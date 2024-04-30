@@ -1,0 +1,30 @@
+name: designer
+channels:
+  - anaconda
+  - pytorch
+  - conda-forge
+dependencies:
+  - python==3.10.4
+  - pip==23.2.1
+  - pip:
+    - openai
+    - azure-identity
+    - azure-ai-ml
+    - promptflow>=1.7.0
+    - promptflow-tools
+    - langchain
+    - langchain-openai
+    - unstructured[all-docs]
+    - azure-search-documents
+    - pytest
+    - jinja2
+    - chainlit
+    - tiktoken
+    - chainlit
+    - python-frontmatter
+    - ipykernel
+    - ipython
+    - pandas 
+    - numpy
+    - pyautogen
+    - azure-monitor-opentelemetry-exporter --pre
