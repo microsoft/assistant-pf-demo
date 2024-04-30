@@ -1,0 +1,26 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    is_chat_history: true
+    default: []
+  question:
+    type: string
+    is_chat_input: true
+    default: make me a painting of a deer
+outputs:
+  answer:
+    type: string
+    reference: ${functions.output}
+    is_chat_output: true
+nodes:
+- name: functions
+  type: python
+  source:
+    type: code
+    path: functions_flow.py
+  inputs:
+    chat_history: ${inputs.chat_history}
+    question: ${inputs.question}

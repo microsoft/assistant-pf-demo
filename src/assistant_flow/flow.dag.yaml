@@ -1,0 +1,34 @@
+# id: steelthread_demo_pf_with_assistants
+# name: SteelThread Demo PF with Assistants
+inputs:
+  chat_history:
+    type: list
+    default: []
+    description: IGNORED since this is an assistant chat that uses a thread_id in the session_state
+    is_chat_history: true
+  chat_input:
+    type: string
+    default: get the order numbers by month for the last year and plot it in a line chart using matplotlib. Make use to use the month names in the plot.
+    is_chat_input: true
+  session_state:
+    type: object
+    default: {}
+outputs:
+  chat_output:
+    type: string
+    reference: ${planner.output.chat_output}
+    is_chat_output: true
+  session_state:
+    type: object
+    reference: ${planner.output.session_state}
+    is_chat_output: false
+nodes:
+- name: planner
+  type: python
+  source:
+    type: code
+    path: pf_planner.py
+  inputs:
+    question: ${inputs.chat_input}
+    session_state: ${inputs.session_state}
+  use_variants: false
