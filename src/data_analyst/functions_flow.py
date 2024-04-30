@@ -114,7 +114,7 @@ async def sales_data_insights(question):
     messages.append({"role": "user", "content": f"{question}\nGive only the query in SQL format"})
 
     response = await client.chat.completions.create(
-        model= os.getenv("OPENAI_CHAT_MODEL"),
+        model= os.getenv("OPENAI_ANALYST_CHAT_MODEL"),
         messages=messages, 
     )
 
@@ -190,7 +190,7 @@ async def call_tool(tool_call, message_history, stream):
 async def call_llm(message_history, stream):
     print("calling llm", message_history)
     settings = {
-        "model": os.getenv("OPENAI_CHAT_MODEL"),
+        "model": os.getenv("OPENAI_ANALYST_CHAT_MODEL"),
         "tools": tools,
         "tool_choice": "auto",
     }

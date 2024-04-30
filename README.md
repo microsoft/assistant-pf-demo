@@ -1,14 +1,72 @@
 # Project
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+## Tracing function calls
 
-As the maintainer of this project, please make a few updates:
+In this sample, we will show how to use [Azure OpenAI Assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/assistant) with [Prompt Flow](https://microsoft.github.io/promptflow/).
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+### Prerequisites:
+
+- Python 3.11
+- Conda
+- Azure OpenAI API resouce (**OPENAI_API_BASE**, **OPENAI_API_KEY**) in a [region that supports assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#assistants-preview) with an 1106 model or better -- I recommend creating it in Sweden central. 
+- Deployments of OpenAI models:
+    - deployment of `gpt-4-1106-preview`/`gpt-35-turbo-1106` or later for use by the **OpenAI assistant**. Both work, but `gpt-35-turbo-1106` is faster and `gpt-4-1106-preview` is more accurate. (**OPENAI_ASSISTANT_MODEL**)
+    - deployment of `gpt-35-turbo-1106` or later for use by the **Data Analyst** to perform some limited NL to SQL. (**OPENAI_ANALYST_CHAT_MODEL**)
+
+Copy `.env.sample` to `.env` and fill in the values:
+
+```bash
+OPENAI_API_TYPE="azure"
+OPENAI_API_VERSION="2024-02-15-preview"
+OPENAI_API_BASE="https://***.openai.azure.com/"
+OPENAI_API_KEY="******************"
+OPENAI_ASSISTANT_MODEL="gpt-35-turbo-1106"
+OPENAI_ANALYST_CHAT_MODEL="gpt-35-turbo-1106"
+OPENAI_ASSISTANT_ID="asst_0leWabwuOmzsNVG5Kst1CpeV"
+APPINSIGHTS_INSTRUMENTATIONKEY="InstrumentationKey=***;IngestionEndpoint=https://****.in.applicationinsights.azure.com/;LiveEndpoint=https://****"
+```
+
+### Install dependencies
+
+```bash
+conda env create -f environment.yml
+conda activate assistant
+```
+
+Then install the pre-release version of azure-monitor-opentelemetry-exporter
+```bash
+pip install azure-monitor-opentelemetry-exporter --pre
+```
+
+### Run the sample
+
+The sample app uses [chainlit](https://docs.chainlit.io/get-started/overview) to build a simple chat UI that is capable of displaying images. The app is started like so:
+
+```bash
+cd src
+chainlit run app.py
+```
+
+The console output will be similar to this (port numbers might differ):
+
+```bash
+INFO:waitress:Serving on http://127.0.0.1:61802
+Start Prompt Flow Service on 61802, version: 1.7.0
+You can view the traces from local: http://localhost:61802/v1.0/ui/traces/
+2024-03-30 11:15:14 - Request URL: 'https://dc.services.visualstudio.com/v2.1/track'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '2020'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': '54367e9e-ee7e-11ee-a580-0e3a2dccaa78'
+    'User-Agent': 'azsdk-python-azuremonitorclient/unknown Python/3.10.4 (macOS-10.16-x86_64-i386-64bit)'
+A body is sent with the request
+2024-03-30 11:15:14 - Your app is available at http://localhost:8000
+```
+
+Open two browser tabs, one to `http://localhost:8000` and one to `http://localhost:61802/v1.0/ui/traces/`
+
 
 ## Contributing
 
