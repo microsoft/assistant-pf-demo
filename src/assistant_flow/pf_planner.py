@@ -4,7 +4,7 @@ from typing import List
 import os
 
 # local imports
-from chat import chat_completion
+from .chat import chat_completion
 
 @tool
 def planner(

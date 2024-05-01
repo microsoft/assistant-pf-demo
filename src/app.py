@@ -59,6 +59,7 @@ def start_chat():
         [],
     )
     cl.user_session.set("last_message_context", None)
+    cl.user_session.set("session_state", {})
 
     promptflows = [
         os.path.join(os.path.dirname(__file__), 'assistant_flow'),
@@ -83,7 +84,7 @@ def show_images(image):
     return elements
 
 
-async def call_promptflow(chat_history, message):
+def call_promptflow(chat_history, message):
 
     tracer = trace.get_tracer(__name__)
     with tracer.start_as_current_span("call_promptflow") as span:
@@ -106,9 +107,14 @@ async def call_promptflow(chat_history, message):
         # response = await cl.make_async(client.test)(prompt_flow, 
         #                                               inputs={"chat_history": chat_history,
         #                                                       "question": message.content})
-        from data_analyst.functions_flow import run_conversation
-        response = await run_conversation(chat_history=chat_history, 
-                                           question=message.content)
+        # from data_analyst.functions_flow import run_conversation
+        # response = await run_conversation(chat_history=chat_history, 
+        #                                    question=message.content)
+        session_state = cl.user_session.get("session_state")
+
+        from assistant_flow.pf_planner import chat_completion
+        response = chat_completion(question=message.content,
+                                    session_state=session_state)
 
         try:            
             span.set_attribute("output", json.dumps(response))
@@ -166,32 +172,38 @@ async def run_conversation(message: cl.Message):
         await feedback("downvote")
     else:
 
+        from chainlit import make_async, run_sync
+
         msg = cl.Message(content="")
         await msg.send()
 
-        stream = await call_promptflow(chat_history, message)
+        reply = await make_async(call_promptflow)(chat_history, message)
+        cl.user_session.set("session_state", reply["session_state"])
+        stream = reply["chat_output"]
         response = ""
-        async for thing in stream:
-            response += thing
-            await msg.stream_token(thing)
+        images = []
+        for thing in stream:
+
+            if thing.strip().startswith("!["):
+                image = parse_image(thing.strip())
+                images.append(image)
+                msg.elements = images
+            else:
+                response += thing
+                msg.content = response
+            
+            await msg.update()
         await msg.stream_token("🏁")
-
-        # if "messages" in response:
-        #     for thing in response["messages"]:
-        #         async with cl.Step(name=thing["role"]) as child_step:
-        #             child_step.output = thing["content"]
-
-        # if response["image"]:
-        #     elements = show_images(response["image"])
-        # else:
-        #     elements = []  
-
-        # await cl.Message(content=response["answer"], 
-        #                     author="Answer",
-        #                     elements=elements).send()
         
         chat_history.append({"inputs": {"question": message.content}, 
                             "outputs": {"answer": response}})
+        
+def parse_image(thing):
+    # parse the image data from this inline markdown image
+    # ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABjElEQVRIS+2VvUoDQRSGv)
+    image = thing.split("(data:image/png;base64,")[1].split(")")[0]
+    data = base64.b64decode(image)
+    return cl.Image(content=data, name="generated image", display="inline")
 
 if __name__ == "__main__":
     start_trace()

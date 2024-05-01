@@ -11,7 +11,7 @@ import sqlite3
 import pandas as pd 
 
 # local imports
-from core import AssistantsAPIGlue
+from .core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 
@@ -110,7 +110,7 @@ def sales_data_insights(question):
     messages.append({"role": "user", "content": f"{question}\nGive only the query in SQL format"})
 
     response = client.chat.completions.create(
-        model= os.getenv("OPENAI_CHAT_MODEL"),
+        model= os.getenv("OPENAI_ANALYST_CHAT_MODEL"),
         messages=messages, 
     )
 
