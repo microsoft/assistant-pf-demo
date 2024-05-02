@@ -10,6 +10,9 @@ inputs:
     type: string
     is_chat_input: true
     default: make me a painting of a deer
+  session_state:
+    type: object
+    default: {}
 outputs:
   answer:
     type: string
