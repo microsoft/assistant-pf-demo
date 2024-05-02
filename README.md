@@ -70,30 +70,55 @@ Then do as instructed suggested on the console by adding the provided line `OPEN
 The sample app uses [chainlit](https://docs.chainlit.io/get-started/overview) to build a simple chat UI that is capable of displaying images. The app is started like so:
 
 ```bash
-cd src
-python app.py
+python src/app.py
 ```
 
 The console output will be similar to this (port numbers might differ):
 
 ```bash
-INFO:waitress:Serving on http://127.0.0.1:61802
-Start Prompt Flow Service on 61802, version: 1.7.0
-You can view the traces from local: http://localhost:61802/v1.0/ui/traces/
-2024-03-30 11:15:14 - Request URL: 'https://dc.services.visualstudio.com/v2.1/track'
-Request method: 'POST'
-Request headers:
-    'Content-Type': 'application/json'
-    'Content-Length': '2020'
-    'Accept': 'application/json'
-    'x-ms-client-request-id': '54367e9e-ee7e-11ee-a580-0e3a2dccaa78'
-    'User-Agent': 'azsdk-python-azuremonitorclient/unknown Python/3.10.4 (macOS-10.16-x86_64-i386-64bit)'
-A body is sent with the request
+2024-05-01 20:49:19 - Loaded .env file
+2024-05-01 20:49:21 - collection: assistant-test
+2024-05-01 20:49:21 - resource attributes: {'service.name': 'promptflow', 'collection': 'assistant-test'}
+2024-05-01 20:49:21 - tracer provider is set with resource attributes: {'service.name': 'promptflow', 'collection': 'assistant-test'}
+Starting prompt flow service...
+Start prompt flow service on port 23334, version: 1.10.0.
+You can stop the prompt flow service with the following command:'pf service stop'.
+Alternatively, if no requests are made within 1 hours, it will automatically stop.
 2024-03-30 11:15:14 - Your app is available at http://localhost:8000
 ```
 
-Open two browser tabs, one to `http://localhost:8000` and one to `http://localhost:61802/v1.0/ui/traces/`
+Open two browser tabs, one to `http://localhost:8000` and one to `http://localhost:23334/v1.0/ui/traces/`
 
+Should be able to chat with the assistant in the chat UI and see the traces in the other tab.
+
+### Log traces to AI Studio
+
+```bash
+pf config set trace.destination=azureml://subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project
+```
+
+should produce output like this:
+
+```log
+The workspace Cosmos DB is not initialized yet, will start initialization, which may take some minutes...
+Set config [{'trace.destination': 'azureml://subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project'}] successfully.
+```
+
+After setting the trace destination, you might need to restart the pfs service:
+
+```bash
+pf service stop
+```
+
+When you use the chat UI, you should see traces in the Azure AI Studio workspace. In the output logs of the app you should see the URL to the trace views for local and Azure AI Studio:
+
+```log
+You can view the trace detail from the following URL:
+http://localhost:23334/v1.0/ui/traces/?#collection=assistant-test&uiTraceId=0x67a45d1c29d32e62f50eda806ff51a3b
+https://ai.azure.com/projecttrace/detail/0x67a45d1c29d32e62f50eda806ff51a3b?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project&flight=PFTrace
+```
+
+![](images/sad-puppy.png)
 
 ## Contributing
 
