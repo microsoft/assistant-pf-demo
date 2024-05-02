@@ -15,11 +15,16 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExport
 from promptflow.client import PFClient
 from promptflow.tracing import start_trace
 from dotenv import load_dotenv
+import logging
 load_dotenv()
 
 def setup_app_insights():
     from promptflow.tracing._integrations._openai_injector import inject_openai_api
     inject_openai_api()
+
+    # dial down the logs for azure monitor -- it is so chatty
+    azmon_logger = logging.getLogger('azure')
+    azmon_logger.setLevel(logging.WARNING)
 
     # Set the Tracer Provider
     trace.set_tracer_provider(TracerProvider())
