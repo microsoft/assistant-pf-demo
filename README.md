@@ -12,7 +12,7 @@ In this sample, we will show how to use [Azure OpenAI Assistants](https://learn.
 - Deployments of OpenAI models:
     - deployment of `gpt-4-1106-preview`/`gpt-35-turbo-1106` or later for use by the **OpenAI assistant**. Both work, but `gpt-35-turbo-1106` is faster and `gpt-4-1106-preview` is more accurate. (**OPENAI_ASSISTANT_MODEL**)
     - deployment of `gpt-35-turbo-1106` or later for use by the **Data Analyst** to perform some limited NL to SQL. (**OPENAI_ANALYST_CHAT_MODEL**)
-- Azure Application Insights (**APPINSIGHTS_INSTRUMENTATIONKEY**)
+- Azure Application Insights (**APPINSIGHTS_CONNECTION_STRING**)
 
 Copy `.env.sample` to `.env` and fill in the values:
 
@@ -24,7 +24,7 @@ OPENAI_API_KEY="******************"
 OPENAI_ASSISTANT_MODEL="gpt-35-turbo-1106"
 OPENAI_ANALYST_CHAT_MODEL="gpt-35-turbo-1106"
 OPENAI_ASSISTANT_ID="asst_0leWabwuOmzsNVG5Kst1CpeV" <-- you will create this further down
-APPINSIGHTS_INSTRUMENTATIONKEY="InstrumentationKey=***;IngestionEndpoint=https://****.in.applicationinsights.azure.com/;LiveEndpoint=https://****"
+APPINSIGHTS_CONNECTION_STRING="InstrumentationKey=***;IngestionEndpoint=https://****.in.applicationinsights.azure.com/;LiveEndpoint=https://****"
 ```
 
 ### Install dependencies
@@ -60,7 +60,7 @@ OPENAI_ASSISTANT_ID="asst_wgEXCRBQ7E4BfznSkGgJy41k"
 ```
 
 You should go to your Azure AI Studio project and check that the assistant was actually created -- it should look like this:
-<img src="images/assistant-ai-studio.png" width="800">
+![](images/assistant-ai-studio.png)
 
 Then do as suggested on the console by adding the provided line `OPENAI_ASSISTANT_ID="asst_*****"` to the `.env` file.
 
@@ -93,11 +93,13 @@ Should be able to chat with the assistant in the chat UI and see the traces in t
 
 ### Log traces to AI Studio
 
+In addition to viewing the traces in the local promptflow traces view, you can also log the traces to Azure AI Studio. To do this, you need to set the trace destination to the Azure AI Studio workspace. You will need your Azure subscription ID, resource group, and project name.
+
 ```bash
 pf config set trace.destination=azureml://subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project
 ```
 
-should produce output like this:
+On first run, the above should produce output like this:
 
 ```log
 The workspace Cosmos DB is not initialized yet, will start initialization, which may take some minutes...
@@ -108,15 +110,33 @@ After setting the trace destination, you might need to restart the pfs service:
 
 ```bash
 pf service stop
+pf service start
 ```
 
 When you use the chat UI, you should see traces in the Azure AI Studio workspace. In the output logs of the app you should see the URL to the trace views for local and Azure AI Studio:
 
 ```log
+...
 You can view the trace detail from the following URL:
 http://localhost:23334/v1.0/ui/traces/?#collection=assistant-test&uiTraceId=0x67a45d1c29d32e62f50eda806ff51a3b
 https://ai.azure.com/projecttrace/detail/0x67a45d1c29d32e62f50eda806ff51a3b?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project&flight=PFTrace
+...
 ```
+![](images/ai-studio-traces.png)
+### View traces in Application Insights
+
+You can also view the traces in Application Insights. You already set the environment variable `APPINSIGHTS_CONNECTION_STRING` in the `.env` file. The value should be the **connection string** of the Application Insights instance you want to use.
+![](images/app-insights-1.png)
+
+To see the traces here, you can for instance use the End-to-End transaction details view in Application Insights. To get there, follow the clicks as shown in the image below:
+
+![](images/app-insights-2.png)
+
+Which will give you a view like this:
+
+![](images/app-insights-3.png)
+
+Enjoy chatting with the assistant!
 
 ![](images/sad-puppy.png)
 
