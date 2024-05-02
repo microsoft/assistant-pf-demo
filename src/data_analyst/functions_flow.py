@@ -38,6 +38,7 @@ system_message = """
     #  main_category TEXT
     #  sub_category TEXT
     #  product_type TEXT
+    #  Region TEXT
     #
 In this table all numbers are already aggregated, so all queries will be some type of aggregation with group by.
 for instance when asked:
