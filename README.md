@@ -8,10 +8,11 @@ In this sample, we will show how to use [Azure OpenAI Assistants](https://learn.
 
 - Python 3.11
 - Conda
-- Azure OpenAI API resouce (**OPENAI_API_BASE**, **OPENAI_API_KEY**) in a [region that supports assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#assistants-preview) with an 1106 model or better -- I recommend creating it in Sweden central. 
+- AI Studio Hub & Project with an Azure OpenAI endpoint (**OPENAI_API_BASE**, **OPENAI_API_KEY**) in a [region that supports assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#assistants-preview) with an 1106 model or better -- I recommend creating it in Sweden central. 
 - Deployments of OpenAI models:
     - deployment of `gpt-4-1106-preview`/`gpt-35-turbo-1106` or later for use by the **OpenAI assistant**. Both work, but `gpt-35-turbo-1106` is faster and `gpt-4-1106-preview` is more accurate. (**OPENAI_ASSISTANT_MODEL**)
     - deployment of `gpt-35-turbo-1106` or later for use by the **Data Analyst** to perform some limited NL to SQL. (**OPENAI_ANALYST_CHAT_MODEL**)
+- Azure Application Insights (**APPINSIGHTS_INSTRUMENTATIONKEY**)
 
 Copy `.env.sample` to `.env` and fill in the values:
 
@@ -22,7 +23,7 @@ OPENAI_API_BASE="https://***.openai.azure.com/"
 OPENAI_API_KEY="******************"
 OPENAI_ASSISTANT_MODEL="gpt-35-turbo-1106"
 OPENAI_ANALYST_CHAT_MODEL="gpt-35-turbo-1106"
-OPENAI_ASSISTANT_ID="asst_0leWabwuOmzsNVG5Kst1CpeV"
+OPENAI_ASSISTANT_ID="asst_0leWabwuOmzsNVG5Kst1CpeV" <-- you will create this further down
 APPINSIGHTS_INSTRUMENTATIONKEY="InstrumentationKey=***;IngestionEndpoint=https://****.in.applicationinsights.azure.com/;LiveEndpoint=https://****"
 ```
 
@@ -38,13 +39,39 @@ Then install the pre-release version of azure-monitor-opentelemetry-exporter
 pip install azure-monitor-opentelemetry-exporter --pre
 ```
 
+### Create an OpenAI assistant
+
+Create an OpenAI assistant using the setup.py script
+
+```bash
+python src/assistant_flow/setup.py
+```
+
+This should ouput something like this:
+
+```log
+OPENAI_API_KEY ******
+OPENAI_API_BASE https://******.openai.azure.com
+OPENAI_API_VERSION 2024-02-15-preview
+{'id': 'asst_wgEXCRBQ7E4BfznSkGgJy41k', 'created_at': 1714610540, 'description': None, 'instructions': "\nYou are a helpful assistant that helps the user potentially with the help of some functions.\n\nIf you are using multiple tools to solve a user's task, make sure to communicate \ninformation learned from one tool to the next tool.\nFirst, make a plan of how you will use the tools to solve the user's task and communicated\nthat plan to the user with the first response. Then execute the plan making sure to communicate\nthe required information between tools since tools only see the information passed to them;\nThey do not have access to the chat history.\nIf you think that tool use can be parallelized (e.g. to get weather data for multiple cities) \nmake sure to use the multi_tool_use.parallel function to execute.\n\nOnly use a tool when it is necessary to solve the user's task. \nDon't use a tool if you can answer the user's question directly.\nOnly use the tools provided in the tools list -- don't make up tools!!\n\nAnything that would benefit from a tabular presentation should be returned as markup table.\n", 'metadata': {}, 'model': 'gpt-35-turbo-1106', 'name': 'Contoso Assistant', 'object': 'assistant', 'tools': [{'type': 'code_interpreter'}, {'function': {'name': 'sales_data_insights', 'description': '\n            get some data insights about the contoso sales data. This tool has information about total sales, return return rates, discounts given, etc., by date, product category, etc.\n            you can ask questions like:\n            - query for the month with the strongest revenue\n            - which day of the week has the least sales in january\n            - query the average value of orders by month\n            - what is the average sale value for Tuesdays\n            If you are unsure of the data available, you can ask for a list of categories, days, etc.\n            - query for all the values for the main_category\n            If a query cannot be answered, the tool will return a message saying that the query is not supported. otherwise the data will be returned.\n            ', 'parameters': {'type': 'object', 'properties': {'question': {'type': 'string', 'description': "The question you want to ask the tool in plain English. e.g. 'what is the average sale value for Tuesdays'"}}, 'required': ['question']}}, 'type': 'function'}], 'response_format': None, 'temperature': None, 'tool_resources': None, 'top_p': None, 'file_ids': []}
+Assistant created with id asst_wgEXCRBQ7E4BfznSkGgJy41k
+add the following to your .env file
+OPENAI_ASSISTANT_ID="asst_wgEXCRBQ7E4BfznSkGgJy41k"
+```
+
+You should go to your Azure AI Studio project and check that the assistant was actually created -- it should look like this:
+<img src="images/assistant-ai-studio.png" width="800">
+
+Then do as instructed suggested on the console by adding the provided line `OPENAI_ASSISTANT_ID="asst_*****"` to the `.env` file.
+
+
 ### Run the sample
 
 The sample app uses [chainlit](https://docs.chainlit.io/get-started/overview) to build a simple chat UI that is capable of displaying images. The app is started like so:
 
 ```bash
 cd src
-chainlit run app.py
+python app.py
 ```
 
 The console output will be similar to this (port numbers might differ):

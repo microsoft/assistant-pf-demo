@@ -82,3 +82,7 @@ assistant = client.beta.assistants.create(
     tools=tools
 )
 show_json(assistant)
+
+print("Assistant created with id", assistant.id)
+print("add the following to your .env file")
+print(f'OPENAI_ASSISTANT_ID="{assistant.id}"')
