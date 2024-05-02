@@ -62,7 +62,7 @@ OPENAI_ASSISTANT_ID="asst_wgEXCRBQ7E4BfznSkGgJy41k"
 You should go to your Azure AI Studio project and check that the assistant was actually created -- it should look like this:
 <img src="images/assistant-ai-studio.png" width="800">
 
-Then do as instructed suggested on the console by adding the provided line `OPENAI_ASSISTANT_ID="asst_*****"` to the `.env` file.
+Then do as suggested on the console by adding the provided line `OPENAI_ASSISTANT_ID="asst_*****"` to the `.env` file.
 
 
 ### Run the sample
