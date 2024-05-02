@@ -11,7 +11,7 @@ import sqlite3
 import pandas as pd 
 
 # local imports
-from .core import AssistantsAPIGlue
+from core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 

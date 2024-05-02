@@ -64,8 +64,25 @@ You should go to your Azure AI Studio project and check that the assistant was a
 
 Then do as suggested on the console by adding the provided line `OPENAI_ASSISTANT_ID="asst_*****"` to the `.env` file.
 
+### Test the Assistant Flow
 
-### Run the sample
+You can test that the flow is working correctly by running the following command:
+
+```bash
+pf flow test --flow src/assistant_flow --ui
+```
+
+This will start the prompt flow service (pfs) and provide a URL to the chat UI. The console output will be similar to this:
+
+```log
+Prompt flow service has started...
+You can begin chat flow on http://127.0.0.1:23333/v1.0/ui/chat?flow=L1VzZXJzL2RhbmllbHNjL2dpdC9hc3Npc3RhbnQtcGYtZGVtby9zcmMvYXNzaXN0YW50X2Zsb3cvZmxvdy5kYWcueWFtbA%3D%3D
+```
+
+You can ask the assistant questions like: 
+> get the order numbers by month for the last year and plot it in a line chart using matplotlib. Make use to use the month names in the plot.
+
+### Run the Chainlit sample app
 
 The sample app uses [chainlit](https://docs.chainlit.io/get-started/overview) to build a simple chat UI that is capable of displaying images. The app is started like so:
 

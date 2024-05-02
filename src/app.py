@@ -89,7 +89,7 @@ def show_images(image):
     return elements
 
 
-def call_promptflow(chat_history, message):
+async def call_promptflow(chat_history, message):
 
     tracer = trace.get_tracer(__name__)
     with tracer.start_as_current_span("call_promptflow") as span:
@@ -107,19 +107,29 @@ def call_promptflow(chat_history, message):
         span.set_attribute("framework", "promptflow")
         span.set_attribute("function", "call_promptflow")
 
+        session_state = cl.user_session.get("session_state")
         # prompt_flow = cl.user_session.get("config")["active_promptflow"]
         # client = PFClient()
         # response = await cl.make_async(client.test)(prompt_flow, 
-        #                                               inputs={"chat_history": chat_history,
-        #                                                       "question": message.content})
+        #                                             inputs=dict(chat_history=chat_history,
+        #                                                         chat_input=message.content,
+        #                                                         session_state=session_state))
+
         # from data_analyst.functions_flow import run_conversation
         # response = await run_conversation(chat_history=chat_history, 
         #                                    question=message.content)
-        session_state = cl.user_session.get("session_state")
 
-        from assistant_flow.pf_planner import chat_completion
-        response = chat_completion(question=message.content,
-                                    session_state=session_state)
+        from promptflow.core import Flow
+        prompt_flow_path = cl.user_session.get("config")["active_promptflow"]
+        prompt_flow = Flow.load(prompt_flow_path)
+        response = await cl.make_async(prompt_flow)(chat_history=chat_history,
+                                                    chat_input=message.content,
+                                                    session_state=session_state)
+
+
+        # from assistant_flow.pf_planner import chat_completion
+        # response = chat_completion(question=message.content,
+        #                             session_state=session_state)
 
         try:            
             span.set_attribute("output", json.dumps(response))
@@ -182,7 +192,7 @@ async def run_conversation(message: cl.Message):
         msg = cl.Message(content="")
         await msg.send()
 
-        reply = await make_async(call_promptflow)(chat_history, message)
+        reply = await call_promptflow(chat_history, message)
         cl.user_session.set("session_state", reply["session_state"])
         stream = reply["chat_output"]
         response = ""
