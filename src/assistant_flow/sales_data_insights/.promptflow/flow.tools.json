@@ -1,0 +1,38 @@
+{
+  "package": {},
+  "code": {
+    "chat.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "question": {
+          "type": [
+            "string"
+          ]
+        },
+        "chat_history": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "description": "Chat with Chatbot"
+    },
+    "functions_flow.py": {
+      "type": "python",
+      "inputs": {
+        "chat_history": {
+          "type": [
+            "object"
+          ]
+        },
+        "question": {
+          "type": [
+            "object"
+          ]
+        }
+      },
+      "source": "functions_flow.py",
+      "function": "run_conversation"
+    }
+  }
+}

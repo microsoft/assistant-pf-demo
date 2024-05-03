@@ -68,7 +68,7 @@ def start_chat():
 
     promptflows = [
         os.path.join(os.path.dirname(__file__), 'assistant_flow'),
-        os.path.join(os.path.dirname(__file__), 'data_analyst'),
+        os.path.join(os.path.dirname(__file__), 'assistant_flow/sales_data_analyst'),
     ]
 
     config = dict(
@@ -204,7 +204,7 @@ def parse_image(thing):
     # ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABjElEQVRIS+2VvUoDQRSGv)
     image = thing.split("(data:image/png;base64,")[1].split(")")[0]
     data = base64.b64decode(image)
-    return cl.Image(content=data, name="generated image", display="inline")
+    return cl.Image(content=data, name="generated image", display="inline", size="large")
 
 if __name__ == "__main__":
     start_trace()

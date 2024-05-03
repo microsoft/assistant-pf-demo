@@ -32,15 +32,36 @@ tools = [
         "function": {
             "name": "sales_data_insights",
             "description": """
-            get some data insights about the contoso sales data. This tool has information about total sales, return return rates, discounts given, etc., by date, product category, etc.
-            you can ask questions like:
-            - query for the month with the strongest revenue
-            - which day of the week has the least sales in january
-            - query the average value of orders by month
-            - what is the average sale value for Tuesdays
-            If you are unsure of the data available, you can ask for a list of categories, days, etc.
-            - query for all the values for the main_category
-            If a query cannot be answered, the tool will return a message saying that the query is not supported. otherwise the data will be returned.
+   get some data insights about the contoso sales data. This tool has aggregated information in the following structure:
+      Number_of_Orders INTEGER "the number of orders processed"
+      Sum_of_Order_Value_USD REAL "the total value of the orders processed in USD"
+      Sum_of_Number_of_Items REAL "the sum of items in the orders processed"
+      Number_of_Orders_with_Discount INTEGER "the number of orders that received a discount"
+      Sum_of_Discount_Percentage REAL "the sum of discount percentage -- useful to calculate average discounts given"
+      Sum_of_Shipping_Cost_USD REAL "the sum of shipping cost for the processed orders"
+      Number_of_Orders_Returned INTEGER "the number of orders returned by the customers"
+      Number_of_Orders_Cancelled INTEGER "the number or orders cancelled by the customers before they were sent out"
+      Sum_of_Time_to_Fulfillment REAL "the sum of time to fulfillment"
+      Number_of_Orders_Repeat_Customers INTEGER "number of orders that were placed by repeat customers"
+      Year INTEGER
+      Month INTEGER
+      Day INTEGER
+      Date TIMESTAMP
+      Day_of_Week INTEGER in 0 based format, Monday is 0, Tuesday is 1, etc.
+      main_category TEXT
+      sub_category TEXT
+      product_type TEXT
+      Region TEXT
+  you can ask questions like:
+  - what was the total revenue in Q1 2024 by region
+  - which day of month has the least sales in january
+  - show the average value of orders by month
+  - what is the average sale value for Tuesdays
+  If you are unsure of the data available, you can ask for a list of categories, days, etc.
+  - query for all the values for the main_category
+  The data will be returned in a json format in the data property of the returned object with the query used 
+  to get the data in the query property.
+  If a query cannot be answered, the tool will return a message in the error property of the returned object. 
             """,
             "parameters": {
                 "type": "object",
@@ -71,6 +92,8 @@ make sure to use the multi_tool_use.parallel function to execute.
 Only use a tool when it is necessary to solve the user's task. 
 Don't use a tool if you can answer the user's question directly.
 Only use the tools provided in the tools list -- don't make up tools!!
+If you are not getting the right information from a tool, make sure to ask the user for clarification. 
+Do not just return the wrong information. Do not make up information.
 
 Anything that would benefit from a tabular presentation should be returned as markup table.
 """
