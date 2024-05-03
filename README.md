@@ -153,7 +153,72 @@ Which will give you a view like this:
 
 ![](images/app-insights-3.png)
 
-Enjoy chatting with the assistant!
+### Building a Dashboard with Promptflow Telemetry
+
+To have the Telemetry from Promptflow and your app show up in and Azure Portal Dashboard or a Grafana Dashboard, you can follow these steps:
+
+1. In App Insights, got to the Logs view and create a new query. Make sure to edit your query in KQL Mode so you have access to the different tables. Here is an example of a query that shows the average duration of the OpenAI Chat calls by model/deployment name used: 
+
+```kql
+dependencies
+| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
+| project model = inputs.model, duration_sec = duration / 1000
+| summarize avg(duration_sec) by tostring(model)
+| render columnchart
+```
+
+![](images/dashboard-1.png)
+
+2. Save the query and pin it to a dashboard. You can create a new dashboard or add it to an existing one.
+
+![](images/dashboard-2.png)
+
+3. Once pinned to the Dashboard, you can edit the title and move/resize the chart as you see fit.
+
+![](images/dashboard-3.png)
+
+To manage your Azure Portal Dashboards, got to the Dashboard hub in the Azure Portal:
+![](images/dashboard-4.png)
+
+Here are a few KQL queries that you can use to get started with building your own dashboards:
+
+- Average duration of OpenAI Chat calls by model/deployment name used:
+```kql
+dependencies
+| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
+| project model = inputs.model, duration_sec = duration / 1000
+| summarize avg(duration_sec) by tostring(model)
+| render columnchart
+```
+
+- Tokens used over time:
+```kql
+dependencies
+| extend
+    total_tokens = toint(customDimensions["llm.usage.total_tokens"]),
+    prompt_tokens = toint(customDimensions["llm.usage.prompt_tokens"]),
+    completion_tokens = toint(customDimensions["llm.usage.completion_tokens"])
+| summarize sum(total_tokens), sum(prompt_tokens), sum(completion_tokens) by bin(timestamp, 5m) 
+| render timechart
+```
+
+- Total tokens used by model/deployment
+```kql
+dependencies
+| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
+| extend
+    total_tokens = toint(customDimensions["llm.usage.total_tokens"]),
+    prompt_tokens = toint(customDimensions["llm.usage.prompt_tokens"]),
+    completion_tokens = toint(customDimensions["llm.usage.completion_tokens"]),
+    model = tostring(inputs.model)
+| summarize prompt = sum(prompt_tokens), completion = sum(completion_tokens) by model
+| render columnchart 
+```
+
+Enjoy exploring your Promptflow telemetry!
 
 ![](images/sad-puppy.png)
 
