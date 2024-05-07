@@ -39,10 +39,12 @@ inputs:
   question:
     type: string
     default: what is the region with the most revenue in Q1 2024?
+    is_chat_input: true
 outputs:
   data:
     type: string
     reference: ${sales_data_insights.output.data}
+    is_chat_output: true
   query:
     type: string
     reference: ${sales_data_insights.output.query}

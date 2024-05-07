@@ -218,6 +218,30 @@ dependencies
 | render columnchart 
 ```
 
+### Query the data in Azure Data Explorer
+
+To query the data from you App Insights instance, go to https://dataexplorer.azure.com/ and add a connection:
+
+![](images/ade-1.png)
+
+Then add the URL for you App Insights instance like so:
+![](images/ade-2.png)
+
+Following this format:
+`https://ade.applicationinsights.io/subscriptions/<your-subscription>/resourcegroups/<your-resource-gropu>/providers/microsoft.insights/components/<your-app-insights-instance>`
+
+This will allow you to execute the same queries as above and pin them to the same Dashboard.
+
+In addition, you can pull data from App Insights to build datasets for validation and fine tuning. For instance, in our example the sub-flow that performs that provides the sales data insights is called `sales_data_insights`. That means that you will find traces with that name and with the `span_type == "Flow"` from which you can retrieve the input and output parameters with a query like this:
+
+```kql
+dependencies
+| where name == "sales_data_insights" and customDimensions.span_type == "Flow"
+| extend inputs = parse_json(tostring(customDimensions["inputs"]))
+| extend output = parse_json(tostring(customDimensions["output"]))
+| project inputs.question, output.query, output.error
+```
+
 Enjoy exploring your Promptflow telemetry!
 
 ![](images/sad-puppy.png)

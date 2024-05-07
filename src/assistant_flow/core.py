@@ -121,10 +121,6 @@ class AssistantsAPIGlue:
         self.queue.send(f"Running message on Thread: {self.thread_id}")
 
         start_time = time.time()
-        step_logging_cursor = None
-
-        # keep track of messages happening during the loop
-        internal_memory = []
 
         # loop until max_waiting_time is reached
         while (time.time() - start_time) < self.max_waiting_time:
@@ -136,16 +132,6 @@ class AssistantsAPIGlue:
                 f"Run status: {run.status} (time={int(time.time() - start_time)}s, max_waiting_time={self.max_waiting_time})"
             )
 
-            # # check run steps
-            # run_steps = self.client.beta.threads.runs.steps.list(
-            #     thread_id=self.thread_id, run_id=run.id, after=step_logging_cursor
-            # )
-
-            # for step in run_steps:
-            #     trace_step(step.model_dump())
-            #     internal_memory.append(step.step_details.model_dump())
-            #     step_logging_cursor = step.id
-
             if run.status == "completed":
                 # check run steps
                 run_steps = self.client.beta.threads.runs.steps.list(
@@ -153,8 +139,7 @@ class AssistantsAPIGlue:
                 )
 
                 for step in reversed(list(run_steps)):
-                    trace_step(step.model_dump())
-                    internal_memory.append(step.step_details.model_dump())
+                    log_step(step.model_dump())
 
                 messages = []
                 for message in self.client.beta.threads.messages.list(
@@ -194,7 +179,6 @@ class AssistantsAPIGlue:
 
                 for tool_call in run.required_action.submit_tool_outputs.tool_calls:
                     trace_tool(tool_call.model_dump())
-                    internal_memory.append(tool_call.model_dump())
                     self.queue.send(f"Tool call: {tool_call.function.name} with arguments: {tool_call.function.arguments}")
 
                     if tool_call.type == "function":
@@ -203,17 +187,12 @@ class AssistantsAPIGlue:
                             **json.loads(tool_call.function.arguments)
                         )
 
-                        # tool_call_output = call_tool(
-                        #     tools_map[tool_call.function.name], **json.loads(tool_call.function.arguments)
-                        # )
-
                         tool_call_outputs.append(
                             {
                                 "tool_call_id": tool_call.id,
                                 "output": json.dumps(tool_call_output),
                             }
                         )
-                        internal_memory.append(tool_call_outputs[-1])
                     else:
                         raise ValueError(f"Unsupported tool call type: {tool_call.type}")
 
@@ -232,11 +211,24 @@ class AssistantsAPIGlue:
             else:
                 raise ValueError(f"Unknown run status: {run.status}")
 
-@trace
-def trace_step(step):
+def log_step(step):
     logging.info(
             "The assistant has moved forward to step {}".format(step["id"])
     )
+    step_details = step["step_details"]
+    if step_details["type"] == "tool_calls":
+        for tool_call in step_details["tool_calls"]:
+            if tool_call["type"] == "code_interpreter":
+                python_code = tool_call["code_interpreter"]["input"].split("\n")
+                output = tool_call["code_interpreter"]["outputs"]
+                trace_code_interpreter(python_code, output)
+
+@trace
+def trace_code_interpreter(python_code, output):
+    logging.info(
+            "The assistant executed code interpretation of {}".format(python_code)
+    )
+
 @trace
 def trace_tool(tool_call):
     logging.info(
