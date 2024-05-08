@@ -3,8 +3,8 @@
 FROM order_data
 WHERE main_category = ""APPAREL"" 
 AND sub_category = ""WOMEN'S CLOTHING"" 
-AND Month = 11
-AND Year = 2023
+AND Month = 5
+AND Year = 2024
 GROUP BY Day"
 "query for all the values for the product_type","SELECT DISTINCT product_type
 FROM order_data"
