@@ -141,7 +141,10 @@ def sales_data_insights(question: str):
 
     message = response.choices[0].message
 
-    query = message.content
+    query :str = message.content
+
+    if query.startswith("```sql") and query.endswith("```"):
+        query = query[6:-3].strip()
 
     ## get folder of this file -- below which is the data folder
     folder = os.path.dirname(os.path.abspath(__file__))
