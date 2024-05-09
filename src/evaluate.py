@@ -82,12 +82,13 @@ def main():
             }
         )
 
+    print("\n")
     pprint("-----Tabular Results-----")
-    pprint(pd.DataFrame(response["rows"]))
-
+    pprint(pd.DataFrame(response.get("rows")))
+    print("\n")
     pprint("-----Average of Scores-----")
-    pprint(pd.DataFrame(response["metrics"]))
-
+    pprint(response.get("metrics"))
+    print("\n")
     print("-----Studio URL-----")
     pprint(response["studio_url"])
 

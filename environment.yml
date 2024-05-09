@@ -7,10 +7,13 @@ dependencies:
   - python==3.11
   - pip==24.0
   - pip:
+    - --extra-index-url https://azuremlsdktestpypi.azureedge.net/promptflow
     - openai
     - azure-identity
     - azure-ai-ml
-    - promptflow>=1.10.0
+    - promptflow==1.11.0
+    - promptflow-azure==1.11.0 # This is needed due to following bug : https://msdata.visualstudio.com/Vienna/_workitems/edit/3186300 
+    - promptflow-evals
     - promptflow-tools
     - pytest
     - jinja2
