@@ -1,4 +1,4 @@
-﻿"question","query"
+﻿"question","ground_truth_query"
 "what are the orders for women's clothing by day in the current month","SELECT SUM(Number_of_Orders)
 FROM order_data
 WHERE main_category = ""APPAREL"" 

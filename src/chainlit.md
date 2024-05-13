@@ -6,4 +6,4 @@ This is a simple demo of using the OpenAI Assistant API to create a chatbot. The
 
 Test it by asking the assistant some questions about the sales data, for instance:
 - show the 2023 sales by category in a bar chart
-- show the total sales revenue by month in a line chart
+- show the total sales revenue aggregated by year and month in a line chart

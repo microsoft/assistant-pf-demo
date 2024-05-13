@@ -399,3 +399,7 @@ FodyWeavers.xsd
 .env
 spans.json
 .files/
+src/sales_data_insights/.promptflow
+src/custom_evaluators/.promptflow
+src/assistant_flow/sales_data_insights/.promptflow
+src/tmp/

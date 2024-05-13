@@ -208,7 +208,8 @@ class AssistantsAPIGlue:
 
             elif run.status in ["in_progress", "queued"]:
                 # fun running emoji                
-                self.queue.send(f"{fun_emojis[int(time.time()) % len(fun_emojis)]}")
+                # self.queue.send(f"{fun_emojis[int(time.time()) % len(fun_emojis)]}")
+                self.queue.send(".")
                 time.sleep(2)
 
             else:
@@ -263,7 +264,7 @@ class QueuedIteratorStream:
         if event is not None and event != "":
             if isinstance(event, Image):
                 self.output.append(event.to_base64(with_type=True))
-                self.queue.put_nowait(f"\n![]({event.to_base64(with_type=True)})\n\n")
+                self.queue.put_nowait(f"\n\n![]({event.to_base64(with_type=True)})\n\n")
             else:
                 self.output.append(event)
                 self.queue.put_nowait(f"{event}")

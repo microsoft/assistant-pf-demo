@@ -17,4 +17,5 @@
     "python.testing.pytestArgs": [
         "test"
     ],
+    "debugpy.debugJustMyCode": false,
 }
