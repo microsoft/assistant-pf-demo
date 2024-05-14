@@ -1,0 +1,695 @@
+{
+    "rows": [
+        {
+            "outputs.data": [
+                {
+                    "Year": 2023,
+                    "Avg_Daily_Revenue": 2554.8900053777
+                },
+                {
+                    "Year": 2024,
+                    "Avg_Daily_Revenue": 1895.6275519793
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Year, SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year",
+            "outputs.execution_time": 6.48,
+            "inputs.question": "what was the average daily revenue in europe by year",
+            "inputs.ground_truth_query": "SELECT Year, SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue FROM order_data WHERE Region = 'EUROPE' GROUP BY Year",
+            "outputs.execution_time.seconds": 6.48,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to calculate the average daily revenue per year for orders from the 'EUROPE' region. They both sum the order values, count distinct dates, and group the results by year. The only difference is the use of double quotes for string literals in the generated_query, which is acceptable in SQL, versus single quotes in the ground_truth_query. This difference does not affect the functionality, efficiency, or readability of the query.",
+            "line_number": 0
+        },
+        {
+            "outputs.data": [
+                {
+                    "Day": 1,
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "Day": 2,
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "Day": 3,
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "Day": 4,
+                    "SUM(Number_of_Orders)": 32
+                },
+                {
+                    "Day": 5,
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "Day": 6,
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "Day": 7,
+                    "SUM(Number_of_Orders)": 31
+                },
+                {
+                    "Day": 8,
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "Day": 9,
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "Day": 10,
+                    "SUM(Number_of_Orders)": 36
+                },
+                {
+                    "Day": 11,
+                    "SUM(Number_of_Orders)": 34
+                },
+                {
+                    "Day": 12,
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "Day": 13,
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "Day": 14,
+                    "SUM(Number_of_Orders)": 31
+                },
+                {
+                    "Day": 15,
+                    "SUM(Number_of_Orders)": 32
+                },
+                {
+                    "Day": 16,
+                    "SUM(Number_of_Orders)": 31
+                },
+                {
+                    "Day": 17,
+                    "SUM(Number_of_Orders)": 36
+                },
+                {
+                    "Day": 18,
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "Day": 19,
+                    "SUM(Number_of_Orders)": 32
+                },
+                {
+                    "Day": 20,
+                    "SUM(Number_of_Orders)": 31
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Day, SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"WOMEN'S CLOTHING\" AND Month = strftime('%m', 'now') AND Year = strftime('%Y', 'now')\nGROUP BY Day",
+            "outputs.execution_time": 11.21,
+            "inputs.question": "what are the orders for women's clothing by day in the current month",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) FROM order_data WHERE main_category = 'APPAREL' AND sub_category = 'WOMEN'S CLOTHING' AND Month = strftime('%m','now') AND Year = strftime('%Y','now') GROUP BY Day",
+            "outputs.execution_time.seconds": 11.21,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the daily sum of orders for a specific main and sub-category in the current month and year from the order_data table. They both filter by the same conditions, group the results by day, and sum the number of orders. The only difference is the use of double quotes versus single quotes for string literals, which in SQL are interchangeable and do not affect the functionality or outcome of the query.",
+            "line_number": 1
+        },
+        {
+            "outputs.data": [
+                {
+                    "product_type": "JACKETS & VESTS"
+                },
+                {
+                    "product_type": "SHIRTS"
+                },
+                {
+                    "product_type": "PANTS & SHORTS"
+                },
+                {
+                    "product_type": "UNDERWEAR & BASE LAYERS"
+                },
+                {
+                    "product_type": "OTHER"
+                },
+                {
+                    "product_type": "TOPS"
+                },
+                {
+                    "product_type": "HIKING BOOTS"
+                },
+                {
+                    "product_type": "TRAIL SHOES"
+                },
+                {
+                    "product_type": "SANDALS"
+                },
+                {
+                    "product_type": "WINTER BOOTS"
+                },
+                {
+                    "product_type": "BACKPACKING TENTS"
+                },
+                {
+                    "product_type": "FAMILY CAMPING TENTS"
+                },
+                {
+                    "product_type": "SHELTERS & TARPS"
+                },
+                {
+                    "product_type": "BIVYS"
+                },
+                {
+                    "product_type": "SLEEPING BAGS"
+                },
+                {
+                    "product_type": "SLEEPING PADS"
+                },
+                {
+                    "product_type": "HAMMOCKS"
+                },
+                {
+                    "product_type": "LINERS"
+                },
+                {
+                    "product_type": "DAYPACKS"
+                },
+                {
+                    "product_type": "OVERNIGHT PACKS"
+                },
+                {
+                    "product_type": "EXTENDED TRIP PACKS"
+                },
+                {
+                    "product_type": "HYDRATION PACKS"
+                },
+                {
+                    "product_type": "STOVES"
+                },
+                {
+                    "product_type": "COOKWARE"
+                },
+                {
+                    "product_type": "UTENSILS & ACCESSORIES"
+                },
+                {
+                    "product_type": "FOOD & NUTRITION"
+                },
+                {
+                    "product_type": "HARNESSES"
+                },
+                {
+                    "product_type": "HELMETS"
+                },
+                {
+                    "product_type": "CARABINERS & QUICKDRAWS"
+                },
+                {
+                    "product_type": "ROPES & SLINGS"
+                },
+                {
+                    "product_type": "CLIMBING SHOES"
+                },
+                {
+                    "product_type": "CHALK & CHALK BAGS"
+                },
+                {
+                    "product_type": "TRAINING EQUIPMENT"
+                },
+                {
+                    "product_type": "ICE AXES"
+                },
+                {
+                    "product_type": "CRAMPONS"
+                },
+                {
+                    "product_type": "MOUNTAINEERING BOOTS"
+                },
+                {
+                    "product_type": "AVALANCHE SAFETY"
+                },
+                {
+                    "product_type": "KAYAKS"
+                },
+                {
+                    "product_type": "CANOES"
+                },
+                {
+                    "product_type": "PADDLES"
+                },
+                {
+                    "product_type": "SAFETY GEAR"
+                },
+                {
+                    "product_type": "SURFBOARDS"
+                },
+                {
+                    "product_type": "WETSUITS"
+                },
+                {
+                    "product_type": "RASH GUARDS"
+                },
+                {
+                    "product_type": "SURF ACCESSORIES"
+                },
+                {
+                    "product_type": "RODS & REELS"
+                },
+                {
+                    "product_type": "TACKLE"
+                },
+                {
+                    "product_type": "WADERS"
+                },
+                {
+                    "product_type": "ACCESSORIES"
+                },
+                {
+                    "product_type": "SKIS"
+                },
+                {
+                    "product_type": "SKI BOOTS"
+                },
+                {
+                    "product_type": "SKI POLES"
+                },
+                {
+                    "product_type": "SKI BINDINGS"
+                },
+                {
+                    "product_type": "SNOWBOARDS"
+                },
+                {
+                    "product_type": "SNOWBOARD BOOTS"
+                },
+                {
+                    "product_type": "BINDINGS"
+                },
+                {
+                    "product_type": "SNOWSHOES"
+                },
+                {
+                    "product_type": "POLES"
+                },
+                {
+                    "product_type": "TRAVEL BACKPACKS"
+                },
+                {
+                    "product_type": "DUFFEL BAGS"
+                },
+                {
+                    "product_type": "CARRY-ONS"
+                },
+                {
+                    "product_type": "TRAVEL ACCESSORIES"
+                },
+                {
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "product_type": "EYE MASKS"
+                },
+                {
+                    "product_type": "PACKING ORGANIZERS"
+                },
+                {
+                    "product_type": "SECURITY"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type FROM order_data",
+            "outputs.execution_time": 1.38,
+            "inputs.question": "query for all the values for the product_type",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type FROM order_data",
+            "outputs.execution_time.seconds": 1.38,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are identical, aiming to retrieve all distinct product types from the order_data table. They use the same SELECT DISTINCT clause and target the same field without any additional conditions or modifications.",
+            "line_number": 2
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": null
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE main_category = \"OUTDOOR\" AND sub_category = \"FOOTWEAR\" AND product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024",
+            "outputs.execution_time": 6.33,
+            "inputs.question": "what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
+            "outputs.execution_time.seconds": 6.33,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are designed to sum the order values from the 'order_data' table for a specific product type, month, and year. The ground_truth_query focuses on summing the values for 'HIKING BOOTS' in May 2024. The generated_query adds additional filters for 'main_category' as 'OUTDOOR' and 'sub_category' as 'FOOTWEAR', which narrows down the data further than the ground_truth_query. This means the generated_query might return a subset of the results from the ground_truth_query or potentially the same results if all 'HIKING BOOTS' fall under 'OUTDOOR' and 'FOOTWEAR'. The additional conditions in the generated_query do not alter the fundamental structure or the type of data retrieved but could potentially affect the cardinality of the results.",
+            "line_number": 3
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 2617.5064216778,
+                    "sub_category": "CHILDREN'S FOOTWEAR"
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 2517.6189987606,
+                    "sub_category": "MEN'S FOOTWEAR"
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 2461.4109672494,
+                    "sub_category": "WOMEN'S FOOTWEAR"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD), sub_category FROM order_data WHERE main_category = \"FOOTWEAR\" AND product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024 GROUP BY sub_category",
+            "outputs.execution_time": 21.66,
+            "inputs.question": "what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT sub_category, SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY sub_category",
+            "outputs.execution_time.seconds": 21.66,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are designed to calculate the total order value for a specific product type ('HIKING BOOTS') during a specific month and year (May 2024), grouped by sub_category. The main difference is that the generated_query includes an additional condition to filter by main_category ('FOOTWEAR'), which is not present in the ground_truth_query. This additional condition means the generated_query might return fewer rows or different sub_categories compared to the ground_truth_query if there are 'HIKING BOOTS' in other main categories. The order of the SELECT clause elements (SUM and sub_category) is different but does not affect the result structure or content. The additional filtering condition in the generated_query slightly alters the scope of the data being queried, which could lead to different results if 'HIKING BOOTS' exist under different main categories.",
+            "line_number": 4
+        },
+        {
+            "outputs.data": [
+                {
+                    "Day": 1,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 132.8494009616
+                },
+                {
+                    "Day": 1,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 123.7752943726
+                },
+                {
+                    "Day": 1,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 105.3220103675
+                },
+                {
+                    "Day": 2,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 148.636166579
+                },
+                {
+                    "Day": 2,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 142.8489290281
+                },
+                {
+                    "Day": 2,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 103.0843097572
+                },
+                {
+                    "Day": 3,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 96.6175473396
+                },
+                {
+                    "Day": 3,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 100.7785129502
+                },
+                {
+                    "Day": 3,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 74.1748051677
+                },
+                {
+                    "Day": 4,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 117.2227012995
+                },
+                {
+                    "Day": 4,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 108.38219383
+                },
+                {
+                    "Day": 4,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 139.1541464323
+                },
+                {
+                    "Day": 5,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 123.0226586606
+                },
+                {
+                    "Day": 5,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 101.1513317457
+                },
+                {
+                    "Day": 5,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 81.4334710407
+                },
+                {
+                    "Day": 6,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 140.821697392
+                },
+                {
+                    "Day": 6,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 135.3954448142
+                },
+                {
+                    "Day": 6,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 116.0756414065
+                },
+                {
+                    "Day": 7,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 138.3028649559
+                },
+                {
+                    "Day": 7,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 118.4548251807
+                },
+                {
+                    "Day": 7,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 108.6911354135
+                },
+                {
+                    "Day": 8,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 123.1326815784
+                },
+                {
+                    "Day": 8,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 120.4759690762
+                },
+                {
+                    "Day": 8,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 103.573616868
+                },
+                {
+                    "Day": 9,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 105.508674678
+                },
+                {
+                    "Day": 9,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 95.1579273806
+                },
+                {
+                    "Day": 9,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 115.0089823692
+                },
+                {
+                    "Day": 10,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 141.7778609087
+                },
+                {
+                    "Day": 10,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 136.7562080676
+                },
+                {
+                    "Day": 10,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 139.1950924951
+                },
+                {
+                    "Day": 11,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 136.1865022783
+                },
+                {
+                    "Day": 11,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 151.1876444492
+                },
+                {
+                    "Day": 11,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 123.8588265556
+                },
+                {
+                    "Day": 12,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 106.0006600997
+                },
+                {
+                    "Day": 12,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 102.4370581767
+                },
+                {
+                    "Day": 12,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 143.7168394866
+                },
+                {
+                    "Day": 13,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 144.7701950159
+                },
+                {
+                    "Day": 13,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 131.6896344808
+                },
+                {
+                    "Day": 13,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 122.8726441262
+                },
+                {
+                    "Day": 14,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 172.552938069
+                },
+                {
+                    "Day": 14,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 154.6188538372
+                },
+                {
+                    "Day": 14,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 184.5497722624
+                },
+                {
+                    "Day": 15,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 124.9359250203
+                },
+                {
+                    "Day": 15,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 131.6619770357
+                },
+                {
+                    "Day": 15,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 128.4360043178
+                },
+                {
+                    "Day": 16,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 147.7093557803
+                },
+                {
+                    "Day": 16,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 132.9566378254
+                },
+                {
+                    "Day": 16,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 157.5031830326
+                },
+                {
+                    "Day": 17,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 147.1420739273
+                },
+                {
+                    "Day": 17,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 155.0659897479
+                },
+                {
+                    "Day": 17,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 139.4806143906
+                },
+                {
+                    "Day": 18,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 113.4930605224
+                },
+                {
+                    "Day": 18,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 106.4957995902
+                },
+                {
+                    "Day": 18,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 116.9772559008
+                },
+                {
+                    "Day": 19,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 108.6810465413
+                },
+                {
+                    "Day": 19,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 121.1022725977
+                },
+                {
+                    "Day": 19,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 111.5262448987
+                },
+                {
+                    "Day": 20,
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 148.1424100699
+                },
+                {
+                    "Day": 20,
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 147.226494574
+                },
+                {
+                    "Day": 20,
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 146.7763709603
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nWHERE product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024\nGROUP BY Day, sub_category",
+            "outputs.execution_time": 6.88,
+            "inputs.question": "show the total revenue by day and sub_category in May 2024 for product type 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY Day, sub_category",
+            "outputs.execution_time.seconds": 6.88,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the daily total revenue for each sub_category of 'HIKING BOOTS' sold in May 2024 from the order_data table. They both sum the order values, filter by product type, month, and year, and group the results by day and sub_category. The only difference is the use of double quotes for string literals in the generated_query versus single quotes in the ground_truth_query, which is a minor syntactical difference and does not affect the functionality or the output of the query.",
+            "line_number": 5
+        }
+    ],
+    "metrics": {
+        "execution_time.seconds": 8.99,
+        "error.error": 0.0,
+        "sql_similarity.score": 4.666666666666667
+    },
+    "studio_url": "https://ai.azure.com/build/evaluation/evaluate_variant_0_20240514_180052_061991?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project"
+}

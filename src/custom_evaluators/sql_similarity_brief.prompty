@@ -5,7 +5,7 @@ model:
   api: chat
   configuration:
     type: azure_openai
-    azure_deployment: 1106-preview
+    azure_deployment: gpt-4-turbo
     api_key: ${env:OPENAI_API_KEY}
     azure_endpoint: ${env:OPENAI_API_BASE}
   parameters:

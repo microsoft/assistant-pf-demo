@@ -15,7 +15,7 @@ from custom_evaluators.error import ErrorEvaluator
 load_dotenv(override=True)
 
 def load_data_as_df():
-    data_path = os.path.join(pathlib.Path(__file__).parent.resolve(), "generate_data", "test_data.csv")
+    data_path = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "generate_data", "test_data_small.csv")
     data = {}
     df = pd.read_csv(data_path)
     return df
@@ -25,7 +25,7 @@ def evaluate_sales_data_insights_on_single_row_of_data():
     response = sales_data_insight(question="what was the total revenue in Q1 2024 by region")
     print(response)
 
-    sql_similarity_evaluator = load_flow(os.path.join(pathlib.Path(__file__).parent.resolve(), "custom_evaluators", "sql_similarity.prompty"))
+    sql_similarity_evaluator = load_flow(os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "custom_evaluators", "sql_similarity.prompty"))
     compare_evaluator = CompareEvaluator()
     execution_time_evaluator = ExecutionTimeEvaluator()
 
@@ -37,6 +37,10 @@ def evaluate_sales_data_insights_on_single_row_of_data():
     pprint(f"SQL Similarity Evaluator Response: {sql_similarity_response}")
     pprint(f"Execution Time Evaluator Response: {execution_time_response}")
 
+def error_to_number(error: str, **kwargs):
+    # return 1 if error is not None
+    numerical_error = 0 if not error or error == "None" else 1
+    return {"error": numerical_error}
 
 def main():
     # This helps debug evaluators on a single row of data
@@ -44,10 +48,10 @@ def main():
 
     # Loading data and later converting to jsonl file
     input_data_df = load_data_as_df()
+    prompty_path = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "custom_evaluators", "sql_similarity.prompty")
 
     # Initialize evaluators
-    sql_similarity_evaluator = load_flow(os.path.join(pathlib.Path(__file__).parent.resolve(), "custom_evaluators", "sql_similarity.prompty"))
-    compare_evaluator = CompareEvaluator()
+    sql_similarity_evaluator = load_flow(prompty_path)
     execution_time_evaluator = ExecutionTimeEvaluator()
     error_evaluator = ErrorEvaluator()
 
@@ -63,16 +67,11 @@ def main():
             target=SalesDataInsights(),
             data=data_file,
             evaluators={
-                "compare": compare_evaluator,
-                "sql_similarity": sql_similarity_evaluator,
                 "execution_time": execution_time_evaluator,
-                "error": error_evaluator
+                "error": error_evaluator,
+                "sql_similarity": sql_similarity_evaluator
             },
             evaluator_config={
-                "compare": {
-                    "response": "${target.query}",
-                    "ground_truth": "${data.ground_truth_query}"
-                },
                 "sql_similarity": {
                     "response": "${target.query}",
                     "ground_truth": "${data.ground_truth_query}"

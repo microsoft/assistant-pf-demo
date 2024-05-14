@@ -1,4 +1,4 @@
-entry: assistant_flow.sales_data_insights:SalesDataInsights
+entry: assistant_flow.sales_data_insights.sales_data_insights:SalesDataInsights
 
 
 

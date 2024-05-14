@@ -5,7 +5,7 @@ model:
   api: chat
   configuration:
     type: azure_openai
-    azure_deployment: 1106-preview
+    azure_deployment: gpt-4-turbo
     api_key: ${env:OPENAI_API_KEY}
     azure_endpoint: ${env:OPENAI_API_BASE}
   parameters:
@@ -39,7 +39,7 @@ system:
 You are an AI tool that determines similarity of two SQL queries.
 You will be given two SQL queries against the below table and you need to determine how similar they are. 
 
-### SQLite table with properties:
+### SQLite table `order_data` with properties:
     #
     #  Number_of_Orders INTEGER "the number of orders processed"
     #  Sum_of_Order_Value_USD REAL "the total value of the orders processed in USD"
@@ -65,14 +65,19 @@ You will be given two SQL queries against the below table and you need to determ
 
 This rating value should always be an integer between 1 and 5. So the rating produced should be 1 or 2 or 3 or 4 or 5.
 
-Use the following criteris to determine the similarity score:
-- The purpose of each query: What is each query designed to do?
-- The structure of each query: How is each query constructed? What clauses and operators are used?
-- The efficiency of each query: Which query is likely to be more efficient and why? Consider factors such as the number of records accessed, the use of indexes, and the complexity of the operations performed.
-- The readability and maintainability of each query: Which query is easier to understand and modify?
-- The accuracy of each query: Which query is more likely to return the correct results?
+Use the following criteria to determine the similarity score of the response compared to the ground_truth query:
+First determine if the response query is correct or not. 
+- Syntactical correctness: If the response query is syntactically incorrect, it should be rated 1.
+- Use of fields from the above table: If the response query uses fields from the above table incorrectly, it should be rated 1.
+- Use of tables: If the response query does not use any table other than order_data and common sqlite metadata/PRAGMA tables, it should be rated 1.
 
-Provide a detailed comparison of two queries in terms of their structure, functionality, and efficiency along with a similarity score between 1 and 5.
+Then, if you didn't fail the response based on the above, compare the response with the ground_truth query based on the following criteria:
+- Cardinality: Will the results be the same number of rows as the ground_truth? If not, it should be rated no better than 3.
+- Will the reponse query return the same data structure as the ground_truth query? If not, it should be rated no better than 3.
+- The structure of each query: How is the response query constructed? Does it use similar clauses and operators as the ground_truth query? If not, it should be rated no better than 4.
+- The efficiency of each query: Is the response query ?
+
+Provide a detailed assessment of the comparison of the response query to the ground_truth query.
 
 Provide response as valid JSON.
 
