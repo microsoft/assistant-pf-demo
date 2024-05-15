@@ -7,7 +7,7 @@ from pprint import pprint
 
 from promptflow.client import load_flow
 from promptflow.evals.evaluate import evaluate
-from assistant_flow.sales_data_insights.main import SalesDataInsights
+from sales_data_insights.main import SalesDataInsights
 
 load_dotenv(override=True)
 

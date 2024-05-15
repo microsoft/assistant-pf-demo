@@ -15,7 +15,7 @@ from .core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 from promptflow.core import Flow
-from assistant_flow.sales_data_insights.main import SalesDataInsights
+from sales_data_insights.main import SalesDataInsights
 
 # @trace
 # def sales_data_insights(question):
