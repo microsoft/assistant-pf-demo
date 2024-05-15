@@ -8,6 +8,7 @@ In this sample, we will show how to use [Azure OpenAI Assistants](https://learn.
 
 - Python 3.11
 - Conda
+- Azure CLI
 - AI Studio Hub & Project with an Azure OpenAI endpoint (**OPENAI_API_BASE**, **OPENAI_API_KEY**) in a [region that supports assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#assistants-preview) with an 1106 model or better -- I recommend creating it in Sweden central. 
 - Deployments of OpenAI models:
     - deployment of `gpt-4-1106-preview`/`gpt-35-turbo-1106` or later for use by the **OpenAI assistant**. Both work, but `gpt-35-turbo-1106` is faster and `gpt-4-1106-preview` is more accurate. (**OPENAI_ASSISTANT_MODEL**)
@@ -80,7 +81,7 @@ You can begin chat flow on http://127.0.0.1:23333/v1.0/ui/chat?flow=L1VzZXJzL2Rh
 ```
 
 You can ask the assistant questions like: 
-> get the order numbers by month for the last year and plot it in a line chart using matplotlib. Make use to use the month names in the plot.
+> get the order numbers by month for the last year and plot it in a line chart using matplotlib. Make sure to use the month names in the plot.
 
 ### Run the Chainlit sample app
 
