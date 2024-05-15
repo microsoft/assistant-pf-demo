@@ -3,122 +3,6 @@
         {
             "outputs.data": [
                 {
-                    "Year": 2023,
-                    "Avg_Daily_Revenue": 2554.8900053777
-                },
-                {
-                    "Year": 2024,
-                    "Avg_Daily_Revenue": 1895.6275519793
-                }
-            ],
-            "outputs.error": "None",
-            "outputs.query": "SELECT Year, SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year",
-            "outputs.execution_time": 6.48,
-            "inputs.question": "what was the average daily revenue in europe by year",
-            "inputs.ground_truth_query": "SELECT Year, SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue FROM order_data WHERE Region = 'EUROPE' GROUP BY Year",
-            "outputs.execution_time.seconds": 6.48,
-            "outputs.error.error": 0,
-            "outputs.sql_similarity.score": 5,
-            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to calculate the average daily revenue per year for orders from the 'EUROPE' region. They both sum the order values, count distinct dates, and group the results by year. The only difference is the use of double quotes for string literals in the generated_query, which is acceptable in SQL, versus single quotes in the ground_truth_query. This difference does not affect the functionality, efficiency, or readability of the query.",
-            "line_number": 0
-        },
-        {
-            "outputs.data": [
-                {
-                    "Day": 1,
-                    "SUM(Number_of_Orders)": 35
-                },
-                {
-                    "Day": 2,
-                    "SUM(Number_of_Orders)": 33
-                },
-                {
-                    "Day": 3,
-                    "SUM(Number_of_Orders)": 35
-                },
-                {
-                    "Day": 4,
-                    "SUM(Number_of_Orders)": 32
-                },
-                {
-                    "Day": 5,
-                    "SUM(Number_of_Orders)": 35
-                },
-                {
-                    "Day": 6,
-                    "SUM(Number_of_Orders)": 33
-                },
-                {
-                    "Day": 7,
-                    "SUM(Number_of_Orders)": 31
-                },
-                {
-                    "Day": 8,
-                    "SUM(Number_of_Orders)": 33
-                },
-                {
-                    "Day": 9,
-                    "SUM(Number_of_Orders)": 33
-                },
-                {
-                    "Day": 10,
-                    "SUM(Number_of_Orders)": 36
-                },
-                {
-                    "Day": 11,
-                    "SUM(Number_of_Orders)": 34
-                },
-                {
-                    "Day": 12,
-                    "SUM(Number_of_Orders)": 35
-                },
-                {
-                    "Day": 13,
-                    "SUM(Number_of_Orders)": 33
-                },
-                {
-                    "Day": 14,
-                    "SUM(Number_of_Orders)": 31
-                },
-                {
-                    "Day": 15,
-                    "SUM(Number_of_Orders)": 32
-                },
-                {
-                    "Day": 16,
-                    "SUM(Number_of_Orders)": 31
-                },
-                {
-                    "Day": 17,
-                    "SUM(Number_of_Orders)": 36
-                },
-                {
-                    "Day": 18,
-                    "SUM(Number_of_Orders)": 35
-                },
-                {
-                    "Day": 19,
-                    "SUM(Number_of_Orders)": 32
-                },
-                {
-                    "Day": 20,
-                    "SUM(Number_of_Orders)": 31
-                }
-            ],
-            "outputs.error": "None",
-            "outputs.query": "SELECT Day, SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"WOMEN'S CLOTHING\" AND Month = strftime('%m', 'now') AND Year = strftime('%Y', 'now')\nGROUP BY Day",
-            "outputs.execution_time": 11.21,
-            "inputs.question": "what are the orders for women's clothing by day in the current month",
-            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) FROM order_data WHERE main_category = 'APPAREL' AND sub_category = 'WOMEN'S CLOTHING' AND Month = strftime('%m','now') AND Year = strftime('%Y','now') GROUP BY Day",
-            "outputs.execution_time.seconds": 11.21,
-            "outputs.error.error": 0,
-            "outputs.sql_similarity.score": 5,
-            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the daily sum of orders for a specific main and sub-category in the current month and year from the order_data table. They both filter by the same conditions, group the results by day, and sum the number of orders. The only difference is the use of double quotes versus single quotes for string literals, which in SQL are interchangeable and do not affect the functionality or outcome of the query.",
-            "line_number": 1
-        },
-        {
-            "outputs.data": [
-                {
                     "product_type": "JACKETS & VESTS"
                 },
                 {
@@ -319,57 +203,14 @@
             ],
             "outputs.error": "None",
             "outputs.query": "SELECT DISTINCT product_type FROM order_data",
-            "outputs.execution_time": 1.38,
+            "outputs.execution_time": 3.01,
             "inputs.question": "query for all the values for the product_type",
             "inputs.ground_truth_query": "SELECT DISTINCT product_type FROM order_data",
-            "outputs.execution_time.seconds": 1.38,
+            "outputs.execution_time.seconds": 3.01,
             "outputs.error.error": 0,
             "outputs.sql_similarity.score": 5,
-            "outputs.sql_similarity.explanation": "Both queries are identical, aiming to retrieve all distinct product types from the order_data table. They use the same SELECT DISTINCT clause and target the same field without any additional conditions or modifications.",
-            "line_number": 2
-        },
-        {
-            "outputs.data": [
-                {
-                    "SUM(Sum_of_Order_Value_USD)": null
-                }
-            ],
-            "outputs.error": "None",
-            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE main_category = \"OUTDOOR\" AND sub_category = \"FOOTWEAR\" AND product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024",
-            "outputs.execution_time": 6.33,
-            "inputs.question": "what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'",
-            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
-            "outputs.execution_time.seconds": 6.33,
-            "outputs.error.error": 0,
-            "outputs.sql_similarity.score": 4,
-            "outputs.sql_similarity.explanation": "Both queries are designed to sum the order values from the 'order_data' table for a specific product type, month, and year. The ground_truth_query focuses on summing the values for 'HIKING BOOTS' in May 2024. The generated_query adds additional filters for 'main_category' as 'OUTDOOR' and 'sub_category' as 'FOOTWEAR', which narrows down the data further than the ground_truth_query. This means the generated_query might return a subset of the results from the ground_truth_query or potentially the same results if all 'HIKING BOOTS' fall under 'OUTDOOR' and 'FOOTWEAR'. The additional conditions in the generated_query do not alter the fundamental structure or the type of data retrieved but could potentially affect the cardinality of the results.",
-            "line_number": 3
-        },
-        {
-            "outputs.data": [
-                {
-                    "SUM(Sum_of_Order_Value_USD)": 2617.5064216778,
-                    "sub_category": "CHILDREN'S FOOTWEAR"
-                },
-                {
-                    "SUM(Sum_of_Order_Value_USD)": 2517.6189987606,
-                    "sub_category": "MEN'S FOOTWEAR"
-                },
-                {
-                    "SUM(Sum_of_Order_Value_USD)": 2461.4109672494,
-                    "sub_category": "WOMEN'S FOOTWEAR"
-                }
-            ],
-            "outputs.error": "None",
-            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD), sub_category FROM order_data WHERE main_category = \"FOOTWEAR\" AND product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024 GROUP BY sub_category",
-            "outputs.execution_time": 21.66,
-            "inputs.question": "what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'",
-            "inputs.ground_truth_query": "SELECT sub_category, SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY sub_category",
-            "outputs.execution_time.seconds": 21.66,
-            "outputs.error.error": 0,
-            "outputs.sql_similarity.score": 4,
-            "outputs.sql_similarity.explanation": "Both queries are designed to calculate the total order value for a specific product type ('HIKING BOOTS') during a specific month and year (May 2024), grouped by sub_category. The main difference is that the generated_query includes an additional condition to filter by main_category ('FOOTWEAR'), which is not present in the ground_truth_query. This additional condition means the generated_query might return fewer rows or different sub_categories compared to the ground_truth_query if there are 'HIKING BOOTS' in other main categories. The order of the SELECT clause elements (SUM and sub_category) is different but does not affect the result structure or content. The additional filtering condition in the generated_query slightly alters the scope of the data being queried, which could lead to different results if 'HIKING BOOTS' exist under different main categories.",
-            "line_number": 4
+            "outputs.sql_similarity.explanation": "Both queries are identical, aiming to retrieve all distinct product types from the 'order_data' table. They use the same SELECT DISTINCT clause and target the same field without any additional conditions or modifications.",
+            "line_number": 0
         },
         {
             "outputs.data": [
@@ -676,20 +517,179 @@
             ],
             "outputs.error": "None",
             "outputs.query": "SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nWHERE product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024\nGROUP BY Day, sub_category",
-            "outputs.execution_time": 6.88,
+            "outputs.execution_time": 21.92,
             "inputs.question": "show the total revenue by day and sub_category in May 2024 for product type 'HIKING BOOTS'",
             "inputs.ground_truth_query": "SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY Day, sub_category",
-            "outputs.execution_time.seconds": 6.88,
+            "outputs.execution_time.seconds": 21.92,
             "outputs.error.error": 0,
             "outputs.sql_similarity.score": 5,
             "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the daily total revenue for each sub_category of 'HIKING BOOTS' sold in May 2024 from the order_data table. They both sum the order values, filter by product type, month, and year, and group the results by day and sub_category. The only difference is the use of double quotes for string literals in the generated_query versus single quotes in the ground_truth_query, which is a minor syntactical difference and does not affect the functionality or the output of the query.",
+            "line_number": 1
+        },
+        {
+            "outputs.data": [
+                {
+                    "Day": 1,
+                    "Total_Orders": 35
+                },
+                {
+                    "Day": 2,
+                    "Total_Orders": 33
+                },
+                {
+                    "Day": 3,
+                    "Total_Orders": 35
+                },
+                {
+                    "Day": 4,
+                    "Total_Orders": 32
+                },
+                {
+                    "Day": 5,
+                    "Total_Orders": 35
+                },
+                {
+                    "Day": 6,
+                    "Total_Orders": 33
+                },
+                {
+                    "Day": 7,
+                    "Total_Orders": 31
+                },
+                {
+                    "Day": 8,
+                    "Total_Orders": 33
+                },
+                {
+                    "Day": 9,
+                    "Total_Orders": 33
+                },
+                {
+                    "Day": 10,
+                    "Total_Orders": 36
+                },
+                {
+                    "Day": 11,
+                    "Total_Orders": 34
+                },
+                {
+                    "Day": 12,
+                    "Total_Orders": 35
+                },
+                {
+                    "Day": 13,
+                    "Total_Orders": 33
+                },
+                {
+                    "Day": 14,
+                    "Total_Orders": 31
+                },
+                {
+                    "Day": 15,
+                    "Total_Orders": 32
+                },
+                {
+                    "Day": 16,
+                    "Total_Orders": 31
+                },
+                {
+                    "Day": 17,
+                    "Total_Orders": 36
+                },
+                {
+                    "Day": 18,
+                    "Total_Orders": 35
+                },
+                {
+                    "Day": 19,
+                    "Total_Orders": 32
+                },
+                {
+                    "Day": 20,
+                    "Total_Orders": 31
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Day, SUM(Number_of_Orders) as Total_Orders\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"WOMEN'S CLOTHING\" AND Month = strftime('%m', 'now') AND Year = strftime('%Y', 'now')\nGROUP BY Day",
+            "outputs.execution_time": 12.52,
+            "inputs.question": "what are the orders for women's clothing by day in the current month",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) FROM order_data WHERE main_category = 'APPAREL' AND sub_category = 'WOMEN'S CLOTHING' AND Month = strftime('%m','now') AND Year = strftime('%Y','now') GROUP BY Day",
+            "outputs.execution_time.seconds": 12.52,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the daily sum of orders for a specific main and sub-category in the current month and year from the order_data table. They both filter the data by the same conditions, group the results by day, and sum the number of orders. The only difference is the alias used for the summed number of orders, which does not affect the query's functionality, efficiency, or readability.",
+            "line_number": 2
+        },
+        {
+            "outputs.data": [
+                {
+                    "Year": 2023,
+                    "Avg_Daily_Revenue": 2554.8900053777
+                },
+                {
+                    "Year": 2024,
+                    "Avg_Daily_Revenue": 1895.6275519793
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Year, SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year",
+            "outputs.execution_time": 14.15,
+            "inputs.question": "what was the average daily revenue in europe by year",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue, Year\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year",
+            "outputs.execution_time.seconds": 14.15,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to calculate the average daily revenue per year for orders in the 'EUROPE' region. They both sum the order values and divide by the count of distinct dates, grouping the results by year. The only difference is the order of the columns selected (Year and Avg_Daily_Revenue), which does not affect the functionality, efficiency, or the structure of the query. Both queries will return the same results with the same cardinality and data structure.",
+            "line_number": 3
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 7596.5363876878
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024",
+            "outputs.execution_time": 16.81,
+            "inputs.question": "what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
+            "outputs.execution_time.seconds": 16.81,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the total order value for 'HIKING BOOTS' in May 2024 from the order_data table. They both sum the order values and filter the results based on the product type, month, and year. The only difference is the use of double quotes for string literals in the generated_query, which is acceptable in SQL but less standard than single quotes used in the ground_truth_query. This minor difference does not affect the functionality or the result of the query.",
+            "line_number": 4
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 2617.5064216778,
+                    "sub_category": "CHILDREN'S FOOTWEAR"
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 2517.6189987606,
+                    "sub_category": "MEN'S FOOTWEAR"
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 2461.4109672494,
+                    "sub_category": "WOMEN'S FOOTWEAR"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD), sub_category\nFROM order_data\nWHERE product_type = \"HIKING BOOTS\" AND Month = 5 AND Year = 2024\nGROUP BY sub_category",
+            "outputs.execution_time": 22.84,
+            "inputs.question": "what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT sub_category, SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY sub_category",
+            "outputs.execution_time.seconds": 22.84,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the total order value for each sub_category of 'HIKING BOOTS' sold in May 2024 from the order_data table. They both filter the data by product_type, month, and year, sum the order values, and group the results by sub_category. The only difference is the order of the columns in the SELECT clause, which does not affect the query's functionality, efficiency, or readability.",
             "line_number": 5
         }
     ],
     "metrics": {
-        "execution_time.seconds": 8.99,
+        "execution_time.seconds": 15.208333333333334,
         "error.error": 0.0,
-        "sql_similarity.score": 4.666666666666667
+        "sql_similarity.score": 5.0
     },
-    "studio_url": "https://ai.azure.com/build/evaluation/evaluate_variant_0_20240514_180052_061991?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project"
+    "studio_url": "https://ai.azure.com/build/evaluation/evaluate_variant_0_20240515_143000_095029?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project"
 }

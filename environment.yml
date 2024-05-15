@@ -1,4 +1,4 @@
-name: assistant-eval
+name: assistant-eval2
 channels:
   - anaconda
   - pytorch
@@ -11,8 +11,8 @@ dependencies:
     - openai
     - azure-identity
     - azure-ai-ml
-    - promptflow==1.11.0
-    - promptflow-azure==1.11.0 # This is needed due to following bug : https://msdata.visualstudio.com/Vienna/_workitems/edit/3186300 
+    - promptflow
+    - promptflow-azure # This is needed due to following bug : https://msdata.visualstudio.com/Vienna/_workitems/edit/3186300 
     - promptflow-evals
     - promptflow-tools
     - pytest
@@ -23,3 +23,4 @@ dependencies:
     - ipython
     - pandas 
     - numpy
+    - azure-monitor-opentelemetry-exporter --pre

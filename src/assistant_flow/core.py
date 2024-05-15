@@ -25,7 +25,6 @@ class AssistantsAPIGlue:
         client: AzureOpenAI,
         question: str,
         session_state: dict[str, any] = {},
-        context: dict[str, any] = {},
         tools: dict[str, callable] = {},
     ):
         # Provision an AzureOpenAI client for the assistants
@@ -33,13 +32,7 @@ class AssistantsAPIGlue:
         self.client = client
         self.tools = tools
 
-        if "max_waiting_time" in context:
-            logging.info(
-                f"Using max_waiting_time from context: {context['max_waiting_time']}"
-            )
-            self.max_waiting_time = context["max_waiting_time"]
-        else:
-            self.max_waiting_time = 120
+        self.max_waiting_time = 120
 
         if "thread_id" in session_state:
             logging.info(f"Using thread_id from session_stat: {session_state['thread_id']}")
@@ -54,17 +47,14 @@ class AssistantsAPIGlue:
         logging.info("Adding message in the thread")
         self.add_message(dict(role="user", content=question))
 
-        if "assistant_id" in context:
-            logging.info(f"Using assistant_id from context: {context['assistant_id']}")
-            self.assistant_id = context["assistant_id"]
-        elif "OPENAI_ASSISTANT_ID" in os.environ:
+        if "OPENAI_ASSISTANT_ID" in os.environ:
             logging.info(
                 f"Using assistant_id from environment variables: {os.getenv('OPENAI_ASSISTANT_ID')}"
             )
             self.assistant_id = os.getenv("OPENAI_ASSISTANT_ID")
         else:
             raise Exception(
-                "You need to provide OPENAI_ASSISTANT_ID in the environment variables (or pass assistant_id in the context)"
+                "You need to provide OPENAI_ASSISTANT_ID in the environment variables"
             )
         # get current span
         otel_trace.get_current_span().set_attribute("AssistantsAPIGlue_assistant_id", self.assistant_id)

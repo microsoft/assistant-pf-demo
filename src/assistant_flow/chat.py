@@ -11,11 +11,11 @@ import sqlite3
 import pandas as pd 
 
 # local imports
-from core import AssistantsAPIGlue
+from .core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 from promptflow.core import Flow
-from assistant_flow.sales_data_insights.sales_data_insights import SalesDataInsights
+from assistant_flow.sales_data_insights.main import SalesDataInsights
 
 # @trace
 # def sales_data_insights(question):
@@ -25,12 +25,23 @@ from assistant_flow.sales_data_insights.sales_data_insights import SalesDataInsi
 #     response = prompt_flow(question=question)
 #     return response
 
+from typing import TypedDict, Generator
+class AssistantStream(TypedDict):
+    chat_output: Generator[str, None, None]
+    session_state: dict 
+
+class AssistantFlow:
+    def __init__(self):
+        pass
+
+    def __call__(self, question: str, session_state: dict = {}) -> AssistantStream:
+        return chat_completion(question=question, session_state=session_state)
+
 @trace
 def chat_completion(
     question: str,
     session_state: dict = {},
-    context: dict[str, any] = {},
-):
+) -> AssistantStream:
     # verify all env vars are present
     required_env_vars = [
         "OPENAI_API_BASE",
@@ -58,7 +69,6 @@ def chat_completion(
     handler = AssistantsAPIGlue(client=client, 
                                 question=question, 
                                 session_state=session_state, 
-                                context=context, 
                                 tools=dict(sales_data_insights=sales_data_insights))
     return handler.run()
 

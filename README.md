@@ -186,7 +186,7 @@ Here are a few KQL queries that you can use to get started with building your ow
 - Average duration of OpenAI Chat calls by model/deployment name used:
 ```kql
 dependencies
-| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| where name == "openai_chat" or name == "openai_chat_async" or name == "Iterated(openai_chat)"
 | extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
 | project model = inputs.model, duration_sec = duration / 1000
 | summarize avg(duration_sec) by tostring(model)
@@ -207,7 +207,7 @@ dependencies
 - Total tokens used by model/deployment
 ```kql
 dependencies
-| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| where name == "openai_chat" or name == "openai_chat_async" or name == "Iterated(openai_chat)"
 | extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
 | extend
     total_tokens = toint(customDimensions["llm.usage.total_tokens"]),

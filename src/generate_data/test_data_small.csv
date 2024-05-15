@@ -1,7 +1,0 @@
-﻿"question","ground_truth_query"
-"what was the average daily revenue in europe by year","SELECT Year, SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue FROM order_data WHERE Region = 'EUROPE' GROUP BY Year"
-"what are the orders for women's clothing by day in the current month","SELECT Day, SUM(Number_of_Orders) FROM order_data WHERE main_category = 'APPAREL' AND sub_category = 'WOMEN'S CLOTHING' AND Month = strftime('%m','now') AND Year = strftime('%Y','now') GROUP BY Day"
-"query for all the values for the product_type","SELECT DISTINCT product_type FROM order_data"
-"what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'","SELECT SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024"
-"what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'","SELECT sub_category, SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY sub_category"
-"show the total revenue by day and sub_category in May 2024 for product type 'HIKING BOOTS'","SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY Day, sub_category"
