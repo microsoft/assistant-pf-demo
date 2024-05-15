@@ -9,6 +9,12 @@ FROM mcr.microsoft.com/devcontainers/miniconda:0-3
 # [Optional] Uncomment to install a different version of Python than the default
 COPY environment.yml /tmp/conda-tmp/
 RUN conda env create -f /tmp/conda-tmp/environment.yml
+RUN conda init zsh
+
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+RUN `
+
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
