@@ -15,6 +15,9 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/p
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 RUN sed -i "s|plugins=(git)|plugins=(git zsh-autosuggestions zsh-syntax-highlighting)|g" ~/.zshrc
 
+RUN conda init
+RUN conda init zsh
+
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
