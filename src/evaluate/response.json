@@ -1,0 +1,2887 @@
+{
+    "rows": [
+        {
+            "outputs.data": [
+                {
+                    "product_type": "JACKETS & VESTS"
+                },
+                {
+                    "product_type": "SHIRTS"
+                },
+                {
+                    "product_type": "PANTS & SHORTS"
+                },
+                {
+                    "product_type": "UNDERWEAR & BASE LAYERS"
+                },
+                {
+                    "product_type": "OTHER"
+                },
+                {
+                    "product_type": "TOPS"
+                },
+                {
+                    "product_type": "HIKING BOOTS"
+                },
+                {
+                    "product_type": "TRAIL SHOES"
+                },
+                {
+                    "product_type": "SANDALS"
+                },
+                {
+                    "product_type": "WINTER BOOTS"
+                },
+                {
+                    "product_type": "BACKPACKING TENTS"
+                },
+                {
+                    "product_type": "FAMILY CAMPING TENTS"
+                },
+                {
+                    "product_type": "SHELTERS & TARPS"
+                },
+                {
+                    "product_type": "BIVYS"
+                },
+                {
+                    "product_type": "SLEEPING BAGS"
+                },
+                {
+                    "product_type": "SLEEPING PADS"
+                },
+                {
+                    "product_type": "HAMMOCKS"
+                },
+                {
+                    "product_type": "LINERS"
+                },
+                {
+                    "product_type": "DAYPACKS"
+                },
+                {
+                    "product_type": "OVERNIGHT PACKS"
+                },
+                {
+                    "product_type": "EXTENDED TRIP PACKS"
+                },
+                {
+                    "product_type": "HYDRATION PACKS"
+                },
+                {
+                    "product_type": "STOVES"
+                },
+                {
+                    "product_type": "COOKWARE"
+                },
+                {
+                    "product_type": "UTENSILS & ACCESSORIES"
+                },
+                {
+                    "product_type": "FOOD & NUTRITION"
+                },
+                {
+                    "product_type": "HARNESSES"
+                },
+                {
+                    "product_type": "HELMETS"
+                },
+                {
+                    "product_type": "CARABINERS & QUICKDRAWS"
+                },
+                {
+                    "product_type": "ROPES & SLINGS"
+                },
+                {
+                    "product_type": "CLIMBING SHOES"
+                },
+                {
+                    "product_type": "CHALK & CHALK BAGS"
+                },
+                {
+                    "product_type": "TRAINING EQUIPMENT"
+                },
+                {
+                    "product_type": "ICE AXES"
+                },
+                {
+                    "product_type": "CRAMPONS"
+                },
+                {
+                    "product_type": "MOUNTAINEERING BOOTS"
+                },
+                {
+                    "product_type": "AVALANCHE SAFETY"
+                },
+                {
+                    "product_type": "KAYAKS"
+                },
+                {
+                    "product_type": "CANOES"
+                },
+                {
+                    "product_type": "PADDLES"
+                },
+                {
+                    "product_type": "SAFETY GEAR"
+                },
+                {
+                    "product_type": "SURFBOARDS"
+                },
+                {
+                    "product_type": "WETSUITS"
+                },
+                {
+                    "product_type": "RASH GUARDS"
+                },
+                {
+                    "product_type": "SURF ACCESSORIES"
+                },
+                {
+                    "product_type": "RODS & REELS"
+                },
+                {
+                    "product_type": "TACKLE"
+                },
+                {
+                    "product_type": "WADERS"
+                },
+                {
+                    "product_type": "ACCESSORIES"
+                },
+                {
+                    "product_type": "SKIS"
+                },
+                {
+                    "product_type": "SKI BOOTS"
+                },
+                {
+                    "product_type": "SKI POLES"
+                },
+                {
+                    "product_type": "SKI BINDINGS"
+                },
+                {
+                    "product_type": "SNOWBOARDS"
+                },
+                {
+                    "product_type": "SNOWBOARD BOOTS"
+                },
+                {
+                    "product_type": "BINDINGS"
+                },
+                {
+                    "product_type": "SNOWSHOES"
+                },
+                {
+                    "product_type": "POLES"
+                },
+                {
+                    "product_type": "TRAVEL BACKPACKS"
+                },
+                {
+                    "product_type": "DUFFEL BAGS"
+                },
+                {
+                    "product_type": "CARRY-ONS"
+                },
+                {
+                    "product_type": "TRAVEL ACCESSORIES"
+                },
+                {
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "product_type": "EYE MASKS"
+                },
+                {
+                    "product_type": "PACKING ORGANIZERS"
+                },
+                {
+                    "product_type": "SECURITY"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type\nFROM order_data",
+            "outputs.execution_time": 1.06,
+            "inputs.question": "query for all the values for the product_type",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type FROM order_data",
+            "outputs.execution_time.seconds": 1.06,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are identical in their functionality and structure. They both aim to retrieve distinct product types from the 'order_data' table without any additional conditions or modifications. The syntax and the fields used are correct and appropriate, and both queries will return the same result set.",
+            "line_number": 0
+        },
+        {
+            "outputs.data": "(Failed)",
+            "outputs.error": "Execution failed on sql 'SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Day, \n       sub_category\nFROM order_data \nWHERE product_type = 'HIKING BOOTS' \nAND main_category = 'FOOTWEAR' \nAND sub_category = 'MEN\\'S FOOTWEAR' \nAND Month = 5 \nAND Year = 2024 \nGROUP BY Day, sub_category': near \"S\": syntax error",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Day, \n       sub_category\nFROM order_data \nWHERE product_type = 'HIKING BOOTS' \nAND main_category = 'FOOTWEAR' \nAND sub_category = 'MEN\\'S FOOTWEAR' \nAND Month = 5 \nAND Year = 2024 \nGROUP BY Day, sub_category",
+            "outputs.execution_time": 2.46,
+            "inputs.question": "show the total revenue by day and sub_category in May 2024 for product type 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY Day, sub_category",
+            "outputs.execution_time.seconds": 2.46,
+            "outputs.error.error": 1,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are designed to calculate the total revenue from orders of a specific product type within a given month and year, grouped by day and sub_category. The main difference lies in the additional filtering condition in the generated_query, which restricts the results to 'FOOTWEAR' as the main_category and 'MEN'S FOOTWEAR' as the sub_category. This additional filtering makes the generated_query more specific compared to the ground_truth_query, which does not restrict the main_category or sub_category. This means the generated_query might return fewer rows or different rows compared to the ground_truth_query, depending on the data. However, the structure and intent of the queries are quite similar, and they both correctly use the fields and syntax.",
+            "line_number": 1
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "SUM(Number_of_Orders)": 32
+                },
+                {
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "SUM(Number_of_Orders)": 31
+                },
+                {
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "SUM(Number_of_Orders)": 36
+                },
+                {
+                    "SUM(Number_of_Orders)": 34
+                },
+                {
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "SUM(Number_of_Orders)": 33
+                },
+                {
+                    "SUM(Number_of_Orders)": 31
+                },
+                {
+                    "SUM(Number_of_Orders)": 32
+                },
+                {
+                    "SUM(Number_of_Orders)": 31
+                },
+                {
+                    "SUM(Number_of_Orders)": 36
+                },
+                {
+                    "SUM(Number_of_Orders)": 35
+                },
+                {
+                    "SUM(Number_of_Orders)": 32
+                },
+                {
+                    "SUM(Number_of_Orders)": 31
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"WOMEN'S CLOTHING\" AND Month = 5 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time": 1.9100000000000001,
+            "inputs.question": "what are the orders for women's clothing by day in the current month",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) FROM order_data WHERE main_category = 'APPAREL' AND sub_category = 'WOMEN'S CLOTHING' AND Month = strftime('%m','now') AND Year = strftime('%Y','now') GROUP BY Day",
+            "outputs.execution_time.seconds": 1.9100000000000001,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are designed to sum the number of orders from the 'order_data' table, filtered by the 'main_category' and 'sub_category' for a specific month and year, and then group the results by day. The primary difference lies in the specification of the month and year: the ground_truth_query dynamically determines the month and year based on the current date using SQLite's strftime function, whereas the generated_query explicitly specifies the month as May (5) and the year as 2024. This difference in date handling means the queries could potentially operate on different data sets depending on when they are run, which affects the cardinality and the data structure of the results. However, the structure and intent of the queries are quite similar, focusing on the same categories and using the same grouping.",
+            "line_number": 2
+        },
+        {
+            "outputs.data": [
+                {
+                    "Avg_Daily_Revenue": 20.6862175886,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.2099253365,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.842994038,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.0964504406,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.4719209156,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5969801961,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0925563417,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.245425741,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.6097562638,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.027421919,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.0000898265,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.4287743971,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 32.246177061,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.7177399906,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.3268004163,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.7863689314,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.0312169874,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.1387436577,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8371935639,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0790062857,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.9240241626,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3640469288,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.54505869,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.1650032905,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.3713865246,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.673740352,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.800581339,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.8697390573,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.6260431046,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0490270341,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.6524377654,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.2743725656,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.4157015121,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1038762504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.3643206263,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4061223986,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.1072772957,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8631378922,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.4026196158,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5194205391,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8849103144,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.6677281526,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9993915295,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.0236384198,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.4774034815,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4826285896,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0559672421,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.3432578495,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5909592041,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3489859907,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.2884774256,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.736196305500002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5105082802,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 32.8083433145,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.2564486953,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6565830263,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.1296193823,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.3150803586,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0356019504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.1944004387,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.6131140295,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.852896046,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 36.3231132641,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.0428363235,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9193203534,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.1408974681,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8481244186,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9381415828,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.319359602,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9907792025,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.5134503412,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4178394216,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.8471104588,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.744348408,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 34.4172281895,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.1270557294,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6628159169,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4477861291,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3935424696,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7522925947,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.7861733931,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.7241643209,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3866273123,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.6717847725,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5805394991,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5571651952,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 31.8598895486,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.947957293400002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.0577233324,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.2770836627,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2355141944,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.1922793367,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4855077961,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6210216911,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6966427616,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1661583504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.5370822508,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7635997424,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.357983073,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.180110889,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1674640752,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5460660006,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.2053793061,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.4977708166,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3072699555,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4505622171,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6349937004,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3300032808,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.7472596412,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3169444998,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8220765811,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.0708054487,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7817806233,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1498694524,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9485587833,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.1912380785,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6197821619,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4230535254,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8088709784,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7691623424,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2358721024,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.4570849296,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.8179318407,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.9874792656,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.9949411594,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.6054811398,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.7814848822,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.1386778991,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.9656851659,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.313878929,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1868396495,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.4002714303,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.6116732653,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5704184893,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0094550258,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3292189801,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8662786494,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 31.1547598063,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3906606667,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.3440482384,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.2315222111,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.7986909481,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1570537021,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1910437204,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1398017876,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.5719858338,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 37.3553896967,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8370271232,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7086302512,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.4235331511,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3770345701,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7774881116,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.1413912502,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1954954664,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.5745837678,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3449029081,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.827871255,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.3797484423,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 33.5950746631,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0466025288,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.751599277,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8319844389,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.6610490651,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.9833617828,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.3141380438,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6389337975,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.5748829738,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1034172754,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4292797512,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.0350380937,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.2809735778,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3418290415,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.5041456181,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2166942606,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1171006122,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3097040977,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9306887818,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1820096342,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6460915076,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3536638375,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.4328887785,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.9760441332,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.9451973257,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0546525195,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.9268008259,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.1361372473,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9380028026,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.014512779,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6393583504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3349700211,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4239648624,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0613034373,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.8627571501,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.2341618317,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4908104489,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8556522432,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.5146158325,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7586941236,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.723651678,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8428586912,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5561212976,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8750645395,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4969692382,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7586191601,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.0857536566,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.5907880514,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.4275085605,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.9267109408,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1654792566,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9050079769,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4312881401,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4739143506,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.7767926024,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8563883156,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9042796356,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4548125934,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.2154541239,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.2759462777,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8381946854,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.2137035594,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.2259249641,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.3698244011,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.8955539222,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.518253818,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.5090729532,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6313516113,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1153580112,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.0322511736,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9993795269,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 32.8409213276,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 34.1411864011,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3458858213,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.876388016900002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4124336073,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.5269710587,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7615221751,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8909169998,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0544978006,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.948432597,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9466452582,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.146083081,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.2133835017,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.8236183419,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9646801169,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.0564955833,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.1159355427,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8972804851,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.0619600385,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.6784382155,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5003583802,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8926615316,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0145535782,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7969323827,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.1529473113,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.1882212687,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6556216969,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.5497355838,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4500741118,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0503037157,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.4126676202,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8895494808,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.7530687657,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3443341607,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.2398662072,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4037883234,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8386640105,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.1819754063,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5875197287,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.7672571047,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9731083426,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.1705611155,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.3511054158,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6557850758,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.9120073671,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.0878311626,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.9981486018,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5522365579,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.6561019283,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7458341591,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.0706518732,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.4553908093,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3393268516,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6968160163,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1207727193,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5331220282,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1713243011,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.5470783879,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6246873425,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.7056533052,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.9128434642,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7898449392,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.5445890224,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2967703366,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0904272246,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3372162488,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.8665749136,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0436191423,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.7336358633,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5773281838,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.386916199,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3044951611,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8582653255,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.111581278,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.2984394379,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7560418587,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.3048997663,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0355072429,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3108808936,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1247887026,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2318486871,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0473056931,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8769828684,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.7646486276,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 35.5585280128,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.4873136997,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5048512498,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.344539996800002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.2500048896,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6727346997,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3759787911,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.268603053,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6590095819,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7087418738,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5137701894,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7591430396,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 33.0876423096,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.6140728469,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8507105256,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.118232204,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.3002667069,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.246906707,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.7175452526,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3205504648,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6665562484,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0630485343,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1624267437,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.120551131,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.7974363577,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.994923218,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.5918244298,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1433508539,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.131762188,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.1908468691,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6970687022,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5184585094,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8784631027,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.9588949486,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.6702612892,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7590704717,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.5861866896,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.9176142313,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8652574528,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.2628336613,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2196821742,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.450387015,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.778156676000002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1654960488,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0841292092,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.601850228,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1854754226,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8014671928,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6902030422,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8548052859,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0639712844,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.4383645521,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5119278844,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4261561229,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.2671704015,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8554700541,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.9859917871,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8318401684,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4325099801,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5145470578,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9493142565,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0974701289,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.904974183,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0498369612,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7343163912,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.3176816959,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.6186193969,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.2014209395,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.7569891464,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.4508669117,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0418525711,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.057325628,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.8955257233,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6013366181,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7595842008,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.4681776283,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.116626109,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0577576892,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8689759684,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.0474011866,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.415466765,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5574593644,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.9807100796,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8004271948,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4164031811,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.0807947597,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.890854956,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.2237336609,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.28691212,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.1847513889,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4704606733,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.3416657839,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8160691127,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2447640142,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5308831174,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9783795704,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.2777023359,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.7814501552,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.8965578447,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.4455984261,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.8843649604,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7024009814,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7285124488,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0557979947,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8415780016,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.3900914604,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.8031364472,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.7791563132,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3949778876,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.8095269351,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.8504871534,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.3629921025,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.8721110761,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4642076252,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9468613062,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.24989399,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7137819271,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.0735670784,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9048589269,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.426175975,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.9899382762,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9894467538,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.4257342671,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.0398624489,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.0418563444,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4560966979,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1835363815,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0680781997,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8313767919,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6564832448,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6529496074,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5057754964,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6659508491,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9989894487,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.8681090173,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.583910254,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8079011968,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.8028978651,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.0149211647,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1630833375,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.6415389258,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6333184277,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.568704163,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7688972871,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3784386578,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1095658531,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9103513392,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.3570438694,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.4674689754,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3382058786,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 10.5157687548,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8447919749,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1246934705,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9224313516,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9920664963,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.4207265421,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.510461865899998,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0167281571,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2028719102,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0519854175,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4312912146,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.8903219847,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1271938185,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5608823972,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5148665713,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1143658555,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0237543312,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7490608181,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.151623601,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.343740081299998,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4999326851,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.9081878838,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.8641207247,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8913812525,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1997144608,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.6661865661,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.2902223061,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7868855576,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.3249669664,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.2151260883,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1983943952,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7808794841,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.3581821714,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.5405179721,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.6572290314,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8074048304,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7006492469,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9869402786,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.805491625,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.2956420332,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9825280425,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.416304302,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.4760491459,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) / SUM(Number_of_Orders) as Avg_Daily_Revenue, \n       Year, \n       Region\nFROM order_data \nWHERE Region = \"EUROPE\" \nGROUP BY Year, Day, Month",
+            "outputs.execution_time": 1.58,
+            "inputs.question": "what was the average daily revenue in europe by year",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue, Year\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year",
+            "outputs.execution_time.seconds": 1.58,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 2,
+            "outputs.sql_similarity.explanation": "The generated query and the ground_truth query both aim to calculate the average daily revenue from the order_data table for the 'EUROPE' region, grouped by year. However, there are significant differences in how they achieve this. The ground_truth query uses COUNT(DISTINCT Date) to determine the number of unique days, ensuring that the average daily revenue is calculated correctly across all days of the year. In contrast, the generated query incorrectly groups by Year, Day, and Month, which will result in a different calculation for average daily revenue, as it does not account for the unique days but rather for each combination of Year, Day, and Month. Additionally, the generated query includes the 'Region' in the SELECT clause, which is unnecessary given the WHERE filter and does not match the ground_truth query's structure. These differences in the grouping and calculation method mean the generated query will not only produce a different result set but also a structurally different output compared to the ground_truth query.",
+            "line_number": 3
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 7596.5363876878
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data\nWHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
+            "outputs.execution_time": 1.06,
+            "inputs.question": "what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
+            "outputs.execution_time.seconds": 1.06,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 5,
+            "outputs.sql_similarity.explanation": "Both queries are functionally identical, aiming to retrieve the total order value for 'HIKING BOOTS' in May 2024 from the order_data table. They both sum the order values and filter the results based on the product type, month, and year. There are no differences in the structure, clauses, or conditions used in both queries.",
+            "line_number": 4
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": null
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE sub_category = 'FOOTWEAR' AND product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
+            "outputs.execution_time": 1.45,
+            "inputs.question": "what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT sub_category, SUM(Sum_of_Order_Value_USD) FROM order_data WHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024 GROUP BY sub_category",
+            "outputs.execution_time.seconds": 1.45,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "The generated_query and the ground_truth_query both aim to sum the order values from the order_data table for 'HIKING BOOTS' in May 2024. However, the ground_truth_query groups the results by sub_category, which means it will return the sum of order values for each sub_category of 'HIKING BOOTS'. The generated_query, on the other hand, specifically filters for the 'FOOTWEAR' sub_category and does not include a GROUP BY clause, resulting in a single sum for just the 'FOOTWEAR' sub_category. This difference in the use of the GROUP BY clause and the specific filtering in the generated_query means the queries will return different data structures and potentially different row counts, depending on the data.",
+            "line_number": 5
+        }
+    ],
+    "metrics": {
+        "execution_time.seconds": 1.5866666666666667,
+        "error.error": 0.16666666666666666,
+        "sql_similarity.score": 3.6666666666666665
+    },
+    "studio_url": "https://ai.azure.com/build/evaluation/evaluate_variant_0_20240515_154619_497911?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project"
+}

@@ -1,0 +1,135 @@
+---
+name: Sql Similarity Evaluator
+description: Sql Similarity Evaluator to compare two SQL queries and return a similarity score
+model:
+  api: chat
+  configuration:
+    type: azure_openai
+    azure_deployment: gpt-4-turbo
+    api_key: ${env:OPENAI_API_KEY}
+    azure_endpoint: ${env:OPENAI_API_BASE}
+  parameters:
+    temperature: 0
+    response_format: { "type": "json_object" }
+
+sample:
+  response: |
+    SELECT Region
+    FROM order_data
+
+  ground_truth: |
+    SELECT DISTINCT Region
+    FROM order_data
+
+inputs:
+  response:
+    type: string
+
+  ground_truth:
+    type: string
+
+outputs:
+  score:
+    type: int
+  explanation:
+    type: string
+---
+
+system:
+You are an AI tool that determines similarity of two SQL queries.
+You will be given two SQL queries against the below table and you need to determine how similar they are. 
+
+### SQLite table `order_data` with properties:
+    #
+    #  Number_of_Orders INTEGER "the number of orders processed"
+    #  Sum_of_Order_Value_USD REAL "the total value of the orders processed in USD"
+    #  Sum_of_Number_of_Items REAL "the sum of items in the orders processed"
+    #  Number_of_Orders_with_Discount INTEGER "the number of orders that received a discount"
+    #  Sum_of_Discount_Percentage REAL "the sum of discount percentage -- useful to calculate average discounts given"
+    #  Sum_of_Shipping_Cost_USD REAL "the sum of shipping cost for the processed orders"
+    #  Number_of_Orders_Returned INTEGER "the number of orders returned by the customers"
+    #  Number_of_Orders_Cancelled INTEGER "the number or orders cancelled by the customers before they were sent out"
+    #  Sum_of_Time_to_Fulfillment REAL "the sum of time to fulfillment"
+    #  Number_of_Orders_Repeat_Customers INTEGER "number of orders that were placed by repeat customers"
+    #  Year INTEGER
+    #  Month INTEGER
+    #  Day INTEGER
+    #  Date TIMESTAMP
+    #  Day_of_Week INTEGER in 0 based format, Monday is 0, Tuesday is 1, etc.
+    #  main_category TEXT
+    #  sub_category TEXT
+    #  product_type TEXT
+    #  Region TEXT
+    #
+
+
+This rating value should always be an integer between 1 and 5. So the rating produced should be 1 or 2 or 3 or 4 or 5.
+
+Use the following criteria to determine the similarity score of the response compared to the ground_truth query:
+First determine if the response query is correct or not. 
+- Syntactical correctness: If the response query is syntactically incorrect, it should be rated 1.
+- Use of fields from the above table: If the response query uses fields from the above table incorrectly, it should be rated 1.
+- Use of tables: If the response query does not use any table other than order_data and common sqlite metadata/PRAGMA tables, it should be rated 1.
+
+Then, if you didn't fail the response based on the above, compare the response with the ground_truth query based on the following criteria:
+- Cardinality: Will the results be the same number of rows as the ground_truth? If not, it should be rated no better than 3.
+- Will the reponse query return the same data structure as the ground_truth query? If not, it should be rated no better than 3.
+- The structure of each query: How is the response query constructed? Does it use similar clauses and operators as the ground_truth query? If not, it should be rated no better than 4.
+- The efficiency of each query: Is the response query ?
+
+Provide a detailed assessment of the comparison of the response query to the ground_truth query.
+
+Provide response as valid JSON.
+
+Here are some examples of chat conversations and the correct response:
+
+**Example 1**
+generated_query:       
+SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, Month
+FROM order_data 
+GROUP BY Month 
+ORDER BY Total_Revenue DESC 
+LIMIT 1
+
+ground_truth_query: 
+SELECT SUM(Sum_of_Order_Value_USD) as Revenue, Month
+FROM order_data 
+GROUP BY Month 
+ORDER BY Revenue DESC 
+LIMIT 1
+
+result:
+{
+  "explanation": "Both queries are functionally identical, aiming to retrieve the highest monthly total revenue from the order_data table. They both sum the order values, group the results by month, order them in descending order by the summed value, and limit the output to the top result. The only difference is the alias used for the summed value, which does not affect the query's functionality, efficiency, or readability.",
+  "score": 5
+}
+
+**Example 2**
+
+generated_query:       
+SELECT SUM(Number_of_Orders)
+FROM order_data
+WHERE Month = 5
+AND Year = 2024
+
+ground_truth_query:
+SELECT SUM(Number_of_Orders)
+FROM order_data
+WHERE Year = 2024
+AND Month = 5
+GROUP BY Day
+
+result:
+{
+  "explanation": "The queries are similar in that they both aim to sum the number of orders from the order_data table for a specific month and year. However, the ground_truth_query includes a GROUP BY clause that groups the results by day, which the generated_query does not have. This means the ground_truth_query will return a sum for each day, while the generated_query will return a single sum for the entire month.",
+  "score": 2 
+}
+
+**Here the actual conversation to be scored:**
+generated_query: 
+{{response}}
+
+ground_truth_query: 
+{{ground_truth}}
+
+result:

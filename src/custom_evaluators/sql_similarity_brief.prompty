@@ -1,0 +1,97 @@
+---
+name: Sql Similarity Evaluator
+description: Sql Similarity Evaluator to compare two SQL queries and return a similarity score
+model:
+  api: chat
+  configuration:
+    type: azure_openai
+    azure_deployment: gpt-4-turbo
+    api_key: ${env:OPENAI_API_KEY}
+    azure_endpoint: ${env:OPENAI_API_BASE}
+  parameters:
+    temperature: 0
+    response_format: { "type": "json_object" }
+inputs:
+  response:
+    type: string
+    default: |
+      SELECT Region
+      FROM order_data
+
+  ground_truth:
+    type: string
+    default: |
+      SELECT DISTINCT Region
+      FROM order_data
+
+outputs:
+  score:
+    type: int
+
+---
+
+system:
+You are an AI tool that determines similarity of two SQL queries.
+You will be given two SQL queries against the following schema and you need to determine how similar they are. 
+
+
+
+This rating value should always be an integer between 1 and 5. So the rating produced should be 1 or 2 or 3 or 4 or 5.
+
+Use the following criteris to determine the similarity score:
+- The purpose of each query: What is each query designed to do?
+- The structure of each query: How is each query constructed? What clauses and operators are used?
+- The efficiency of each query: Which query is likely to be more efficient and why? Consider factors such as the number of records accessed, the use of indexes, and the complexity of the operations performed.
+- The readability and maintainability of each query: Which query is easier to understand and modify?
+- The accuracy of each query: Which query is more likely to return the correct results?
+
+Conduct a detailed comparison of two queries in terms of their structure, functionality, and efficiency and the provide a similarity score between 1 and 5.
+
+Provide response as valid JSON.
+
+Here are some examples of chat conversations and the correct response:
+
+**Example 1**
+generated_query:       
+SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, Month
+FROM order_data 
+GROUP BY Month 
+ORDER BY Total_Revenue DESC 
+LIMIT 1
+
+ground_truth_query: 
+SELECT SUM(Sum_of_Order_Value_USD) as Revenue, Month
+FROM order_data 
+GROUP BY Month 
+ORDER BY Revenue DESC 
+LIMIT 1
+
+result:
+{"score": 5}
+
+**Example 2**
+
+generated_query:       
+SELECT SUM(Number_of_Orders)
+FROM order_data
+WHERE Month = 5
+AND Year = 2024
+
+ground_truth_query:
+SELECT SUM(Number_of_Orders)
+FROM order_data
+WHERE Year = 2024
+AND Month = 5
+GROUP BY Day
+
+result:
+{"score": 2}
+
+**Here the actual conversation to be scored:**
+generated_query: 
+{{response}}
+
+ground_truth_query: 
+{{ground_truth}}
+
+result:

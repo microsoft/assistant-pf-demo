@@ -8,6 +8,7 @@ In this sample, we will show how to use [Azure OpenAI Assistants](https://learn.
 
 - Python 3.11
 - Conda
+- Azure CLI
 - AI Studio Hub & Project with an Azure OpenAI endpoint (**OPENAI_API_BASE**, **OPENAI_API_KEY**) in a [region that supports assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#assistants-preview) with an 1106 model or better -- I recommend creating it in Sweden central. 
 - Deployments of OpenAI models:
     - deployment of `gpt-4-1106-preview`/`gpt-35-turbo-1106` or later for use by the **OpenAI assistant**. Both work, but `gpt-35-turbo-1106` is faster and `gpt-4-1106-preview` is more accurate. (**OPENAI_ASSISTANT_MODEL**)
@@ -80,7 +81,7 @@ You can begin chat flow on http://127.0.0.1:23333/v1.0/ui/chat?flow=L1VzZXJzL2Rh
 ```
 
 You can ask the assistant questions like: 
-> get the order numbers by month for the last year and plot it in a line chart using matplotlib. Make use to use the month names in the plot.
+> get the order numbers by month for the last year and plot it in a line chart using matplotlib. Make sure to use the month names in the plot.
 
 ### Run the Chainlit sample app
 
@@ -186,7 +187,7 @@ Here are a few KQL queries that you can use to get started with building your ow
 - Average duration of OpenAI Chat calls by model/deployment name used:
 ```kql
 dependencies
-| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| where name == "openai_chat" or name == "openai_chat_async" or name == "Iterated(openai_chat)"
 | extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
 | project model = inputs.model, duration_sec = duration / 1000
 | summarize avg(duration_sec) by tostring(model)
@@ -207,7 +208,7 @@ dependencies
 - Total tokens used by model/deployment
 ```kql
 dependencies
-| where name == "openai_chat_async" or name == "Iterated(openai_chat)"
+| where name == "openai_chat" or name == "openai_chat_async" or name == "Iterated(openai_chat)"
 | extend inputs = parse_json(todynamic(tostring(customDimensions["inputs"])))
 | extend
     total_tokens = toint(customDimensions["llm.usage.total_tokens"]),

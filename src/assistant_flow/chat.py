@@ -1,6 +1,3 @@
-# enable type annotation syntax on Python versions earlier than 3.9
-from __future__ import annotations
-
 import time
 import json
 import base64
@@ -11,26 +8,22 @@ import sqlite3
 import pandas as pd 
 
 # local imports
-from core import AssistantsAPIGlue
+from .core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 from promptflow.core import Flow
+from sales_data_insights.main import SalesDataInsights
 
-
-@trace
-def sales_data_insights(question):
-    # call the promptflow
-    prompt_flow_path = os.path.join(os.path.dirname(__file__), 'sales_data_insights')
-    prompt_flow = Flow.load(prompt_flow_path)
-    response = prompt_flow(question=question)
-    return response
+from typing import TypedDict 
+class AssistantStream(TypedDict):
+    chat_output: str
+    session_state: dict 
 
 @trace
 def chat_completion(
     question: str,
     session_state: dict = {},
-    context: dict[str, any] = {},
-):
+) -> AssistantStream:
     # verify all env vars are present
     required_env_vars = [
         "OPENAI_API_BASE",
@@ -53,11 +46,11 @@ def chat_completion(
         api_key=os.getenv("OPENAI_API_KEY"),
         api_version=os.getenv("OPENAI_API_VERSION"),
     )
-
+    sales_data_insights = SalesDataInsights()
+    
     handler = AssistantsAPIGlue(client=client, 
                                 question=question, 
                                 session_state=session_state, 
-                                context=context, 
                                 tools=dict(sales_data_insights=sales_data_insights))
     return handler.run()
 
