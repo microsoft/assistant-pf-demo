@@ -399,3 +399,4 @@ FodyWeavers.xsd
 .env
 spans.json
 .files/
+**/.promptflow
