@@ -19,11 +19,17 @@ def error_to_number(error: str):
     numerical_error = 0 if not error or error == "None" else 1
     return {"error": numerical_error}
 
-def main():
+def main(model="azure_openai", data="small"):
     # which test set to use
-    # data_set = "test_set_large.jsonl"
-    data_set = "test_set_small.jsonl"
-    data_file = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "generate_data", data_set)
+    if data == "small":
+        data_set = "test_set_small.jsonl"
+        data_file = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "generate_data", data_set)
+    elif data == "large":
+        data_set = "test_set_large.jsonl"
+        data_file = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "generate_data", data_set)
+    else:
+        data_file = data
+
     prompty_path = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "custom_evaluators", "sql_similarity.prompty")
 
     # Initialize evaluators
@@ -33,11 +39,16 @@ def main():
 
     # Run evaluation
     with tempfile.TemporaryDirectory() as d: 
-        evaluation_name = f"Sales Insight using {os.getenv('OPENAI_ANALYST_CHAT_MODEL')}"
+        if model == "azure_openai":            
+            evaluation_name = f"SDI: {os.getenv('OPENAI_ANALYST_CHAT_MODEL')}, dataset: {data}"
+        else:
+            evaluation_name = f"SDI: {model}, dataset: {data}"
+
+        print(f"Starting evaluation: {evaluation_name}")
 
         response = evaluate(
             evaluation_name=evaluation_name,
-            target=SalesDataInsights(),
+            target=SalesDataInsights(model_type=model),
             data=data_file,
             evaluators={
                 "execution_time": execution_time_evaluator,
@@ -74,4 +85,12 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # add argparse to load --model parameter which defaults to "azure_openai"
+    # valid values are: ["azure_openai", "phi3_mini", "phi3_medium", "cohere_chat", "mistral_small", "mistral_large", "llama3"]
+    # data parameter defaults to "small" and can be either "small", "large" or a path to a jsonl file
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", help="Model to evaluate", default="azure_openai", choices=["azure_openai", "phi3_mini", "phi3_medium", "cohere_chat", "mistral_small", "mistral_large", "llama3"])
+    parser.add_argument("--data", help="Data to evaluate. Can be either 'small', 'large', or a file name.", default="small")
+    args = parser.parse_args()
+    main(model=args.model, data=args.data)

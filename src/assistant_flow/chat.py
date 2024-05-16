@@ -14,25 +14,10 @@ from openai import AzureOpenAI
 from promptflow.core import Flow
 from sales_data_insights.main import SalesDataInsights
 
-# @trace
-# def sales_data_insights(question):
-#     # call the promptflow
-#     prompt_flow_path = os.path.join(os.path.dirname(__file__), 'sales_data_insights')
-#     prompt_flow = Flow.load(prompt_flow_path)
-#     response = prompt_flow(question=question)
-#     return response
-
 from typing import TypedDict 
 class AssistantStream(TypedDict):
     chat_output: str
     session_state: dict 
-
-class AssistantFlow:
-    def __init__(self):
-        pass
-
-    def __call__(self, question: str, session_state: dict = {}) -> AssistantStream:
-        return chat_completion(question=question, session_state=session_state)
 
 @trace
 def chat_completion(
