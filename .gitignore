@@ -404,3 +404,5 @@ src/custom_evaluators/.promptflow
 src/assistant_flow/sales_data_insights/.promptflow
 src/tmp/
 src/evaluate/.promptflow
+
+.promptflow

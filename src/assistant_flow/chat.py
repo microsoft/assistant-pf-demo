@@ -1,6 +1,3 @@
-# enable type annotation syntax on Python versions earlier than 3.9
-from __future__ import annotations
-
 import time
 import json
 import base64
@@ -25,9 +22,9 @@ from sales_data_insights.main import SalesDataInsights
 #     response = prompt_flow(question=question)
 #     return response
 
-from typing import TypedDict, Generator
+from typing import TypedDict 
 class AssistantStream(TypedDict):
-    chat_output: Generator[str, None, None]
+    chat_output: str
     session_state: dict 
 
 class AssistantFlow:
