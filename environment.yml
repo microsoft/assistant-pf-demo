@@ -1,4 +1,4 @@
-name: assistant
+name: assistant-eval3
 channels:
   - anaconda
   - pytorch
@@ -7,10 +7,13 @@ dependencies:
   - python==3.11
   - pip==24.0
   - pip:
+    - --extra-index-url https://azuremlsdktestpypi.azureedge.net/promptflow
     - openai
     - azure-identity
     - azure-ai-ml
-    - promptflow>=1.10.0
+    - promptflow-azure==1.11.0
+    - promptflow==1.11.0
+    - promptflow-evals
     - promptflow-tools
     - pytest
     - jinja2
@@ -20,3 +23,5 @@ dependencies:
     - ipython
     - pandas 
     - numpy
+    - azure-monitor-opentelemetry-exporter --pre
+    - git+https://github.com/azure/azure-sdk-for-python.git@84ad0b5b6ed5564e3c3baae9f6de32e00aa1e76b#subdirectory=sdk/ai/azure-ai-inference
