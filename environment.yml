@@ -1,4 +1,4 @@
-name: assistant-eval3
+name: assistant
 channels:
   - anaconda
   - pytorch
