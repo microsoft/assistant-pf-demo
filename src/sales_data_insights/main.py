@@ -205,25 +205,24 @@ class SalesDataInsights:
     def __init__(self, data=None, model_type="azure_openai"):
         self.data = data if data else os.path.join(pathlib.Path(__file__).parent.resolve(), "data", "order_data.db")
         self.model_type = model_type
+
+    @trace
+    def __call__(self, *, question: str, **kwargs) -> Result:
         if self.model_type == "azure_openai":
-            self.client = AzureOpenAI(
+            client = AzureOpenAI(
                                 api_key = os.getenv("OPENAI_API_KEY"),
                                 azure_endpoint = os.getenv("OPENAI_API_BASE"),
                                 api_version = os.getenv("OPENAI_API_VERSION")
                             )
         else:
-            endpoint = os.getenv(f"AZUREAI_{model_type.upper()}_URL")
-            key = os.getenv(f"AZUREAI_{model_type.upper()}_KEY")
+            endpoint = os.getenv(f"AZUREAI_{self.model_type.upper()}_URL")
+            key = os.getenv(f"AZUREAI_{self.model_type.upper()}_KEY")
             print("endpoint", endpoint)
             print("key", key)
-            self.client = ChatCompletionsClient(
+            client = ChatCompletionsClient(
                 endpoint=endpoint,
                 credential=AzureKeyCredential(key),
             )
-
-    @trace
-    def __call__(self, *, question: str, **kwargs) -> Result:
-
         # Code to get time to execute the function
         import time
         start = time.time()
@@ -236,23 +235,23 @@ class SalesDataInsights:
         
             messages.append({"role": "user", "content": f"{question}\nGive only the query in SQL format"})
 
-            response = self.client.chat.completions.create(
+            response = client.chat.completions.create(
                 model= os.getenv("OPENAI_ANALYST_CHAT_MODEL"),
                 messages=messages, 
             )
         elif self.model_type.lower() == "phi3_mini":
             combined_message = UserMessage(content=f"{system_message_short}\n\n{question}\nGive only the query in SQL format")
             messages = [combined_message]
-            response = self.client.create(messages=messages, temperature=0, max_tokens=1000)
+            response = client.create(messages=messages, temperature=0, max_tokens=1000)
         elif self.model_type.lower() == "phi3_medium":
             combined_message = UserMessage(content=f"{system_message}\n\n{question}\nGive only the query in SQL format")
             messages = [combined_message]
-            response = self.client.create(messages=messages, temperature=0, max_tokens=1000)
+            response = client.create(messages=messages, temperature=0, max_tokens=1000)
         else:
             system_message_obj = SystemMessage(content=system_message)
             user_message_obj = UserMessage(content=f"{question}\nGive only the query in SQL format")
             messages = [system_message_obj, user_message_obj]
-            response = self.client.create(messages=messages, temperature=0, max_tokens=1000)
+            response = client.create(messages=messages, temperature=0, max_tokens=1000)
 
         message = response.choices[0].message
 
