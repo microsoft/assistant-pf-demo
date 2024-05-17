@@ -1,0 +1,1 @@
+{"question":"what was the average daily revenue in europe by year","ground_truth_query":"SELECT SUM(Sum_of_Order_Value_USD) \/ COUNT(DISTINCT Date) as Avg_Daily_Revenue, Year\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year"}

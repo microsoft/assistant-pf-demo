@@ -27,6 +27,9 @@ def main(model="azure_openai", data="small"):
     elif data == "large":
         data_set = "test_set_large.jsonl"
         data_file = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "generate_data", data_set)
+    elif data == "mini":
+        data_set = "test_set_mini.jsonl"
+        data_file = os.path.join(pathlib.Path(__file__).parent.parent.resolve(), "generate_data", data_set)
     else:
         data_file = data
 
@@ -51,9 +54,9 @@ def main(model="azure_openai", data="small"):
             target=SalesDataInsights(model_type=model),
             data=data_file,
             evaluators={
+                "sql_similarity": sql_similarity_evaluator,
                 "execution_time": execution_time_evaluator,
-                "error": error_evaluator,
-                "sql_similarity": sql_similarity_evaluator
+                "error": error_evaluator
             },
             evaluator_config={
                 "sql_similarity": {
@@ -91,6 +94,6 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", help="Model to evaluate", default="azure_openai", choices=["azure_openai", "phi3_mini", "phi3_medium", "cohere_chat", "mistral_small", "mistral_large", "llama3"])
-    parser.add_argument("--data", help="Data to evaluate. Can be either 'small', 'large', or a file name.", default="small")
+    parser.add_argument("--data", help="Data to evaluate. Can be either 'mini', 'small', 'large', or a file name.", default="mini")
     args = parser.parse_args()
     main(model=args.model, data=args.data)
