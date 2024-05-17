@@ -109,6 +109,8 @@ Open two browser tabs, one to `http://localhost:8000` and one to `http://localho
 
 Should be able to chat with the assistant in the chat UI and see the traces in the other tab.
 
+### Sequence Diagram
+Here is an example of a sequence diagram that illustrates the flow of an assistant interaction with the Sales Data Insights tool. The flow starts with the frontend asking for a line chart of sales data. The Promptflow service then calls the assistant to get the sales data. The assistant then calls the Sales Data Insights tool to get the sales data. The Sales Data Insights tool then calls a SQL database to get the data. The data is then passed back to the assistant, which then calls the Code Interpreter tool to generate the line chart. The line chart is then passed back to the frontend. The flow is illustrated below: 
 ```mermaid
 sequenceDiagram
     autonumber
