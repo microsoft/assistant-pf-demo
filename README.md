@@ -109,6 +109,47 @@ Open two browser tabs, one to `http://localhost:8000` and one to `http://localho
 
 Should be able to chat with the assistant in the chat UI and see the traces in the other tab.
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Frontend
+    participant Promptflow
+    participant SalesDataInsights
+    box Azure OpenAI Service    
+        participant Assistant
+        participant CodeInterpreter
+    end
+    
+    Frontend->>Promptflow: show me sales data in a line chart
+    activate Promptflow
+    Promptflow->>Assistant: show me sales data in a line chart
+    activate Assistant
+    loop 
+        Assistant->>Assistant: call LLM
+    end
+    Assistant-->>Promptflow: tool_call: SDI("get sales data")
+    deactivate Assistant
+    Promptflow-->Frontend: notify:calling SDI("get sales data") 
+    Promptflow->>SalesDataInsights:  get sales data
+    activate SalesDataInsights
+    loop 
+        SalesDataInsights->>SalesDataInsights: call SQL
+    end
+    SalesDataInsights-->>Promptflow: ["sales", "data", "in", "json", "format"]
+    deactivate SalesDataInsights
+    Promptflow->>Assistant: tool_reply: ["sales", ...] 
+    activate Assistant
+    loop 
+        Assistant->>Assistant: call LLM
+    end
+    Assistant->>CodeInterpreter: "import matplotlib ...."
+    CodeInterpreter-->>Assistant: <Image>
+    Assistant-->>Promptflow: "Here is the requested plot", <Image>
+    deactivate Assistant
+    Promptflow-->>Frontend: "Here is the requested plot", <Image>
+    deactivate Promptflow
+```
+
 ### Log traces to AI Studio
 
 In addition to viewing the traces in the local promptflow traces view, you can also log the traces to Azure AI Studio. To do this, you need to set the trace destination to the Azure AI Studio workspace. You will need your Azure subscription ID, resource group, and project name.
