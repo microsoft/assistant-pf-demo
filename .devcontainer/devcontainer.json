@@ -17,12 +17,14 @@
 				"ms-python.python",
 				"ms-toolsai.jupyter",
 				"prompt-flow.prompt-flow"
-			]
+			],
+			"terminal.integrated.shellIntegration.history": 5000,
+			"terminal.integrated.defaultProfile.linux": "zsh"
 		}
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -31,8 +33,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "python --version",
-
+	"postCreateCommand": "echo $ ZSH_CUSTOM && export ZSH_CUSTOM && bash scripts/post_create.sh"
 	// Configure tool-specific properties.
 	// "customizations": {},
 
