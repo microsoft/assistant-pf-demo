@@ -1,0 +1,4340 @@
+{
+    "rows": [
+        {
+            "outputs.data": "(Failed)",
+            "outputs.error": "Execution failed on sql 'SELECT SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = 'APPAREL'\nAND sub_category = 'WOMEN\\'S CLOTHING'\nAND Month = 5\nAND Year = 2024': near \"S\": syntax error",
+            "outputs.query": "SELECT SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = 'APPAREL'\nAND sub_category = 'WOMEN\\'S CLOTHING'\nAND Month = 5\nAND Year = 2024",
+            "outputs.execution_time": 1.92,
+            "inputs.question": "how many orders did we have in women's clothing this month",
+            "inputs.ground_truth_query": "SELECT SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"WOMEN'S CLOTHING\" AND Month = strftime('%m', 'now') AND Year = strftime('%Y', 'now')",
+            "outputs.execution_time.seconds": 1.92,
+            "outputs.error.error": 1,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating any duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This results in a difference in the number of rows returned and the uniqueness of the data. Therefore, the generated_query does not fully match the intent of the ground_truth_query to provide unique region values.",
+            "line_number": 0
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Number_of_Orders)": 665
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Number_of_Orders)\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"MEN'S CLOTHING\" AND Month = 5 AND Year = 2024",
+            "outputs.execution_time": 1.96,
+            "inputs.question": "how many orders in the main category of \"apparel\" and the sub cateory of men's apparel were made in may 2024",
+            "inputs.ground_truth_query": "SELECT SUM(Number_of_Orders) FROM order_data WHERE main_category = \"APPAREL\" AND sub_category = \"MEN'S CLOTHING\" AND Month = 5 AND Year = 2024",
+            "outputs.execution_time.seconds": 1.96,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, whereas the generated_query does not use DISTINCT and could potentially list the same region multiple times if it appears in multiple rows. This difference affects the cardinality of the results, as the ground_truth_query will return a unique list of regions, while the generated_query might return duplicates.",
+            "line_number": 1
+        },
+        {
+            "outputs.data": "(Failed)",
+            "outputs.error": "Execution failed on sql 'SELECT SUM(Number_of_Orders)\nFROM order_data \nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" \nAND Month = (current month)': near \"month\": syntax error",
+            "outputs.query": "SELECT SUM(Number_of_Orders)\nFROM order_data \nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" \nAND Month = (current month)",
+            "outputs.execution_time": 1.73,
+            "inputs.question": "how many orders of Travel pillows were processed this month",
+            "inputs.ground_truth_query": "SELECT SUM(Number_of_Orders) \nFROM order_data \nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Month = strftime('%m', 'now') AND Year = strftime('%Y', 'now')",
+            "outputs.execution_time.seconds": 1.73,
+            "outputs.error.error": 1,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' column from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and could potentially return duplicate regions. This difference affects the cardinality of the results, as the ground_truth_query will return fewer rows if there are duplicate regions in the data. However, the structure and syntax of both queries are correct and they target the same data source and column.",
+            "line_number": 2
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Number_of_Orders)": 54,
+                    "Region": "AFRICA"
+                },
+                {
+                    "SUM(Number_of_Orders)": 56,
+                    "Region": "ASIA-PACIFIC"
+                },
+                {
+                    "SUM(Number_of_Orders)": 55,
+                    "Region": "EUROPE"
+                },
+                {
+                    "SUM(Number_of_Orders)": 54,
+                    "Region": "MIDDLE EAST"
+                },
+                {
+                    "SUM(Number_of_Orders)": 58,
+                    "Region": "NORTH AMERICA"
+                },
+                {
+                    "SUM(Number_of_Orders)": 58,
+                    "Region": "SOUTH AMERICA"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Number_of_Orders), Region\nFROM order_data\nWHERE main_category = \"TRAVEL\" \n      AND sub_category = \"TRAVEL ACCESSORIES\" \n      AND product_type = \"TRAVEL PILLOWS\" \n      AND Month = 5 -- Assuming the current month is May\nGROUP BY Region",
+            "outputs.execution_time": 2.11,
+            "inputs.question": "how many orders were made for travel pillows this month by region",
+            "inputs.ground_truth_query": "SELECT SUM(Number_of_Orders), Region\nFROM order_data\nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Month = strftime('%m', 'now')\nGROUP BY Region",
+            "outputs.execution_time.seconds": 2.11,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate regions. The structure and intent are similar, but the lack of the DISTINCT keyword in the generated_query means it does not fully match the functionality of the ground_truth_query.",
+            "line_number": 3
+        },
+        {
+            "outputs.data": [
+                {
+                    "Day": 11,
+                    "Total_Orders": 8
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Day, \n           SUM(Number_of_Orders) as Total_Orders\nFROM order_data\nWHERE main_category = \"TRAVEL\" \nAND sub_category = \"TRAVEL ACCESSORIES\" \nAND product_type = \"TRAVEL PILLOWS\" \nAND Month = 5 \nAND Year = 2024\nGROUP BY Day\nORDER BY Total_Orders DESC\nLIMIT 1",
+            "outputs.execution_time": 2.49,
+            "inputs.question": "on which day in May 2024 did we sell the most product_type \"TRAVEL PILLOWS\"",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) AS Total_Orders\nFROM order_data\nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Month = 5 AND Year = 2024\nGROUP BY Day\nORDER BY Total_Orders DESC\nLIMIT 1",
+            "outputs.execution_time.seconds": 2.49,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the results, as the generated_query may return more rows due to duplicates. The structure and intent are similar, but the lack of the DISTINCT keyword in the generated_query means it does not fully match the functionality of the ground_truth_query.",
+            "line_number": 4
+        },
+        {
+            "outputs.data": [
+                {
+                    "main_category": "APPAREL",
+                    "sub_category": "MEN'S CLOTHING"
+                },
+                {
+                    "main_category": "APPAREL",
+                    "sub_category": "WOMEN'S CLOTHING"
+                },
+                {
+                    "main_category": "APPAREL",
+                    "sub_category": "CHILDREN'S CLOTHING"
+                },
+                {
+                    "main_category": "APPAREL",
+                    "sub_category": "OTHER"
+                },
+                {
+                    "main_category": "FOOTWEAR",
+                    "sub_category": "MEN'S FOOTWEAR"
+                },
+                {
+                    "main_category": "FOOTWEAR",
+                    "sub_category": "WOMEN'S FOOTWEAR"
+                },
+                {
+                    "main_category": "FOOTWEAR",
+                    "sub_category": "CHILDREN'S FOOTWEAR"
+                },
+                {
+                    "main_category": "FOOTWEAR",
+                    "sub_category": "OTHER"
+                },
+                {
+                    "main_category": "CAMPING & HIKING",
+                    "sub_category": "TENTS & SHELTERS"
+                },
+                {
+                    "main_category": "CAMPING & HIKING",
+                    "sub_category": "SLEEPING GEAR"
+                },
+                {
+                    "main_category": "CAMPING & HIKING",
+                    "sub_category": "BACKPACKS"
+                },
+                {
+                    "main_category": "CAMPING & HIKING",
+                    "sub_category": "COOKING GEAR"
+                },
+                {
+                    "main_category": "CAMPING & HIKING",
+                    "sub_category": "OTHER"
+                },
+                {
+                    "main_category": "CLIMBING",
+                    "sub_category": "CLIMBING GEAR"
+                },
+                {
+                    "main_category": "CLIMBING",
+                    "sub_category": "BOULDERING & TRAINING"
+                },
+                {
+                    "main_category": "CLIMBING",
+                    "sub_category": "MOUNTAINEERING"
+                },
+                {
+                    "main_category": "CLIMBING",
+                    "sub_category": "OTHER"
+                },
+                {
+                    "main_category": "WATER SPORTS",
+                    "sub_category": "PADDLING"
+                },
+                {
+                    "main_category": "WATER SPORTS",
+                    "sub_category": "SURFING"
+                },
+                {
+                    "main_category": "WATER SPORTS",
+                    "sub_category": "FISHING"
+                },
+                {
+                    "main_category": "WATER SPORTS",
+                    "sub_category": "OTHER"
+                },
+                {
+                    "main_category": "WINTER SPORTS",
+                    "sub_category": "SKIING"
+                },
+                {
+                    "main_category": "WINTER SPORTS",
+                    "sub_category": "SNOWBOARDING"
+                },
+                {
+                    "main_category": "WINTER SPORTS",
+                    "sub_category": "SNOWSHOEING"
+                },
+                {
+                    "main_category": "WINTER SPORTS",
+                    "sub_category": "OTHER"
+                },
+                {
+                    "main_category": "TRAVEL",
+                    "sub_category": "LUGGAGE & BAGS"
+                },
+                {
+                    "main_category": "TRAVEL",
+                    "sub_category": "TRAVEL ACCESSORIES"
+                },
+                {
+                    "main_category": "TRAVEL",
+                    "sub_category": "OTHER"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT main_category, sub_category\nFROM order_data",
+            "outputs.execution_time": 1.65,
+            "inputs.question": "query for all distinct values for main_category and sub_category",
+            "inputs.ground_truth_query": "SELECT DISTINCT main_category, sub_category\nFROM order_data",
+            "outputs.execution_time.seconds": 1.65,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating any duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This results in a difference in the number of rows returned and the uniqueness of the data. Therefore, the generated_query does not fully match the intent of the ground_truth_query to provide unique region values.",
+            "line_number": 5
+        },
+        {
+            "outputs.data": [
+                {
+                    "product_type": "TRAVEL PILLOWS"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE product_type LIKE '%Pillow%'",
+            "outputs.execution_time": 1.65,
+            "inputs.question": "query for all the values for product_type where product_type LIKE '%Pillow%'",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE product_type LIKE '%PILLOW%'",
+            "outputs.execution_time.seconds": 1.65,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' column from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and thus could return duplicate regions. This difference affects the cardinality of the result set, as the generated_query might return more rows due to duplicates. However, the data structure (a single column of regions) remains the same.",
+            "line_number": 6
+        },
+        {
+            "outputs.data": [
+                {
+                    "product_type": "TRAVEL PILLOWS"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE sub_category = 'TRAVEL ACCESSORIES' AND product_type = 'TRAVEL PILLOWS'",
+            "outputs.execution_time": 1.7000000000000002,
+            "inputs.question": "query for all the values for product_type where sub_category = 'Travel Pillows'",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE sub_category = \"TRAVEL PILLOWS\"",
+            "outputs.execution_time.seconds": 1.7000000000000002,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return every instance of each region, including duplicates. This results in a difference in the number of rows returned and the data structure of the result set.",
+            "line_number": 7
+        },
+        {
+            "outputs.data": [
+                {
+                    "sub_category": "LUGGAGE & BAGS",
+                    "product_type": "TRAVEL BACKPACKS"
+                },
+                {
+                    "sub_category": "LUGGAGE & BAGS",
+                    "product_type": "DUFFEL BAGS"
+                },
+                {
+                    "sub_category": "LUGGAGE & BAGS",
+                    "product_type": "CARRY-ONS"
+                },
+                {
+                    "sub_category": "LUGGAGE & BAGS",
+                    "product_type": "TRAVEL ACCESSORIES"
+                },
+                {
+                    "sub_category": "LUGGAGE & BAGS",
+                    "product_type": "OTHER"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES",
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES",
+                    "product_type": "EYE MASKS"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES",
+                    "product_type": "PACKING ORGANIZERS"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES",
+                    "product_type": "SECURITY"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES",
+                    "product_type": "OTHER"
+                },
+                {
+                    "sub_category": "OTHER",
+                    "product_type": "OTHER"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT sub_category, product_type\nFROM order_data\nWHERE main_category = 'TRAVEL'",
+            "outputs.execution_time": 1.47,
+            "inputs.question": "query for all the values for sub_category and product_type where main_category = 'Travel'",
+            "inputs.ground_truth_query": "SELECT DISTINCT sub_category, product_type \nFROM order_data \nWHERE main_category = \"TRAVEL\"",
+            "outputs.execution_time.seconds": 1.47,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate region entries.",
+            "line_number": 8
+        },
+        {
+            "outputs.data": [
+                {
+                    "main_category": "APPAREL"
+                },
+                {
+                    "main_category": "FOOTWEAR"
+                },
+                {
+                    "main_category": "CAMPING & HIKING"
+                },
+                {
+                    "main_category": "CLIMBING"
+                },
+                {
+                    "main_category": "WATER SPORTS"
+                },
+                {
+                    "main_category": "WINTER SPORTS"
+                },
+                {
+                    "main_category": "TRAVEL"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT main_category\nFROM order_data",
+            "outputs.execution_time": 1.29,
+            "inputs.question": "query for all the values for the main_category",
+            "inputs.ground_truth_query": "SELECT DISTINCT main_category FROM order_data",
+            "outputs.execution_time.seconds": 1.29,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return every instance of each region, including duplicates. This results in a difference in the number of rows returned and the data structure of the result set.",
+            "line_number": 9
+        },
+        {
+            "outputs.data": [
+                {
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "product_type": "EYE MASKS"
+                },
+                {
+                    "product_type": "PACKING ORGANIZERS"
+                },
+                {
+                    "product_type": "SECURITY"
+                },
+                {
+                    "product_type": "OTHER"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type \nFROM order_data \nWHERE sub_category = 'TRAVEL ACCESSORIES'",
+            "outputs.execution_time": 1.35,
+            "inputs.question": "query for all the values for the product_type where sub_category = 'TRAVEL ACCESSORIES'",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE sub_category = \"TRAVEL ACCESSORIES\"",
+            "outputs.execution_time.seconds": 1.35,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return every instance of each region, including duplicates. This results in a difference in the number of rows returned and the data structure of the result set.",
+            "line_number": 10
+        },
+        {
+            "outputs.data": [],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE sub_category = 'TRAVEL'",
+            "outputs.execution_time": 1.35,
+            "inputs.question": "query for all the values for the product_type where sub_category = 'travel'",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type\nFROM order_data\nWHERE sub_category = \"TRAVEL\"",
+            "outputs.execution_time.seconds": 1.35,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This results in a difference in the number of rows returned and the data structure of the result. Therefore, the queries are similar in intent but differ in the uniqueness of the output.",
+            "line_number": 11
+        },
+        {
+            "outputs.data": [
+                {
+                    "product_type": "JACKETS & VESTS"
+                },
+                {
+                    "product_type": "SHIRTS"
+                },
+                {
+                    "product_type": "PANTS & SHORTS"
+                },
+                {
+                    "product_type": "UNDERWEAR & BASE LAYERS"
+                },
+                {
+                    "product_type": "OTHER"
+                },
+                {
+                    "product_type": "TOPS"
+                },
+                {
+                    "product_type": "HIKING BOOTS"
+                },
+                {
+                    "product_type": "TRAIL SHOES"
+                },
+                {
+                    "product_type": "SANDALS"
+                },
+                {
+                    "product_type": "WINTER BOOTS"
+                },
+                {
+                    "product_type": "BACKPACKING TENTS"
+                },
+                {
+                    "product_type": "FAMILY CAMPING TENTS"
+                },
+                {
+                    "product_type": "SHELTERS & TARPS"
+                },
+                {
+                    "product_type": "BIVYS"
+                },
+                {
+                    "product_type": "SLEEPING BAGS"
+                },
+                {
+                    "product_type": "SLEEPING PADS"
+                },
+                {
+                    "product_type": "HAMMOCKS"
+                },
+                {
+                    "product_type": "LINERS"
+                },
+                {
+                    "product_type": "DAYPACKS"
+                },
+                {
+                    "product_type": "OVERNIGHT PACKS"
+                },
+                {
+                    "product_type": "EXTENDED TRIP PACKS"
+                },
+                {
+                    "product_type": "HYDRATION PACKS"
+                },
+                {
+                    "product_type": "STOVES"
+                },
+                {
+                    "product_type": "COOKWARE"
+                },
+                {
+                    "product_type": "UTENSILS & ACCESSORIES"
+                },
+                {
+                    "product_type": "FOOD & NUTRITION"
+                },
+                {
+                    "product_type": "HARNESSES"
+                },
+                {
+                    "product_type": "HELMETS"
+                },
+                {
+                    "product_type": "CARABINERS & QUICKDRAWS"
+                },
+                {
+                    "product_type": "ROPES & SLINGS"
+                },
+                {
+                    "product_type": "CLIMBING SHOES"
+                },
+                {
+                    "product_type": "CHALK & CHALK BAGS"
+                },
+                {
+                    "product_type": "TRAINING EQUIPMENT"
+                },
+                {
+                    "product_type": "ICE AXES"
+                },
+                {
+                    "product_type": "CRAMPONS"
+                },
+                {
+                    "product_type": "MOUNTAINEERING BOOTS"
+                },
+                {
+                    "product_type": "AVALANCHE SAFETY"
+                },
+                {
+                    "product_type": "KAYAKS"
+                },
+                {
+                    "product_type": "CANOES"
+                },
+                {
+                    "product_type": "PADDLES"
+                },
+                {
+                    "product_type": "SAFETY GEAR"
+                },
+                {
+                    "product_type": "SURFBOARDS"
+                },
+                {
+                    "product_type": "WETSUITS"
+                },
+                {
+                    "product_type": "RASH GUARDS"
+                },
+                {
+                    "product_type": "SURF ACCESSORIES"
+                },
+                {
+                    "product_type": "RODS & REELS"
+                },
+                {
+                    "product_type": "TACKLE"
+                },
+                {
+                    "product_type": "WADERS"
+                },
+                {
+                    "product_type": "ACCESSORIES"
+                },
+                {
+                    "product_type": "SKIS"
+                },
+                {
+                    "product_type": "SKI BOOTS"
+                },
+                {
+                    "product_type": "SKI POLES"
+                },
+                {
+                    "product_type": "SKI BINDINGS"
+                },
+                {
+                    "product_type": "SNOWBOARDS"
+                },
+                {
+                    "product_type": "SNOWBOARD BOOTS"
+                },
+                {
+                    "product_type": "BINDINGS"
+                },
+                {
+                    "product_type": "SNOWSHOES"
+                },
+                {
+                    "product_type": "POLES"
+                },
+                {
+                    "product_type": "TRAVEL BACKPACKS"
+                },
+                {
+                    "product_type": "DUFFEL BAGS"
+                },
+                {
+                    "product_type": "CARRY-ONS"
+                },
+                {
+                    "product_type": "TRAVEL ACCESSORIES"
+                },
+                {
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "product_type": "EYE MASKS"
+                },
+                {
+                    "product_type": "PACKING ORGANIZERS"
+                },
+                {
+                    "product_type": "SECURITY"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT product_type\nFROM order_data",
+            "outputs.execution_time": 1.24,
+            "inputs.question": "query for all the values for the product_type",
+            "inputs.ground_truth_query": "SELECT DISTINCT product_type FROM order_data",
+            "outputs.execution_time.seconds": 1.24,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and will return all region entries, including duplicates. This difference in the use of DISTINCT affects the cardinality of the results, as the ground_truth_query will return fewer rows if there are duplicate regions in the data. Therefore, the generated_query does not fully match the intent of retrieving unique regions.",
+            "line_number": 12
+        },
+        {
+            "outputs.data": [
+                {
+                    "Region": "NORTH AMERICA"
+                },
+                {
+                    "Region": "EUROPE"
+                },
+                {
+                    "Region": "ASIA-PACIFIC"
+                },
+                {
+                    "Region": "AFRICA"
+                },
+                {
+                    "Region": "MIDDLE EAST"
+                },
+                {
+                    "Region": "SOUTH AMERICA"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT Region\nFROM order_data",
+            "outputs.execution_time": 1.23,
+            "inputs.question": "query for all the values for the Region",
+            "inputs.ground_truth_query": "SELECT DISTINCT Region FROM order_data",
+            "outputs.execution_time.seconds": 1.23,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating any duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicates. The data structure of the result (a single column of regions) is the same, but the number of rows may differ.",
+            "line_number": 13
+        },
+        {
+            "outputs.data": [
+                {
+                    "sub_category": "LUGGAGE & BAGS"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES"
+                },
+                {
+                    "sub_category": "OTHER"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT sub_category\nFROM order_data\nWHERE main_category = 'TRAVEL'",
+            "outputs.execution_time": 1.38,
+            "inputs.question": "query for all the values for the sub_category where main_category = 'TRAVEL'",
+            "inputs.ground_truth_query": "SELECT DISTINCT sub_category\nFROM order_data\nWHERE main_category = \"TRAVEL\"",
+            "outputs.execution_time.seconds": 1.38,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate regions. The data structure of the result is the same, but the number of rows returned will differ.",
+            "line_number": 14
+        },
+        {
+            "outputs.data": [
+                {
+                    "sub_category": "MEN'S CLOTHING"
+                },
+                {
+                    "sub_category": "WOMEN'S CLOTHING"
+                },
+                {
+                    "sub_category": "CHILDREN'S CLOTHING"
+                },
+                {
+                    "sub_category": "OTHER"
+                },
+                {
+                    "sub_category": "MEN'S FOOTWEAR"
+                },
+                {
+                    "sub_category": "WOMEN'S FOOTWEAR"
+                },
+                {
+                    "sub_category": "CHILDREN'S FOOTWEAR"
+                },
+                {
+                    "sub_category": "TENTS & SHELTERS"
+                },
+                {
+                    "sub_category": "SLEEPING GEAR"
+                },
+                {
+                    "sub_category": "BACKPACKS"
+                },
+                {
+                    "sub_category": "COOKING GEAR"
+                },
+                {
+                    "sub_category": "CLIMBING GEAR"
+                },
+                {
+                    "sub_category": "BOULDERING & TRAINING"
+                },
+                {
+                    "sub_category": "MOUNTAINEERING"
+                },
+                {
+                    "sub_category": "PADDLING"
+                },
+                {
+                    "sub_category": "SURFING"
+                },
+                {
+                    "sub_category": "FISHING"
+                },
+                {
+                    "sub_category": "SKIING"
+                },
+                {
+                    "sub_category": "SNOWBOARDING"
+                },
+                {
+                    "sub_category": "SNOWSHOEING"
+                },
+                {
+                    "sub_category": "LUGGAGE & BAGS"
+                },
+                {
+                    "sub_category": "TRAVEL ACCESSORIES"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT DISTINCT sub_category\nFROM order_data",
+            "outputs.execution_time": 1.24,
+            "inputs.question": "query for all the values for the sub_category",
+            "inputs.ground_truth_query": "SELECT DISTINCT sub_category FROM order_data",
+            "outputs.execution_time.seconds": 1.24,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the results, as the generated_query may return more rows due to duplicate regions.",
+            "line_number": 15
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 1282674.424293373,
+                    "Month": 3
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT \n    SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n    Month \nFROM order_data \nGROUP BY Month \nORDER BY Total_Revenue DESC \nLIMIT 1;",
+            "outputs.execution_time": 1.82,
+            "inputs.question": "query for the month with the strongest revenue",
+            "inputs.ground_truth_query": "SELECT Month, SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nGROUP BY Month\nORDER BY Total_Revenue DESC\nLIMIT 1",
+            "outputs.execution_time.seconds": 1.82,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the results, as the generated_query may return more rows due to duplicates. The data structure of the results is similar, but the number of rows returned will differ.",
+            "line_number": 16
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 55266.2390430121
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE Region = \"EUROPE\" AND Year = 2024 AND Month = 1",
+            "outputs.execution_time": 1.62,
+            "inputs.question": "query for the total revenue in January 2024 for Europe",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE Month = 1 AND Year = 2024 AND Region = \"EUROPE\"",
+            "outputs.execution_time.seconds": 1.62,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating any duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate regions. Despite this, the structure and syntax of both queries are correct, and they target the same table and column.",
+            "line_number": 17
+        },
+        {
+            "outputs.data": [
+                {
+                    "main_category": "APPAREL",
+                    "Total_Orders": 38551,
+                    "Total_Order_Value_USD": 1030055.9149774397
+                },
+                {
+                    "main_category": "CAMPING & HIKING",
+                    "Total_Orders": 50764,
+                    "Total_Order_Value_USD": 1357383.3210290838
+                },
+                {
+                    "main_category": "CLIMBING",
+                    "Total_Orders": 36149,
+                    "Total_Order_Value_USD": 964464.7445088724
+                },
+                {
+                    "main_category": "FOOTWEAR",
+                    "Total_Orders": 38637,
+                    "Total_Order_Value_USD": 1033191.5031184964
+                },
+                {
+                    "main_category": "TRAVEL",
+                    "Total_Orders": 26504,
+                    "Total_Order_Value_USD": 707876.2764231277
+                },
+                {
+                    "main_category": "WATER SPORTS",
+                    "Total_Orders": 38581,
+                    "Total_Order_Value_USD": 1031000.8298946022
+                },
+                {
+                    "main_category": "WINTER SPORTS",
+                    "Total_Orders": 36181,
+                    "Total_Order_Value_USD": 968183.6700130049
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT main_category,\n       SUM(Number_of_Orders) as Total_Orders,\n       SUM(Sum_of_Order_Value_USD) as Total_Order_Value_USD\nFROM order_data\nWHERE Year = 2023\nGROUP BY main_category",
+            "outputs.execution_time": 1.83,
+            "inputs.question": "show the 2023 sales by category",
+            "inputs.ground_truth_query": "SELECT main_category, \n       SUM(Number_of_Orders), \n       SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE Year = 2023 \nGROUP BY main_category",
+            "outputs.execution_time.seconds": 1.83,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return every instance of each region, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate values.",
+            "line_number": 18
+        },
+        {
+            "outputs.data": [
+                {
+                    "sub_category": "BACKPACKS",
+                    "product_type": "DAYPACKS",
+                    "Revenue": 83152.1147108231
+                },
+                {
+                    "sub_category": "BACKPACKS",
+                    "product_type": "EXTENDED TRIP PACKS",
+                    "Revenue": 82738.3927408646
+                },
+                {
+                    "sub_category": "BACKPACKS",
+                    "product_type": "HYDRATION PACKS",
+                    "Revenue": 82851.8483391422
+                },
+                {
+                    "sub_category": "BACKPACKS",
+                    "product_type": "OTHER",
+                    "Revenue": 83149.1456072475
+                },
+                {
+                    "sub_category": "BACKPACKS",
+                    "product_type": "OVERNIGHT PACKS",
+                    "Revenue": 83020.3716836423
+                },
+                {
+                    "sub_category": "COOKING GEAR",
+                    "product_type": "COOKWARE",
+                    "Revenue": 83594.536011289
+                },
+                {
+                    "sub_category": "COOKING GEAR",
+                    "product_type": "FOOD & NUTRITION",
+                    "Revenue": 82791.64047749
+                },
+                {
+                    "sub_category": "COOKING GEAR",
+                    "product_type": "OTHER",
+                    "Revenue": 83080.2191400992
+                },
+                {
+                    "sub_category": "COOKING GEAR",
+                    "product_type": "STOVES",
+                    "Revenue": 82128.1173679869
+                },
+                {
+                    "sub_category": "COOKING GEAR",
+                    "product_type": "UTENSILS & ACCESSORIES",
+                    "Revenue": 82937.4727328455
+                },
+                {
+                    "sub_category": "OTHER",
+                    "product_type": "OTHER",
+                    "Revenue": 82723.4405664386
+                },
+                {
+                    "sub_category": "SLEEPING GEAR",
+                    "product_type": "HAMMOCKS",
+                    "Revenue": 82707.7537370119
+                },
+                {
+                    "sub_category": "SLEEPING GEAR",
+                    "product_type": "LINERS",
+                    "Revenue": 82127.9881688954
+                },
+                {
+                    "sub_category": "SLEEPING GEAR",
+                    "product_type": "OTHER",
+                    "Revenue": 83394.8572256727
+                },
+                {
+                    "sub_category": "SLEEPING GEAR",
+                    "product_type": "SLEEPING BAGS",
+                    "Revenue": 82653.9173426136
+                },
+                {
+                    "sub_category": "SLEEPING GEAR",
+                    "product_type": "SLEEPING PADS",
+                    "Revenue": 82807.8983070725
+                },
+                {
+                    "sub_category": "TENTS & SHELTERS",
+                    "product_type": "BACKPACKING TENTS",
+                    "Revenue": 83082.6165547391
+                },
+                {
+                    "sub_category": "TENTS & SHELTERS",
+                    "product_type": "BIVYS",
+                    "Revenue": 83512.2108583111
+                },
+                {
+                    "sub_category": "TENTS & SHELTERS",
+                    "product_type": "FAMILY CAMPING TENTS",
+                    "Revenue": 83578.7238422514
+                },
+                {
+                    "sub_category": "TENTS & SHELTERS",
+                    "product_type": "OTHER",
+                    "Revenue": 82834.4509371582
+                },
+                {
+                    "sub_category": "TENTS & SHELTERS",
+                    "product_type": "SHELTERS & TARPS",
+                    "Revenue": 83520.6966877264
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT sub_category, \n       product_type, \n       SUM(Sum_of_Order_Value_USD) as Revenue\nFROM order_data\nWHERE main_category = 'CAMPING & HIKING'\nGROUP BY sub_category, product_type",
+            "outputs.execution_time": 1.79,
+            "inputs.question": "show the revenue grouped by sub_category and product type for main_category \"Camping & Hiking\"",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD), sub_category, product_type\nFROM order_data\nWHERE main_category = \"CAMPING & HIKING\"\nGROUP BY sub_category, product_type",
+            "outputs.execution_time.seconds": 1.79,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate region entries.",
+            "line_number": 19
+        },
+        {
+            "outputs.data": [
+                {
+                    "Sales_Revenue": 1742388.413039322
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Sales_Revenue\nFROM order_data\nWHERE main_category = \"CAMPING & HIKING\"",
+            "outputs.execution_time": 1.42,
+            "inputs.question": "show the sales revenue by main_category \"Camping & Hiking\"",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Sales_Revenue\nFROM order_data\nWHERE main_category = \"CAMPING & HIKING\"",
+            "outputs.execution_time.seconds": 1.42,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the results, as the generated_query may return more rows due to duplicates.",
+            "line_number": 20
+        },
+        {
+            "outputs.data": "(Failed)",
+            "outputs.error": "Execution failed on sql 'SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Day, \n       sub_category \nFROM order_data \nWHERE product_type = 'HIKING BOOTS' \n      AND main_category = \"FOOTWEAR\" \n      AND sub_category IN ('MEN\\'S FOOTWEAR','WOMEN\\'S FOOTWEAR','CHILDREN\\'S FOOTWEAR') \n      AND Month = 5 \n      AND Year = 2024 \nGROUP BY Day, sub_category': near \"S\": syntax error",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Day, \n       sub_category \nFROM order_data \nWHERE product_type = 'HIKING BOOTS' \n      AND main_category = \"FOOTWEAR\" \n      AND sub_category IN ('MEN\\'S FOOTWEAR','WOMEN\\'S FOOTWEAR','CHILDREN\\'S FOOTWEAR') \n      AND Month = 5 \n      AND Year = 2024 \nGROUP BY Day, sub_category",
+            "outputs.execution_time": 2.19,
+            "inputs.question": "show the total revenue by day and sub_category in May 2024 for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT Day, sub_category, SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nWHERE Month = 5 AND Year = 2024 AND product_type = \"HIKING BOOTS\"\nGROUP BY Day, sub_category",
+            "outputs.execution_time.seconds": 2.19,
+            "outputs.error.error": 1,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating any duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate regions.",
+            "line_number": 21
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 77.5190884557
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 102.791501725
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 101.8798364741
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 90.1916872171
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 95.7084078813
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 154.9412783428
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 123.300368414
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 110.7495314957
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 109.0238624401
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 126.9010156994
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 132.4512069182
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 104.3400438826
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 128.0295569235
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 159.2450370014
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 150.8023000749
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 132.2318789374
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 126.8895709116
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 96.2286051182
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 112.6484130115
+                },
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 157.1259311527
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE main_category = \"TRAVEL\" \nAND sub_category = \"TRAVEL ACCESSORIES\" \nAND product_type = \"TRAVEL PILLOWS\" \nAND Month = 5 \nAND Year = 2024 \nGROUP BY Day",
+            "outputs.execution_time": 1.96,
+            "inputs.question": "show the total sales of product_type \"TRAVEL PILLOWS\" by day in May 2024",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Sum_of_Order_Value_USD) as Total_Sales\nFROM order_data\nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Month = 5 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time.seconds": 1.96,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' column from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and will return all region entries, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicates. However, the data structure (a single column of regions) remains the same.",
+            "line_number": 22
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Sales_Revenue": 1060817.2241593536,
+                    "Month": 1
+                },
+                {
+                    "Total_Sales_Revenue": 1094257.1083047607,
+                    "Month": 2
+                },
+                {
+                    "Total_Sales_Revenue": 1282674.424293373,
+                    "Month": 3
+                },
+                {
+                    "Total_Sales_Revenue": 912168.5495850443,
+                    "Month": 4
+                },
+                {
+                    "Total_Sales_Revenue": 908085.0024678397,
+                    "Month": 5
+                },
+                {
+                    "Total_Sales_Revenue": 669508.2938737525,
+                    "Month": 6
+                },
+                {
+                    "Total_Sales_Revenue": 498611.0745748457,
+                    "Month": 7
+                },
+                {
+                    "Total_Sales_Revenue": 575704.8822889361,
+                    "Month": 8
+                },
+                {
+                    "Total_Sales_Revenue": 593280.938221016,
+                    "Month": 9
+                },
+                {
+                    "Total_Sales_Revenue": 452353.8100907592,
+                    "Month": 10
+                },
+                {
+                    "Total_Sales_Revenue": 510341.4543882621,
+                    "Month": 11
+                },
+                {
+                    "Total_Sales_Revenue": 546006.5871702586,
+                    "Month": 12
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Sales_Revenue, \n       Month\nFROM order_data \nGROUP BY Month",
+            "outputs.execution_time": 1.96,
+            "inputs.question": "show the total sales revenue by month",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Sales_Revenue, \n       Month\nFROM order_data \nGROUP BY Month",
+            "outputs.execution_time.seconds": 1.96,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The main difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and may return duplicate regions. This difference affects the cardinality of the results, as the ground_truth_query will return fewer rows if there are duplicate regions in the data. However, the structure and fields used are the same, and both queries are syntactically correct.",
+            "line_number": 23
+        },
+        {
+            "outputs.data": [],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Number_of_Orders) \nFROM order_data \nWHERE main_category = \"APPAREL\" \nAND sub_category = \"WOMEN'S CLOTHING\" \nAND Month = 9 \nAND Year = 2022 \nGROUP BY Day",
+            "outputs.execution_time": 1.69,
+            "inputs.question": "what are the orders for women's clothing by day in the current month",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) as Total_Orders\nFROM order_data\nWHERE main_category = \"APPAREL\" AND sub_category = \"WOMEN'S CLOTHING\" AND Month = strftime('%m', 'now')\nGROUP BY Day",
+            "outputs.execution_time.seconds": 1.69,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return every instance of each region, including duplicates. This results in a difference in the number of rows returned and the uniqueness of the data, which is a significant difference in the output of the queries.",
+            "line_number": 24
+        },
+        {
+            "outputs.data": [
+                {
+                    "Avg_Sale_Value": 23.35007427
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) / SUM(Number_of_Orders) as Avg_Sale_Value\nFROM order_data\nWHERE Month = 1",
+            "outputs.execution_time": 1.53,
+            "inputs.question": "what is the average sale value for January",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) / SUM(Number_of_Orders) AS Avg_Sale_Value\nFROM order_data\nWHERE Month = 1",
+            "outputs.execution_time.seconds": 1.53,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' column from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and could potentially return duplicate regions. This difference affects the cardinality of the results, as the ground_truth_query will return fewer rows if there are duplicate regions in the data. However, the data structure (a single column of regions) remains the same.",
+            "line_number": 25
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Number_of_Items)": 11804.0
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Number_of_Items) \nFROM order_data \nWHERE main_category = \"TRAVEL\" \nAND sub_category = \"TRAVEL ACCESSORIES\" \nAND product_type = \"TRAVEL PILLOWS\"",
+            "outputs.execution_time": 1.6600000000000001,
+            "inputs.question": "what is the sum of items by product_type where product_type = 'TRAVEL PILLOWS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Number_of_Items)\nFROM order_data\nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\"",
+            "outputs.execution_time.seconds": 1.6600000000000001,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicates. The structure and fields used are correct, but the lack of the DISTINCT clause in the generated_query means it does not fully match the intent of the ground_truth_query.",
+            "line_number": 26
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Number_of_Items)": 2050.0,
+                    "Region": "AFRICA",
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "SUM(Sum_of_Number_of_Items)": 2013.0,
+                    "Region": "ASIA-PACIFIC",
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "SUM(Sum_of_Number_of_Items)": 1940.0,
+                    "Region": "EUROPE",
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "SUM(Sum_of_Number_of_Items)": 1984.0,
+                    "Region": "MIDDLE EAST",
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "SUM(Sum_of_Number_of_Items)": 1902.0,
+                    "Region": "NORTH AMERICA",
+                    "product_type": "TRAVEL PILLOWS"
+                },
+                {
+                    "SUM(Sum_of_Number_of_Items)": 1915.0,
+                    "Region": "SOUTH AMERICA",
+                    "product_type": "TRAVEL PILLOWS"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Number_of_Items),\n       Region,\n       product_type\nFROM order_data\nWHERE product_type = 'TRAVEL PILLOWS'\nGROUP BY Region, product_type",
+            "outputs.execution_time": 1.74,
+            "inputs.question": "what is the sum of items by Region, product_type where product_type = 'TRAVEL PILLOWS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Number_of_Items), \n       Region\nFROM order_data\nWHERE product_type = \"TRAVEL PILLOWS\"\nGROUP BY Region",
+            "outputs.execution_time.seconds": 1.74,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, whereas the generated_query does not use DISTINCT and could potentially list the same region multiple times if it appears in multiple rows. This difference affects the cardinality of the results, as the ground_truth_query will return a unique list of regions, while the generated_query might return duplicates. However, the structure and fields used are the same, and both queries are syntactically correct.",
+            "line_number": 27
+        },
+        {
+            "outputs.data": [
+                {
+                    "Avg_Daily_Revenue": 20.6862175886,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.2099253365,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.842994038,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.0964504406,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.4719209156,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5969801961,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0925563417,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.245425741,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.6097562638,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.027421919,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.0000898265,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.4287743971,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 32.246177061,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.7177399906,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.3268004163,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.7863689314,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.0312169874,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.1387436577,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8371935639,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0790062857,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.9240241626,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3640469288,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.54505869,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.1650032905,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.3713865246,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.673740352,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.800581339,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.8697390573,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.6260431046,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0490270341,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.6524377654,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.2743725656,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.4157015121,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1038762504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.3643206263,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4061223986,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.1072772957,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8631378922,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.4026196158,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5194205391,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8849103144,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.6677281526,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9993915295,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.0236384198,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.4774034815,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4826285896,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0559672421,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.3432578495,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5909592041,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3489859907,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.2884774256,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.736196305500002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5105082802,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 32.8083433145,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.2564486953,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6565830263,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.1296193823,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.3150803586,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0356019504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.1944004387,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.6131140295,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.852896046,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 36.3231132641,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.0428363235,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9193203534,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.1408974681,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8481244186,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9381415828,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.319359602,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9907792025,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.5134503412,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4178394216,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.8471104588,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.744348408,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 34.4172281895,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.1270557294,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6628159169,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4477861291,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3935424696,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7522925947,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.7861733931,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.7241643209,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3866273123,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.6717847725,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5805394991,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5571651952,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 31.8598895486,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.947957293400002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.0577233324,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.2770836627,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2355141944,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.1922793367,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4855077961,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6210216911,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6966427616,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1661583504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.5370822508,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7635997424,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.357983073,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.180110889,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1674640752,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5460660006,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.2053793061,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.4977708166,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3072699555,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4505622171,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6349937004,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3300032808,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.7472596412,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3169444998,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8220765811,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.0708054487,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7817806233,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1498694524,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9485587833,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.1912380785,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6197821619,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4230535254,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8088709784,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7691623424,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2358721024,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.4570849296,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.8179318407,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.9874792656,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.9949411594,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.6054811398,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.7814848822,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.1386778991,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.9656851659,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.313878929,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1868396495,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.4002714303,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.6116732653,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5704184893,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0094550258,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3292189801,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8662786494,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 31.1547598063,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3906606667,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.3440482384,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.2315222111,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.7986909481,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1570537021,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1910437204,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1398017876,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.5719858338,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 37.3553896967,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8370271232,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7086302512,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.4235331511,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3770345701,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7774881116,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.1413912502,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1954954664,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.5745837678,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3449029081,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.827871255,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.3797484423,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 33.5950746631,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0466025288,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.751599277,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8319844389,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.6610490651,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.9833617828,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.3141380438,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6389337975,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.5748829738,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1034172754,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4292797512,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.0350380937,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.2809735778,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3418290415,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.5041456181,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2166942606,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1171006122,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.3097040977,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9306887818,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1820096342,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6460915076,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3536638375,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.4328887785,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.9760441332,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.9451973257,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0546525195,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.9268008259,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.1361372473,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9380028026,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.014512779,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6393583504,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3349700211,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4239648624,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0613034373,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.8627571501,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.2341618317,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4908104489,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8556522432,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.5146158325,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7586941236,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.723651678,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8428586912,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5561212976,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8750645395,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4969692382,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7586191601,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.0857536566,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.5907880514,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.4275085605,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.9267109408,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1654792566,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9050079769,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4312881401,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4739143506,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.7767926024,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8563883156,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9042796356,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4548125934,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.2154541239,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.2759462777,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8381946854,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.2137035594,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.2259249641,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.3698244011,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.8955539222,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.518253818,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.5090729532,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6313516113,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1153580112,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.0322511736,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9993795269,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 32.8409213276,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 34.1411864011,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3458858213,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.876388016900002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4124336073,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.5269710587,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7615221751,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8909169998,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0544978006,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.948432597,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9466452582,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.146083081,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.2133835017,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.8236183419,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9646801169,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.0564955833,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.1159355427,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8972804851,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.0619600385,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.6784382155,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5003583802,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8926615316,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0145535782,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7969323827,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.1529473113,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 29.1882212687,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6556216969,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.5497355838,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.4500741118,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0503037157,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.4126676202,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8895494808,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.7530687657,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3443341607,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.2398662072,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.4037883234,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8386640105,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.1819754063,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5875197287,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.7672571047,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.9731083426,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.1705611155,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.3511054158,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6557850758,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.9120073671,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.0878311626,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.9981486018,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.5522365579,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.6561019283,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7458341591,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.0706518732,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.4553908093,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3393268516,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6968160163,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.1207727193,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5331220282,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1713243011,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.5470783879,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6246873425,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.7056533052,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.9128434642,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7898449392,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.5445890224,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2967703366,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0904272246,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3372162488,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.8665749136,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0436191423,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.7336358633,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5773281838,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.386916199,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.3044951611,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8582653255,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.111581278,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.2984394379,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7560418587,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.3048997663,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0355072429,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3108808936,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1247887026,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2318486871,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0473056931,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8769828684,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.7646486276,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 35.5585280128,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.4873136997,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5048512498,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.344539996800002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.2500048896,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6727346997,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3759787911,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.268603053,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6590095819,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7087418738,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5137701894,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7591430396,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 33.0876423096,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.6140728469,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8507105256,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.118232204,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.3002667069,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.246906707,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 27.7175452526,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3205504648,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6665562484,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.0630485343,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1624267437,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.120551131,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.7974363577,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.994923218,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 30.5918244298,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1433508539,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.131762188,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 25.1908468691,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6970687022,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5184585094,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8784631027,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.9588949486,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.6702612892,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.7590704717,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.5861866896,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 28.9176142313,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8652574528,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.2628336613,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.2196821742,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.450387015,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.778156676000002,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1654960488,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0841292092,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 24.601850228,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.1854754226,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 26.8014671928,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.6902030422,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 22.8548052859,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0639712844,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.4383645521,
+                    "Year": 2023,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5119278844,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4261561229,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.2671704015,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8554700541,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.9859917871,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8318401684,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4325099801,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.5145470578,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9493142565,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0974701289,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.904974183,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0498369612,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.7343163912,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.3176816959,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.6186193969,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.2014209395,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.7569891464,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 23.4508669117,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0418525711,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.057325628,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.8955257233,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.6013366181,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7595842008,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.4681776283,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.116626109,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.0577576892,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8689759684,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.0474011866,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.415466765,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5574593644,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.9807100796,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8004271948,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4164031811,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.0807947597,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.890854956,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.2237336609,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.28691212,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.1847513889,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4704606733,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.3416657839,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8160691127,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2447640142,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.5308831174,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9783795704,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.2777023359,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.7814501552,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.8965578447,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.4455984261,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.8843649604,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7024009814,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7285124488,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0557979947,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8415780016,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.3900914604,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.8031364472,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.7791563132,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.3949778876,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.8095269351,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.8504871534,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.3629921025,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.8721110761,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.4642076252,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9468613062,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.24989399,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.7137819271,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.0735670784,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9048589269,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.426175975,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.9899382762,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9894467538,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.4257342671,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.0398624489,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.0418563444,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4560966979,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1835363815,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0680781997,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.8313767919,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.6564832448,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.6529496074,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.5057754964,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6659508491,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9989894487,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.8681090173,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.583910254,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.8079011968,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.8028978651,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.0149211647,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.1630833375,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.6415389258,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.6333184277,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.568704163,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7688972871,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.3784386578,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1095658531,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9103513392,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.3570438694,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.4674689754,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.3382058786,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 10.5157687548,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.8447919749,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1246934705,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.9224313516,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.9920664963,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.4207265421,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.510461865899998,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.0167281571,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.2028719102,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.0519854175,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.4312912146,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.8903219847,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.1271938185,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5608823972,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.5148665713,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1143658555,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.0237543312,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7490608181,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.151623601,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 16.343740081299998,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 18.4999326851,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.9081878838,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.8641207247,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.8913812525,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 17.1997144608,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.6661865661,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.2902223061,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 21.7868855576,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.3249669664,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.2151260883,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.1983943952,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 20.7808794841,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.3581821714,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 11.5405179721,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.6572290314,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 19.8074048304,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.7006492469,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 13.9869402786,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 15.805491625,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.2956420332,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.9825280425,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 14.416304302,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Avg_Daily_Revenue": 12.4760491459,
+                    "Year": 2024,
+                    "Region": "EUROPE"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD)/SUM(Number_of_Orders) as Avg_Daily_Revenue, \n       Year, \n       Region \nFROM order_data \nWHERE Region = \"EUROPE\" \nGROUP BY Year, Day, Month",
+            "outputs.execution_time": 1.6800000000000002,
+            "inputs.question": "what was the average daily revenue in europe by year",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) / COUNT(DISTINCT Date) as Avg_Daily_Revenue, Year\nFROM order_data\nWHERE Region = \"EUROPE\"\nGROUP BY Year",
+            "outputs.execution_time.seconds": 1.6800000000000002,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, without the DISTINCT keyword, will list every instance of a region for each row in the table, potentially including duplicates. This difference affects the cardinality of the results, as the ground_truth_query will likely return fewer rows (unique regions only).",
+            "line_number": 28
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Number_of_Items)": 8529.0
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Number_of_Items) \nFROM order_data \nWHERE main_category = \"TRAVEL\" \nAND sub_category = \"TRAVEL ACCESSORIES\" \nAND product_type = \"TRAVEL PILLOWS\" \nAND Year = 2023",
+            "outputs.execution_time": 1.8599999999999999,
+            "inputs.question": "what was the total number of items sold for product_type = 'Travel Pillows' in 2023",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Number_of_Items) FROM order_data WHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Year = 2023",
+            "outputs.execution_time.seconds": 1.8599999999999999,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 4,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The main difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and could potentially return duplicate regions if they exist in the data. This difference affects the cardinality of the results, as the ground_truth_query will return fewer rows if there are duplicate regions. However, the structure and fields used are the same, and both queries are syntactically correct.",
+            "line_number": 29
+        },
+        {
+            "outputs.data": [
+                {
+                    "Day": 1,
+                    "Total_Orders": 733
+                },
+                {
+                    "Day": 2,
+                    "Total_Orders": 767
+                },
+                {
+                    "Day": 3,
+                    "Total_Orders": 748
+                },
+                {
+                    "Day": 4,
+                    "Total_Orders": 748
+                },
+                {
+                    "Day": 5,
+                    "Total_Orders": 754
+                },
+                {
+                    "Day": 6,
+                    "Total_Orders": 733
+                },
+                {
+                    "Day": 7,
+                    "Total_Orders": 730
+                },
+                {
+                    "Day": 8,
+                    "Total_Orders": 719
+                },
+                {
+                    "Day": 9,
+                    "Total_Orders": 726
+                },
+                {
+                    "Day": 10,
+                    "Total_Orders": 733
+                },
+                {
+                    "Day": 11,
+                    "Total_Orders": 736
+                },
+                {
+                    "Day": 12,
+                    "Total_Orders": 761
+                },
+                {
+                    "Day": 13,
+                    "Total_Orders": 725
+                },
+                {
+                    "Day": 14,
+                    "Total_Orders": 720
+                },
+                {
+                    "Day": 15,
+                    "Total_Orders": 720
+                },
+                {
+                    "Day": 16,
+                    "Total_Orders": 722
+                },
+                {
+                    "Day": 17,
+                    "Total_Orders": 730
+                },
+                {
+                    "Day": 18,
+                    "Total_Orders": 727
+                },
+                {
+                    "Day": 19,
+                    "Total_Orders": 738
+                },
+                {
+                    "Day": 20,
+                    "Total_Orders": 724
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Day, SUM(Number_of_Orders) as Total_Orders\nFROM order_data\nWHERE Month = 5 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time": 1.53,
+            "inputs.question": "what was the total number of orders in May 2024 by day",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Number_of_Orders) as Total_Orders\nFROM order_data\nWHERE Month = 5 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time.seconds": 1.53,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating any duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate region entries. Therefore, the queries do not produce the same data structure in terms of uniqueness of rows.",
+            "line_number": 30
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 64824.5630153233
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nWHERE main_category = \"TRAVEL\" \nAND sub_category = \"TRAVEL ACCESSORIES\" \nAND product_type = \"TRAVEL PILLOWS\" \nAND Year = 2023",
+            "outputs.execution_time": 1.76,
+            "inputs.question": "what was the total revenue for product_type = 'Travel Pillows' in 2023",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Year = 2023",
+            "outputs.execution_time.seconds": 1.76,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This results in a difference in the number of rows returned and the uniqueness of the data. Therefore, the generated_query does not fully match the intent of the ground_truth_query to provide unique region values.",
+            "line_number": 31
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 1030055.9149774397,
+                    "main_category": "APPAREL"
+                },
+                {
+                    "Total_Revenue": 1357383.3210290838,
+                    "main_category": "CAMPING & HIKING"
+                },
+                {
+                    "Total_Revenue": 964464.7445088724,
+                    "main_category": "CLIMBING"
+                },
+                {
+                    "Total_Revenue": 1033191.5031184964,
+                    "main_category": "FOOTWEAR"
+                },
+                {
+                    "Total_Revenue": 707876.2764231277,
+                    "main_category": "TRAVEL"
+                },
+                {
+                    "Total_Revenue": 1031000.8298946022,
+                    "main_category": "WATER SPORTS"
+                },
+                {
+                    "Total_Revenue": 968183.6700130049,
+                    "main_category": "WINTER SPORTS"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue,\n       main_category\nFROM order_data\nWHERE Year = 2023\nGROUP BY main_category",
+            "outputs.execution_time": 1.97,
+            "inputs.question": "what was the total revenue in 2023 by main_category",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue,\n       main_category\nFROM order_data\nWHERE Year = 2023\nGROUP BY main_category",
+            "outputs.execution_time.seconds": 1.97,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicates. The structure and intent are similar, but the lack of the DISTINCT keyword in the generated_query means it does not fully match the functionality of the ground_truth_query.",
+            "line_number": 32
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 1196889.5592731426,
+                    "Region": "AFRICA"
+                },
+                {
+                    "Total_Revenue": 1047468.6777554749,
+                    "Region": "ASIA-PACIFIC"
+                },
+                {
+                    "Total_Revenue": 932534.851962843,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Total_Revenue": 1393942.6715618663,
+                    "Region": "MIDDLE EAST"
+                },
+                {
+                    "Total_Revenue": 843046.147875105,
+                    "Region": "NORTH AMERICA"
+                },
+                {
+                    "Total_Revenue": 1678274.351536223,
+                    "Region": "SOUTH AMERICA"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue,\n       Region\nFROM order_data \nWHERE Year = 2023\nGROUP BY Region",
+            "outputs.execution_time": 1.67,
+            "inputs.question": "what was the total revenue in 2023 by region",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Region \nFROM order_data \nWHERE Year = 2023 \nGROUP BY Region",
+            "outputs.execution_time.seconds": 1.67,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate regions. Therefore, the data structure of the results will differ, with the ground_truth_query providing a unique list of regions and the generated_query potentially providing a list with duplicates.",
+            "line_number": 33
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 1199818.3367919284
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE Region = 'EUROPE'",
+            "outputs.execution_time": 1.6,
+            "inputs.question": "what was the total revenue in EUROPE",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE Region = \"EUROPE\"",
+            "outputs.execution_time.seconds": 1.6,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve the 'Region' data from the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for 'Region', including duplicates. This results in a difference in the number of rows returned and the data structure of the result. The generated_query will potentially have more rows due to duplicate region entries, whereas the ground_truth_query will have a unique list of regions.",
+            "line_number": 34
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 13138.0683388734,
+                    "Day": 1
+                },
+                {
+                    "Total_Revenue": 12706.6256700034,
+                    "Day": 2
+                },
+                {
+                    "Total_Revenue": 13008.357746695,
+                    "Day": 3
+                },
+                {
+                    "Total_Revenue": 11962.186632796,
+                    "Day": 4
+                },
+                {
+                    "Total_Revenue": 15985.1296834179,
+                    "Day": 5
+                },
+                {
+                    "Total_Revenue": 15733.9988377255,
+                    "Day": 6
+                },
+                {
+                    "Total_Revenue": 14826.813653309,
+                    "Day": 7
+                },
+                {
+                    "Total_Revenue": 14447.4539328521,
+                    "Day": 8
+                },
+                {
+                    "Total_Revenue": 13994.5183524548,
+                    "Day": 9
+                },
+                {
+                    "Total_Revenue": 13611.9373011029,
+                    "Day": 10
+                },
+                {
+                    "Total_Revenue": 13209.8076162037,
+                    "Day": 11
+                },
+                {
+                    "Total_Revenue": 18048.0842397409,
+                    "Day": 12
+                },
+                {
+                    "Total_Revenue": 16703.9834473707,
+                    "Day": 13
+                },
+                {
+                    "Total_Revenue": 16060.3940359645,
+                    "Day": 14
+                },
+                {
+                    "Total_Revenue": 15697.7884742945,
+                    "Day": 15
+                },
+                {
+                    "Total_Revenue": 15182.2478472429,
+                    "Day": 16
+                },
+                {
+                    "Total_Revenue": 14717.1603627531,
+                    "Day": 17
+                },
+                {
+                    "Total_Revenue": 13969.3142669719,
+                    "Day": 18
+                },
+                {
+                    "Total_Revenue": 18891.1926358004,
+                    "Day": 19
+                },
+                {
+                    "Total_Revenue": 18898.2522040269,
+                    "Day": 20
+                },
+                {
+                    "Total_Revenue": 17782.7985300798,
+                    "Day": 21
+                },
+                {
+                    "Total_Revenue": 17071.247018273,
+                    "Day": 22
+                },
+                {
+                    "Total_Revenue": 16498.0216814534,
+                    "Day": 23
+                },
+                {
+                    "Total_Revenue": 15678.4638341404,
+                    "Day": 24
+                },
+                {
+                    "Total_Revenue": 14988.1794915336,
+                    "Day": 25
+                },
+                {
+                    "Total_Revenue": 20375.5582136369,
+                    "Day": 26
+                },
+                {
+                    "Total_Revenue": 19520.3651718046,
+                    "Day": 27
+                },
+                {
+                    "Total_Revenue": 18761.5963088161,
+                    "Day": 28
+                },
+                {
+                    "Total_Revenue": 17983.6077722773,
+                    "Day": 29
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, Day\nFROM order_data\nWHERE Month = 2 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time": 1.78,
+            "inputs.question": "what was the total revenue in February 2024 by day",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nWHERE Month = 2 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time.seconds": 1.78,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicates. The structure and intent are similar, but the lack of the DISTINCT keyword in the generated_query means it does not fully match the functionality of the ground_truth_query.",
+            "line_number": 35
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 68114.2370280629,
+                    "Region": "AFRICA"
+                },
+                {
+                    "Total_Revenue": 60619.7210149731,
+                    "Region": "ASIA-PACIFIC"
+                },
+                {
+                    "Total_Revenue": 55266.2390430121,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Total_Revenue": 80792.9993148937,
+                    "Region": "MIDDLE EAST"
+                },
+                {
+                    "Total_Revenue": 51487.3842054677,
+                    "Region": "NORTH AMERICA"
+                },
+                {
+                    "Total_Revenue": 95515.7659133647,
+                    "Region": "SOUTH AMERICA"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Region \nFROM order_data \nWHERE Month = 1 AND Year = 2024 \nGROUP BY Region",
+            "outputs.execution_time": 1.48,
+            "inputs.question": "what was the total revenue in January 2024 by Region",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD), Region\nFROM order_data\nWHERE Month = 1 AND Year = 2024\nGROUP BY Region",
+            "outputs.execution_time.seconds": 1.48,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the results, as the generated_query may return more rows due to duplicate regions. The structure and intent are similar, but the lack of the DISTINCT keyword in the generated_query means it does not fully match the functionality of the ground_truth_query.",
+            "line_number": 36
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 12377.3480349567,
+                    "Day": 1
+                },
+                {
+                    "Total_Revenue": 12771.3062431674,
+                    "Day": 2
+                },
+                {
+                    "Total_Revenue": 11976.4492823528,
+                    "Day": 3
+                },
+                {
+                    "Total_Revenue": 11820.4768651427,
+                    "Day": 4
+                },
+                {
+                    "Total_Revenue": 11680.5102627936,
+                    "Day": 5
+                },
+                {
+                    "Total_Revenue": 14987.8397639304,
+                    "Day": 6
+                },
+                {
+                    "Total_Revenue": 14257.6918455889,
+                    "Day": 7
+                },
+                {
+                    "Total_Revenue": 14010.1381245793,
+                    "Day": 8
+                },
+                {
+                    "Total_Revenue": 13409.4231920631,
+                    "Day": 9
+                },
+                {
+                    "Total_Revenue": 12984.1136381389,
+                    "Day": 10
+                },
+                {
+                    "Total_Revenue": 12769.7378224816,
+                    "Day": 11
+                },
+                {
+                    "Total_Revenue": 12787.5621010549,
+                    "Day": 12
+                },
+                {
+                    "Total_Revenue": 16177.9382084925,
+                    "Day": 13
+                },
+                {
+                    "Total_Revenue": 15342.081440118,
+                    "Day": 14
+                },
+                {
+                    "Total_Revenue": 15172.7042229477,
+                    "Day": 15
+                },
+                {
+                    "Total_Revenue": 14801.2079016828,
+                    "Day": 16
+                },
+                {
+                    "Total_Revenue": 14460.3409208884,
+                    "Day": 17
+                },
+                {
+                    "Total_Revenue": 13650.8328727265,
+                    "Day": 18
+                },
+                {
+                    "Total_Revenue": 13644.7999081759,
+                    "Day": 19
+                },
+                {
+                    "Total_Revenue": 17497.9215779866,
+                    "Day": 20
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, Day\nFROM order_data \nWHERE Month = 5 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time": 1.5899999999999999,
+            "inputs.question": "what was the total revenue in May 2024 by day",
+            "inputs.ground_truth_query": "SELECT Day, SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data\nWHERE Month = 5 AND Year = 2024\nGROUP BY Day",
+            "outputs.execution_time.seconds": 1.5899999999999999,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that only unique regions are returned, whereas the generated_query does not use DISTINCT and will return all region entries, including duplicates. This difference in the use of DISTINCT affects the cardinality of the results, as the generated_query may return more rows due to duplicates. The data structure of the results is similar, but the number of rows returned will likely differ.",
+            "line_number": 37
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 7596.5363876878
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE product_type = 'HIKING BOOTS' AND Month = 5 AND Year = 2024",
+            "outputs.execution_time": 1.58,
+            "inputs.question": "what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD), \n       product_type\nFROM order_data \nWHERE Month = 5 AND Year = 2024 AND product_type = \"HIKING BOOTS\"\nGROUP BY product_type",
+            "outputs.execution_time.seconds": 1.58,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries are selecting the 'Region' field from the 'order_data' table. The key difference is that the ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, without the DISTINCT keyword, will list every region for each row in the table, which could include duplicates if multiple rows have the same region. This difference affects the cardinality of the results, as the ground_truth_query will potentially return fewer rows (unique regions only).",
+            "line_number": 38
+        },
+        {
+            "outputs.data": [
+                {
+                    "sub_category": "CHILDREN'S FOOTWEAR",
+                    "Total_Revenue": 2617.5064216778
+                },
+                {
+                    "sub_category": "MEN'S FOOTWEAR",
+                    "Total_Revenue": 2517.6189987606
+                },
+                {
+                    "sub_category": "WOMEN'S FOOTWEAR",
+                    "Total_Revenue": 2461.4109672494
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT Sub_category, \n       SUM(Sum_of_Order_Value_USD) as Total_Revenue\nFROM order_data \nWHERE product_type = \"HIKING BOOTS\" AND \n      Month = 5 AND Year = 2024 \nGROUP BY Sub_category",
+            "outputs.execution_time": 1.79,
+            "inputs.question": "what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD), sub_category\nFROM order_data\nWHERE Month = 5 AND Year = 2024 AND product_type = \"HIKING BOOTS\"\nGROUP BY sub_category",
+            "outputs.execution_time.seconds": 1.79,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve the 'Region' data from the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use DISTINCT, which means it will return all region entries, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicates. The data structure of the result (a single column of regions) is the same, but the number of rows and the uniqueness of the data are not.",
+            "line_number": 39
+        },
+        {
+            "outputs.data": [
+                {
+                    "Total_Revenue": 229011.8490284347,
+                    "Region": "AFRICA"
+                },
+                {
+                    "Total_Revenue": 201408.1210246184,
+                    "Region": "ASIA-PACIFIC"
+                },
+                {
+                    "Total_Revenue": 180957.505088469,
+                    "Region": "EUROPE"
+                },
+                {
+                    "Total_Revenue": 267704.0409917144,
+                    "Region": "MIDDLE EAST"
+                },
+                {
+                    "Total_Revenue": 166343.687575083,
+                    "Region": "NORTH AMERICA"
+                },
+                {
+                    "Total_Revenue": 319606.0464714959,
+                    "Region": "SOUTH AMERICA"
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD) AS Total_Revenue,\n       Region\nFROM order_data\nWHERE Year = 2024 AND Month IN (1, 2, 3)\nGROUP BY Region",
+            "outputs.execution_time": 1.73,
+            "inputs.question": "what was the total revenue in Q1 2024 by region",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) as Total_Revenue, \n       Region\nFROM order_data \nWHERE Year = 2024 AND Month IN (1, 2, 3)\nGROUP BY Region",
+            "outputs.execution_time.seconds": 1.73,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the results, as the generated_query may return more rows due to duplicate regions.",
+            "line_number": 40
+        },
+        {
+            "outputs.data": [
+                {
+                    "SUM(Sum_of_Order_Value_USD)": 5136.6882650216
+                }
+            ],
+            "outputs.error": "None",
+            "outputs.query": "SELECT SUM(Sum_of_Order_Value_USD)\nFROM order_data\nWHERE product_type = \"TRAVEL PILLOWS\"\nAND Month = 9\nAND Year = 2023",
+            "outputs.execution_time": 1.57,
+            "inputs.question": "what was the total revenue in the current month by product_type \"travel pillows\"",
+            "inputs.ground_truth_query": "SELECT SUM(Sum_of_Order_Value_USD) \nFROM order_data \nWHERE main_category = \"TRAVEL\" AND sub_category = \"TRAVEL ACCESSORIES\" AND product_type = \"TRAVEL PILLOWS\" AND Month = strftime('%m', 'now') AND Year = strftime('%Y', 'now')",
+            "outputs.execution_time.seconds": 1.57,
+            "outputs.error.error": 0,
+            "outputs.sql_similarity.score": 3,
+            "outputs.sql_similarity.explanation": "Both queries aim to retrieve data from the 'Region' column of the 'order_data' table. The ground_truth_query uses the DISTINCT keyword to ensure that each region is listed only once, eliminating duplicates. The generated_query, however, does not use the DISTINCT keyword, which means it will return all entries for regions, including duplicates. This difference affects the cardinality of the result set, as the generated_query may return more rows due to duplicate regions.",
+            "line_number": 41
+        }
+    ],
+    "metrics": {
+        "execution_time.seconds": 1.6799999999999997,
+        "error.error": 0.07142857142857142,
+        "sql_similarity.score": 3.119047619047619
+    },
+    "studio_url": "https://ai.azure.com/build/evaluation/sales_data_insights_main_salesdatainsights_my65lgsj_20240516_235816_119393?wsid=/subscriptions/15ae9cb6-95c1-483d-a0e3-b1a1a3b06324/resourceGroups/danielsc/providers/Microsoft.MachineLearningServices/workspaces/build-demo-project"
+}

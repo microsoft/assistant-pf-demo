@@ -16,13 +16,13 @@ from sales_data_insights.main import SalesDataInsights
 
 from typing import TypedDict 
 class AssistantStream(TypedDict):
-    chat_output: str
-    session_state: dict 
+    chat_output: str # streamed output from the assistant
+    session_state: dict # assistant thread bookkeeping 
 
 @trace
 def chat_completion(
     question: str,
-    session_state: dict = {},
+    session_state: dict = {}, # For resuming from an existing thread
 ) -> AssistantStream:
     # verify all env vars are present
     required_env_vars = [
