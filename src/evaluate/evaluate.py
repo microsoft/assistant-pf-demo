@@ -53,10 +53,11 @@ def main(model="azure_openai", data="small"):
             evaluation_name=evaluation_name,
             target=SalesDataInsights(model_type=model),
             data=data_file,
-            evaluators={
+            evaluators={ 
+            # Check out promptflow-evals package for built-in evaluators like gpt-groundedness, gpt-similarity and content safety metrics.
+                "error": error_evaluator,
                 "sql_similarity": sql_similarity_evaluator,
-                "execution_time": execution_time_evaluator,
-                "error": error_evaluator
+                "execution_time": execution_time_evaluator
             },
             evaluator_config={
                 "sql_similarity": {
@@ -94,6 +95,6 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", help="Model to evaluate", default="azure_openai", choices=["azure_openai", "phi3_mini", "phi3_medium", "cohere_chat", "mistral_small", "mistral_large", "llama3"])
-    parser.add_argument("--data", help="Data to evaluate. Can be either 'mini', 'small', 'large', or a file name.", default="mini")
+    parser.add_argument("--data", help="Data to evaluate. Can be either 'mini', 'small', 'large', or a file name.", default="small")
     args = parser.parse_args()
     main(model=args.model, data=args.data)

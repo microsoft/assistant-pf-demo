@@ -13,17 +13,21 @@ from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 from promptflow.core import Flow
 from sales_data_insights.main import SalesDataInsights
+from typing import TypedDict
 
-from typing import TypedDict 
+
 class AssistantStream(TypedDict):
     chat_output: str # streamed output from the assistant
     session_state: dict # assistant thread bookkeeping 
+
 
 @trace
 def chat_completion(
     question: str,
     session_state: dict = {}, # For resuming from an existing thread
 ) -> AssistantStream:
+    
+
     # verify all env vars are present
     required_env_vars = [
         "OPENAI_API_BASE",

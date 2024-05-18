@@ -7,13 +7,12 @@ dependencies:
   - python==3.11
   - pip==24.0
   - pip:
-    - --extra-index-url https://azuremlsdktestpypi.azureedge.net/promptflow
     - openai
     - azure-identity
     - azure-ai-ml
-    - promptflow-azure==1.11.0
-    - promptflow==1.11.0
-    - promptflow-evals==0.3.0b1
+    - promptflow-azure>=1.11.0
+    - promptflow>=1.11.0
+    - promptflow-evals>=0.3.0
     - promptflow-tools
     - pytest
     - jinja2
