@@ -7,6 +7,7 @@ from pprint import pprint
 
 from promptflow.client import load_flow
 from promptflow.evals.evaluate import evaluate
+from promptflow.evals.evaluators import ContentSafetyEvaluator
 from sales_data_insights.main import SalesDataInsights
 
 load_dotenv(override=True)
@@ -57,7 +58,12 @@ def main(model="azure_openai", data="small"):
             # Check out promptflow-evals package for built-in evaluators like gpt-groundedness, gpt-similarity and content safety metrics.
                 "error": error_evaluator,
                 "sql_similarity": sql_similarity_evaluator,
-                "execution_time": execution_time_evaluator
+                "execution_time": execution_time_evaluator,
+                "content_safety": ContentSafetyEvaluator(project_scope={
+                    "subscription_id": "15ae9cb6-95c1-483d-a0e3-b1a1a3b06324",
+                    "resource_group_name": "danielsc",
+                    "project_name": "build-demo-project"
+                })
             },
             evaluator_config={
                 "sql_similarity": {
@@ -69,6 +75,10 @@ def main(model="azure_openai", data="small"):
                 },
                 "error": {
                     "error": "${target.error}"
+                },
+                "content_safety": {
+                    "question": "${target.query}",
+                    "answer": "${target.data}"
                 }
             }
         )

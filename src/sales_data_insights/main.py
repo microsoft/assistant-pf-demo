@@ -77,24 +77,28 @@ class SalesDataInsights:
 
         if query.startswith("```sql") and query.endswith("```"):
             query = query[6:-3].strip()
-        
-        sql_connection = sqlite3.connect(self.data)
 
         try:
-            df = pd.read_sql(query, sql_connection)
+            data = self.query_db(query)
         except Exception as e:
             end = time.time()
             execution_time = round(end - start, 2)
             print("Execution time:", execution_time)
             return {"data": None, "error": f"{e}", "query": query, "execution_time": execution_time}
 
-        data = df.to_dict(orient='records')
-
         end = time.time()
         execution_time = round(end - start, 2)
 
         return {"data": data, "error": str(None), "query": query, "execution_time": execution_time}
     
+    @trace
+    def query_db(self, query: str) -> dict:
+        sql_connection = sqlite3.connect(self.data)
+
+        df = pd.read_sql(query, sql_connection)
+
+        return df.to_dict(orient='records')
+ 
 if __name__ == "__main__":
 
     models = ["azure_openai", "phi3_mini", "phi3_medium", "cohere_chat", "mistral_small", "mistral_large", "llama3"]
