@@ -52,18 +52,18 @@ def main(model="azure_openai", data="small"):
 
         response = evaluate(
             evaluation_name=evaluation_name,
-            target=SalesDataInsights(model_type=model),
             data=data_file,
+            target=SalesDataInsights(model_type=model),
             evaluators={ 
-            # Check out promptflow-evals package for built-in evaluators like gpt-groundedness, gpt-similarity and content safety metrics.
-                "error": error_evaluator,
-                "sql_similarity": sql_similarity_evaluator,
-                "execution_time": execution_time_evaluator,
+            # Check out promptflow-evals package for more built-in evaluators like gpt-groundedness, gpt-similarity and content safety metrics.
                 "content_safety": ContentSafetyEvaluator(project_scope={
                     "subscription_id": "15ae9cb6-95c1-483d-a0e3-b1a1a3b06324",
                     "resource_group_name": "danielsc",
                     "project_name": "build-demo-project"
-                })
+                }),
+                "execution_time": execution_time_evaluator,
+                "error": error_evaluator,
+                "sql_similarity": sql_similarity_evaluator,
             },
             evaluator_config={
                 "sql_similarity": {
