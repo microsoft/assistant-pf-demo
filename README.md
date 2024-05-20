@@ -314,8 +314,8 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 
 ## Responsible AI Guidelines
 
-This project follows below responsible AI guidelines and best practices:
+This project follows below responsible AI guidelines and best practices, please review them before using this project:
 
 - [Microsoft Responsible AI Guidelines](https://www.microsoft.com/en-us/ai/responsible-ai)
 - [Responsible AI practices for Azure OpenAI models](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/overview)
-- [Safety evaluations transparency notes](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/safety-evaluations-transparency-note). Please review these guidelines and policies before using this project.
+- [Safety evaluations transparency notes](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/safety-evaluations-transparency-note)
