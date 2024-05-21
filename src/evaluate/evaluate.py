@@ -55,7 +55,8 @@ def main(model="azure_openai", data="small"):
             data=data_file,
             target=SalesDataInsights(model_type=model),
             evaluators={ 
-            # Check out promptflow-evals package for more built-in evaluators like gpt-groundedness, gpt-similarity and content safety metrics.
+            # Check out promptflow-evals package for more built-in evaluators
+            # like gpt-groundedness, gpt-similarity and content safety metrics.
                 "content_safety": ContentSafetyEvaluator(project_scope={
                     "subscription_id": "15ae9cb6-95c1-483d-a0e3-b1a1a3b06324",
                     "resource_group_name": "danielsc",
