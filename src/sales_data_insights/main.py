@@ -27,7 +27,9 @@ class SalesDataInsights:
     """
 
     def __init__(self, data=None, model_type="azure_openai"):
-        self.data = data if data else os.path.join(pathlib.Path(__file__).parent.resolve(), "data", "order_data.db")
+        self.data = data if data else os.path.join(
+            pathlib.Path(__file__).parent.resolve(), "data", "order_data.db"
+        )
         self.model_type = model_type
 
     @trace
