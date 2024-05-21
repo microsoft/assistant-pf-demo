@@ -16,6 +16,8 @@ from sales_data_insights.main import SalesDataInsights
 from typing import TypedDict
 
 
+# You can get the same code with this link. https://aka.ms/2024-brk141​
+
 class AssistantStream(TypedDict):
     chat_output: str # streamed output from the assistant
     session_state: dict # assistant thread bookkeeping 
