@@ -50,6 +50,8 @@ def main(model="azure_openai", data="small"):
 
         print(f"Starting evaluation: {evaluation_name}")
 
+        # You can get the same code with this link. https://aka.ms/2024-brk141​
+
         response = evaluate(
             evaluation_name=evaluation_name,
             data=data_file,

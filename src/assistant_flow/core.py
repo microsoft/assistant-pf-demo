@@ -22,16 +22,17 @@ class AssistantsAPIGlue:
         self,
         client: AzureOpenAI,
         question: str,
-        session_state: dict[str, any] = {},
-        tools: dict[str, callable] = {},
+        session_state: dict[str, any] = None,
+        tools: dict[str, callable] = None,
     ):
         # Provision an AzureOpenAI client for the assistants
         logging.info("Creating AzureOpenaI client")
         self.client = client
-        self.tools = tools
+        self.tools = tools or {}
 
         self.max_waiting_time = 120
 
+        session_state = session_state or {}
         if "thread_id" in session_state:
             logging.info(f"Using thread_id from session_stat: {session_state['thread_id']}")
             otel_trace.get_current_span().set_attribute("AssistantsAPIGlue_thread_id",  session_state['thread_id'])
