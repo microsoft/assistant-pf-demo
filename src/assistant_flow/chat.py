@@ -1,17 +1,10 @@
-import time
-import json
-import base64
-
 import os
 import logging
-import sqlite3
-import pandas as pd 
 
 # local imports
 from .core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
-from promptflow.core import Flow
 from sales_data_insights.main import SalesDataInsights
 from typing import TypedDict
 
@@ -19,16 +12,33 @@ from typing import TypedDict
 # You can get the same code with this link. https://aka.ms/2024-brk141​
 
 class AssistantStream(TypedDict):
-    chat_output: str # streamed output from the assistant
-    session_state: dict # assistant thread bookkeeping 
+
+    """
+    Assistant flow response. This is the output of the assistant flow and chat_completion function. 
+    It contains the chat_output and session_state.
+
+    Attributes:
+        chat_output (str): The streamed output from the assistant.
+        session_state (dict): The assistant thread bookkeeping.
+    """
+
+    chat_output: str
+    session_state: dict
 
 
 @trace
 def chat_completion(
     question: str,
-    session_state: dict = {}, # For resuming from an existing thread
+    session_state: dict = None,
 ) -> AssistantStream:
-    
+
+    """
+    This is the entry point of Assistant flow.
+    Args:
+        question (str): The question to ask the assistant.
+        session_state (dict, optional): The session state to resume from. Defaults to None.
+        Returns: AssistantStream 
+    """
 
     # verify all env vars are present
     required_env_vars = [

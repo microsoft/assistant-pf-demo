@@ -5,10 +5,8 @@ import time
 import os
 import logging
 import json
-import inspect
 
 from openai import AzureOpenAI
-import base64
 
 from promptflow.tracing import trace
 from opentelemetry import trace as otel_trace

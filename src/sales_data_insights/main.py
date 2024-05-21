@@ -19,6 +19,13 @@ class Result(TypedDict):
 
 # Callable class with @trace decorator on the __call__ method
 class SalesDataInsights:
+
+    """
+    SalesDataInsights tool. You can use this tool as a standalone flow to retrieve sales data
+    with natural language queries. In this example, it's also called by the assistant API for a
+    full end-to-end assistant experience.
+    """
+
     def __init__(self, data=None, model_type="azure_openai"):
         self.data = data if data else os.path.join(pathlib.Path(__file__).parent.resolve(), "data", "order_data.db")
         self.model_type = model_type
