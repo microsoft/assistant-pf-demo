@@ -70,7 +70,7 @@ Then do as suggested on the console by adding the provided line `OPENAI_ASSISTAN
 You can test that the flow is working correctly by running the following command:
 
 ```bash
-pf flow test --flow src/assistant_flow --ui
+pf flow test --flow assistant_flow.chat:chat_completion –u
 ```
 
 This will start the prompt flow service (pfs) and provide a URL to the chat UI. The console output will be similar to this:
