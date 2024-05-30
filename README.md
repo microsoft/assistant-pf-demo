@@ -280,7 +280,7 @@ In addition, you can pull data from App Insights to build datasets for validatio
 
 ```kql
 dependencies
-| where name == "sales_data_insights" and customDimensions.span_type == "Flow"
+| where name == "SalesDataInsights" and customDimensions.span_type == "Function"
 | extend inputs = parse_json(tostring(customDimensions["inputs"]))
 | extend output = parse_json(tostring(customDimensions["output"]))
 | project inputs.question, output.query, output.error

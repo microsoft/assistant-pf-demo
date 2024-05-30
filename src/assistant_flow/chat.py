@@ -2,7 +2,7 @@ import os
 import logging
 
 # local imports
-from .core import AssistantsAPIGlue
+from assistant_flow.core import AssistantsAPIGlue
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 from sales_data_insights.main import SalesDataInsights

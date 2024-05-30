@@ -29,9 +29,9 @@ def setup_app_insights():
     from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 
     # Configure Azure Monitor as the Exporter
-    print("using the follwoing connection string", os.getenv('APPINSIGHTS_CONNECTION_STRING'))
+    print("using the following connection string", os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'))
     trace_exporter = AzureMonitorTraceExporter(
-        connection_string=os.getenv('APPINSIGHTS_CONNECTION_STRING')
+        connection_string=os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING')
     )
 
     # Add the Azure exporter to the tracer provider

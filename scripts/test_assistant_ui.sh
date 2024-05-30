@@ -1,0 +1,1 @@
+pf flow test --flow assistant_flow.chat:chat_completion --ui
