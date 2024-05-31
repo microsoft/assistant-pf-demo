@@ -1,0 +1,1095 @@
+question
+How many orders were made each month?
+What's the total sales amount per region?
+Show me the average number of items in each product type
+How many returns did we get each month and year?
+What's the total shipping cost for each category?
+What's the average discount given by region?
+How much time do we spend on fulfillment each year?
+How many repeat customer orders do we get every month and year?
+How many orders get cancelled in each region?
+What's the total number of orders on different days of the week?
+Can you show the number of orders and total sales value for each year in each region?
+What's the average order value each month?
+How many discounted orders do we have by month?
+Show the total orders and shipping costs by region
+How many orders were placed in January?
+What's the average fulfillment time by region?
+How many orders were returned each month this year?
+Show the number of orders from repeat customers per month
+How much did we make in sales last year?
+What's the average shipping cost per order by month?
+Query the total value of orders processed grouped by Region
+Query the average number of items per order grouped by product type
+Query the total number of orders returned grouped by Month and Year
+Query the total shipping cost grouped by main category and sub category
+Query the average discount percentage given grouped by Region
+Query the total time to fulfillment grouped by Year
+Query the number of orders with repeat customers grouped by Month and Year
+Query the total number of orders cancelled grouped by Region
+Query the total number of orders processed on each day of the week
+"Query the number of orders, total value of orders, and average order value grouped by Region and Year"
+What's the average customer satisfaction rating each month?
+How many new customers did we acquire last year?
+What's the total number of employees working in each region?
+How many products were out of stock each month?
+What's the conversion rate of our website visitors to buyers?
+How many marketing campaigns were run in 2023?
+What's the average delivery time for each shipping method?
+How many product reviews did we receive each month?
+What's the average customer lifetime value?
+How many customer service tickets were opened each month?
+How many orders were processed each year?
+Show the total value of orders and number of items by region
+What's the average discount percentage for each main category?
+How many orders were fulfilled late each month?
+How much do we spend on shipping per month?
+What's the average order value for each sub category?
+Show the number of orders and returns for each product type
+How many repeat customer orders do we get by year?
+What's the total discount percentage given each month?
+How many orders were canceled by month?
+Show the total number of items sold each year
+What's the average shipping cost per order by region?
+How many orders with discounts were made by each main category?
+How much time to fulfillment for each month?
+Show the number of orders for each product type each year
+What's the average order value for each region?
+What's the total number of orders placed in December?
+How many orders with discounts were placed by month?
+What's the return rate for each product type?
+How many orders were fulfilled late each year?
+What's the total shipping cost per year?
+How many orders from repeat customers were placed by region?
+What's the average discount percentage for each sub category?
+How many orders with discounts were placed each year?
+What's the total time to fulfillment by region?
+How many orders were processed on each day of the week in December?
+What's the average order value for each product type?
+How many orders were canceled each year?
+What's the total number of orders placed by region each month?
+Show the average shipping cost per order by sub category
+What's the total value of orders processed in the last quarter?
+How many repeat customer orders were placed each month?
+What's the total number of items sold by main category?
+What's the total discount percentage given each year?
+How many orders were returned by month?
+What's the average shipping cost for orders from Europe?
+How many orders were placed by repeat customers each year?
+What's the total number of orders and order value for each main category and sub category?
+What's the average discount percentage given by product type?
+How many orders were returned each day in January?
+What's the total value of orders placed in each region each year?
+How many orders were processed on weekends?
+Show the average time to fulfillment by product type
+What's the total number of orders placed in Q1 each year?
+What's the total discount percentage given by main category?
+How many orders were placed on Mondays?
+What's the average shipping cost for orders from North America?
+How many orders were canceled each month last year?
+What's the return rate for orders from Asia-Pacific?
+What's the total number of orders and order value for each sub category and product type?
+How many orders were placed in the first half of 2023?
+Show the total value of orders and number of items for each sub category
+What's the average discount percentage given for each product type in January?
+How many orders were returned each month in 2022?
+What's the average shipping cost for orders from Africa?
+How many orders were made in the last quarter?
+What's the total revenue for each month?
+What's the average discount given per order?
+How many orders were canceled in December?
+What's the total shipping cost for the last year?
+How many repeat customer orders were there in 2023?
+What's the total number of items sold in the first half of 2024?
+How many orders had discounts each month?
+What's the total value of orders returned each month?
+How many orders were made in each region in Q2?
+What's the total revenue for each sub category?
+How many items were sold in each product type?
+How many orders were placed on Fridays in 2023?
+What's the average order value for each product type in 2024?
+How many orders were returned each month in 2023?
+How many orders were made by repeat customers each quarter?
+What's the total number of orders placed in Europe in January?
+How many orders were canceled in the first half of 2024?
+What's the average shipping cost for orders from South America?
+How many items were sold in each main category?
+How many orders were placed in the first quarter of 2023?
+What's the total revenue for each product type in 2023?
+How many orders were returned in the second quarter of 2022?
+What's the average discount given for each product type?
+How many orders were placed on weekends in the last year?
+How many orders were canceled in Q1 2024?
+What's the total shipping cost for each month in 2023?
+How many orders were placed in the last year?
+What's the total number of orders and revenue for each sub category?
+How many items were sold in January 2024?
+What's the average order value for each main category in 2023?
+How many orders were returned in the first half of 2023?
+How many orders were placed by repeat customers in Q3?
+What's the total number of orders placed in North America in July?
+How many orders were canceled in the second half of 2023?
+What's the average shipping cost for orders from the Middle East?
+How many items were sold in each sub category in 2023?
+How many orders were placed in the second quarter of 2023?
+What's the total revenue for each main category in 2023?
+How many orders were returned in Q1 2022?
+What's the average discount given for each main category?
+How many orders were placed on weekdays in the last year?
+How many orders were canceled in Q2 2023?
+What's the total shipping cost for each quarter in 2023?
+How many orders were placed in the last month?
+What's the total number of orders and revenue for each product type?
+How many items were sold in February 2024?
+What's the average order value for each sub category in 2023?
+How many orders were returned in the second half of 2023?
+How many orders were placed by repeat customers in Q4?
+What's the total number of orders placed in Europe in February?
+How many orders were canceled in the first quarter of 2023?
+What's the average shipping cost for orders from Asia-Pacific?
+How many items were sold in each product type in 2023?
+How many orders were placed in the third quarter of 2023?
+What's the total revenue for each sub category in 2023?
+How many orders were returned in Q2 2022?
+What's the average discount given for each sub category?
+How many orders were placed on holidays in the last year?
+How many orders were canceled in Q3 2023?
+What's the total shipping cost for each month in 2024?
+How many orders were placed in the last quarter of 2023?
+What's the total number of orders and revenue for each main category?
+How many items were sold in March 2024?
+What's the average order value for each product type in 2023?
+How many orders were returned in the third quarter of 2023?
+How many orders were placed by repeat customers in the last year?
+What's the total number of orders placed in North America in August?
+How many orders were canceled in the third quarter of 2023?
+How many items were sold in each main category in 2023?
+How many orders were placed in the fourth quarter of 2023?
+How many orders were returned in Q3 2022?
+What's the average discount given for each product type in 2023?
+How many orders were placed on Fridays in the last year?
+How many orders were canceled in Q4 2023?
+What's the total shipping cost for each quarter in 2024?
+How many orders were placed in the last month of 2023?
+What's the total number of orders and revenue for each sub category in 2023?
+How many items were sold in April 2024?
+What's the average order value for each main category in 2024?
+How many orders were returned in the fourth quarter of 2023?
+How many orders were placed by repeat customers in the first half of 2023?
+What's the total number of orders placed in South America in June?
+How many orders were canceled in the fourth quarter of 2023?
+How many orders were placed in the first quarter of 2024?
+What's the total revenue for each main category in 2024?
+How many orders were returned in Q4 2022?
+What's the average discount given for each main category in 2023?
+How many orders were placed on Mondays in the last year?
+How many orders were canceled in January 2023?
+How many orders were made each week last year?
+What's the total revenue per main category in Q2?
+How many items were sold each quarter?
+How many orders were canceled in February?
+What's the total shipping cost for each main category in 2023?
+How many repeat customer orders were there in the last quarter?
+What's the total number of items sold in December?
+How many orders had discounts each quarter?
+What's the total value of orders returned each year?
+How many orders were made in each region in Q3?
+What's the total revenue for each sub category in 2024?
+How many items were sold each quarter in 2023?
+How many orders were placed on Saturdays last year?
+What's the average order value for each main category in Q1?
+How many orders were returned each quarter in 2023?
+How many orders were made by repeat customers in Q4?
+What's the total number of orders placed in Europe in April?
+How many orders were canceled in the first half of 2023?
+How many items were sold in each product type last year?
+How many orders were placed in the second quarter of 2024?
+What's the total revenue for each main category in Q4?
+How many orders were returned in the second quarter of 2023?
+What's the average discount given for each sub category in 2024?
+How many orders were placed on weekends in the last month?
+How many orders were canceled in Q1 2023?
+What's the total shipping cost for each main category?
+How many orders were placed last month?
+How many items were sold in April 2023?
+What's the average order value for each sub category in 2024?
+How many orders were returned in the first half of 2024?
+How many orders were placed by repeat customers each month last year?
+What's the total number of orders placed in North America in May?
+How many orders were canceled in the second quarter of 2024?
+How many items were sold in each sub category last year?
+How many orders were placed in the third quarter of 2024?
+What's the total revenue for each product type last year?
+How many orders were returned in Q1 2023?
+What's the average discount given for each main category in 2024?
+How many orders were placed on weekdays last month?
+How many orders were canceled in Q2 2024?
+What's the total shipping cost for each sub category last year?
+How many items were sold in May 2023?
+What's the average order value for each product type last year?
+How many orders were returned in the second half of 2024?
+How many orders were placed by repeat customers in the last month?
+What's the total number of orders placed in North America in June?
+How many orders were canceled in the third quarter of 2024?
+How many items were sold in each product type last month?
+How many orders were placed in the fourth quarter of 2024?
+What's the total revenue for each sub category last year?
+How many orders were returned in Q2 2023?
+What's the average discount given for each main category last year?
+How many orders were placed on holidays last month?
+How many orders were canceled in Q3 2024?
+What's the total shipping cost for each sub category in Q4?
+How many orders were placed in November?
+What's the total number of orders and revenue for each main category in Q2?
+How many items were sold in June 2023?
+What's the average order value for each sub category last month?
+How many orders were returned in the third quarter of 2024?
+How many orders were placed by repeat customers last month?
+What's the total number of orders placed in Europe in September?
+How many orders were canceled in the fourth quarter of 2024?
+How many items were sold in each product type in Q1?
+What's the total revenue for each main category last month?
+How many orders were returned in Q3 2023?
+What's the average discount given for each product type last year?
+How many orders were placed on Fridays in the last month?
+How many orders were canceled in Q4 2024?
+What's the total shipping cost for each sub category in Q2?
+How many orders were placed last December?
+How many items were sold in July 2023?
+What's the average order value for each product type in Q2?
+How many orders were returned in the fourth quarter of 2024?
+How many orders were placed by repeat customers in the first quarter of 2024?
+What's the total number of orders placed in South America in July?
+How many items were sold in each main category in Q3?
+What's the total revenue for each product type in Q2?
+How many orders were returned in Q4 2023?
+What's the average discount given for each sub category last month?
+How many orders were placed on Mondays last month?
+How many orders were canceled in January 2024?
+What's the total shipping cost for each sub category in Q1?
+How many orders were placed in December 2023?
+What's the total number of orders and revenue for each sub category in Q3?
+How many items were sold in August 2023?
+What's the average order value for each product type in Q1?
+How many orders were placed by repeat customers in Q2 2024?
+What's the total number of orders placed in South America in August?
+How many orders were canceled in February 2024?
+How many items were sold in each main category last quarter?
+How many orders were placed in the fourth quarter of last year?
+What's the total revenue for each sub category in Q4?
+What's the average discount given for each product type last month?
+How many orders were placed on Tuesdays last month?
+How many orders were canceled in March 2024?
+What's the total shipping cost for each sub category in Q3?
+How many orders were placed in the last quarter?
+What's the total number of orders and revenue for each main category in Q4?
+How many items were sold in September 2023?
+What's the average order value for each sub category last quarter?
+How many orders were returned in the fourth quarter of last year?
+How many orders were placed by repeat customers in Q1 2024?
+What's the total number of orders placed in North America in December?
+How many orders were canceled in April 2024?
+What's the average shipping cost for orders from Europe last year?
+How many items were sold in each main category last month?
+How many orders were placed in the first quarter of last year?
+What's the total revenue for each product type in Q4?
+What's the average discount given for each main category last quarter?
+How many orders were placed on Wednesdays last month?
+How many orders were canceled in May 2024?
+What's the total shipping cost for each sub category in Q1 last year?
+What's the total number of orders and revenue for each sub category in Q4?
+How many items were sold in October 2023?
+What's the average order value for each product type in Q3?
+How many orders were returned in the second quarter of last year?
+How many orders were placed by repeat customers in Q3 2023?
+What's the total number of orders placed in Europe in October?
+How many orders were canceled in June 2024?
+What's the average shipping cost for orders from Asia-Pacific last year?
+How many items were sold in each sub category in Q2?
+How many orders were placed in the second quarter of last year?
+What's the total revenue for each main category in Q3?
+What's the average discount given for each sub category in Q1?
+How many orders were placed on Thursdays last month?
+How many orders were canceled in July 2024?
+What's the total shipping cost for each sub category in Q2 last year?
+How many orders were placed in the last quarter of last year?
+What's the total number of orders and revenue for each product type in Q4?
+How many items were sold in November 2023?
+What's the average order value for each sub category in Q2 last year?
+How many orders were returned in the third quarter of last year?
+How many orders were placed by repeat customers in Q4 2023?
+What's the total number of orders placed in South America in September?
+How many orders were canceled in August 2024?
+What's the average shipping cost for orders from North America last year?
+How many items were sold in each main category in Q1 last year?
+How many orders were placed in the third quarter of last year?
+What's the total revenue for each product type in Q3?
+What's the average discount given for each main category in Q1 last year?
+How many orders were placed on Fridays last month?
+How many orders were canceled in September 2024?
+What's the total shipping cost for each sub category in Q3 last year?
+What's the total number of orders and revenue for each sub category in Q1 last year?
+How many items were sold in December 2023?
+What's the average order value for each product type in Q2 last year?
+How many orders were placed by repeat customers in Q1 last year?
+What's the total number of orders placed in North America in November?
+How many orders were canceled in October 2024?
+What's the average shipping cost for orders from Africa last year?
+How many items were sold in each main category in Q3 last year?
+What's the total revenue for each product type in Q1 last year?
+How many orders were returned in Q4 2021?
+What's the average discount given for each sub category in Q2 last year?
+How many orders were placed on Sundays last month?
+How many orders were canceled in November 2024?
+What's the total shipping cost for each sub category in Q4 last year?
+What's the total number of orders and revenue for each sub category in Q2 last year?
+How many items were sold in January 2023?
+What's the average order value for each main category in Q3 last year?
+How many orders were placed by repeat customers in Q4 last year?
+What's the total number of orders placed in North America in October?
+How many orders were canceled in December 2024?
+What's the average shipping cost for orders from Europe in Q1 last year?
+How many items were sold in each sub category in Q4 last year?
+What's the total revenue for each product type in Q2 last year?
+How many orders were returned in Q3 2021?
+What's the average discount given for each sub category in Q3 last year?
+How many orders were placed on Fridays last year?
+How many orders were canceled in Q1 2025?
+How many orders were placed in the first quarter of this year?
+What's the total number of orders and revenue for each sub category in Q3 last year?
+show the total revenue by day and product type in May 2024 for 'Men's Shoes'
+show the 2023 sales by category
+what was the total revenue in May 2024
+what was the total revenue in May 2024 by region
+show the 2024 May sales by day
+query for all the values for the product_type
+what was the total sales revenue for May 2024
+show the total revenue by day for May 2024
+show the total sales revenue aggregated by year and month
+show the total revenue aggregated by day in May 2024
+show the total revenue aggregated by Region in May 2024
+what is the total revenue in the current month
+what was the total sales revenue in May 2024
+what was the daily sales revenue for May 2024
+query for all the data fields
+what was the total revenue in 2024 by region
+show the total revenue by day in May 2024
+show the total revenue by day and category in May 2024
+what was the total sales revenue by day in May 2024
+what was the total sales revenue by day and category in May 2024
+how many orders for travel were processed in May 2024
+"what was the total number of orders by sub_category, product_type for the Travel category in May 2024"
+what was the total revenue in January 2024 by Region
+what are the sales numbers for February by category
+What are the total sales by category for February?
+What are the total returns by category for February?
+what were the total sales in January 2023
+what is the average order size by main category
+query for all the values for the main_category
+query for the month with the strongest revenue
+which day of the week has the highest sales in February
+show the 2023 sales by category in a bar chart
+query for the month with the strongest revenue in 2023
+query for the total revenue by month
+query for the total number of orders by month
+query for the total sales for each main_category
+total_revenue_for_each_day_in_January
+what is the revenue breakdown by month for q4 2023
+query the sum of revenue for Q4 2023 by month
+query the average value of orders by month
+query the total revenue by region in Q1 2024
+query for the total sales by category for the year 2023
+show the total sales revenue by month
+show the total revenue by year and month
+which is the worst performing category by revenue?
+what was the total revenue in 2023 by main_category
+what is the average sale value for Water Sports
+what is the average sale value for Winter Sports
+show the number of orders by day for women's clothing in the current month
+what are the days in the current month
+what are the orders for women's clothing by day in the current month
+query for all the days in January 2023 where the number of orders is greater than 700
+query for all the months in 2023 where the revenue was above 1Mio
+query for all the months in 2023 where the revenue was above 1000000
+query for all the values for the month
+query the total sales revenue by month for 2023
+query the total sales revenue by month
+query the revenue by day and region for the week of 5/12/2024 to 5/18/2024
+query the revenue by month and region for the year 2024
+query the revenue for Europe in January 2024
+query the region with the most revenue in Q1 2024
+"how many orders were made for the product_type ""MEN'S CLOTHING"" with sub_category ""MEN'S APPAREL"" in EUROPE this month"
+how many orders were made for MEN'S APPAREL in Europe this month
+"how many orders were made for the main_category ""APPAREL"" and the sub_category ""MEN'S APPAREL"" in May 2024"
+"how many orders in the main category of ""apparel"" and the sub cateory of men's apparel were made in may 2024"
+how many orders did we have in women's clothing this month
+what is the revenue for each month in Q4 2023
+query the total revenue by month
+break down the revenue by region
+show the revenue for January by day
+get the revenue by month
+break down each month by region
+what is the average order value for Africa
+query the average order value grouped by region
+top categories by sales revenue
+top categories by number of orders
+query for all the values for Region
+What are the sales numbers for February by category?
+what are the sales numbers for feb by category
+the total sales for February by category
+compare total sales for Apparel and Footwear across different days of the week
+what is the average sale value for Apparel on Mondays
+what is the average sale value for Footwear on Mondays
+what is the average sale value for Apparel on Tuesdays
+what is the average sale value for Footwear on Tuesdays
+what is the average sale value for Apparel on Wednesdays
+what is the average sale value for Footwear on Wednesdays
+what is the average sale value for Apparel on Thursdays
+what is the average sale value for Footwear on Thursdays
+what is the average sale value for Apparel on Fridays
+what is the average sale value for Footwear on Fridays
+what is the average sale value for Apparel on Saturdays
+what is the average sale value for Footwear on Saturdays
+what is the average sale value for Apparel on Sundays
+what is the average sale value for Footwear on Sundays
+total sales revenue by month
+show me the revenue by main category
+which are the sub-categories of winter sports
+query for all the days of the week in January where the number of orders is greater than 10
+query for all the days of the week in January and show me the number of orders
+query for all the days in January and show me the number of orders
+which month is the strongest in Apparel
+what are the sales numbers for each month by category
+what are the sales numbers for each month in Apparel
+what is the total revenue for each month in Apparel
+which sub category in Apparel has the most revenue
+which sub category in apparel has the most revenue
+query for the average value of orders by sub category
+list all the main categories
+query for all the values for the Year
+query for all the values for the Month
+show the total sales revenue by year and month
+what was the total revenue in 2023 by region
+how many orders of Travel pillows were processed this month
+query for all the values for the Region
+what was the total revenue in EUROPE
+what was the total revenue in EUROPE by year
+what was the total revenue in Q1 2024 by region
+query for all the values for the product_type where sub_category = 'travel'
+query for all the values for the sub_category where main_category = 'TRAVEL'
+what is the sum of items by product_type where product_type = 'TRAVEL PILLOWS'
+"on which day in May 2024 did we sell the most product_type ""TRAVEL PILLOWS"""
+"show the total sales of product_type ""TRAVEL PILLOWS"" by day in May 2024"
+what is the average sale value for January
+query for the total revenue in January 2024 for Europe
+"show the sales revenue by main_category ""Camping & Hiking"""
+"show the revenue grouped by sub_category and product type for main_category ""Camping & Hiking"""
+query the total revenue for Q4 2023 by month
+what was the total number of orders in May 2024 by day and main category
+what was the total number of orders in May 2024 by day
+which day of month had the highest revenue in February 2024
+what was the total revenue in February 2024 by day
+query for all the values for the sub_category
+query for all distinct values for main_category and sub_category
+query for all the values for sub_category and product_type where main_category = 'Travel'
+what was the total number of items sold for product_type = 'Travel Pillows' in 2023
+query the total revenue by month for Q4 2023
+what is the average sale value for February
+what is the average sale value for March
+what is the average sale value for April
+what is the average sale value for May
+what is the average sale value for June
+what is the average sale value for July
+what is the average sale value for August
+what is the average sale value for September
+what is the average sale value for October
+what is the average sale value for November
+what is the average sale value for December
+query for the sales value for Apparel
+query for the sales value for Footwear
+query for the sales value for Camping & Hiking
+query for the sales value for Climbing
+query for the sales value for Water Sports
+query for the sales value for Winter Sports
+query for the sales value for Travel
+query for the revenue by category
+query for total revenue by category
+query for the average value of orders by month
+get the order numbers by month for the last year
+"what was the total revenue in the current month by product_type ""travel pillows"""
+how many orders were made for travel pillows this month by region
+"how many orders were made for the product_type ""MEN'S CLOTHING"" in Europe this month"
+"how many orders were made for the product_type ""MEN'S CLOTHING"" in EUROPE this month"
+sales data by category
+what are the sales numbers for jan 2023
+total sales revenue by month and year
+which month had the strongest order numbers
+list all the days of the week where the average ratio of return customer was greater than 50%
+query the average value of orders by day of the week
+query the average value of orders by day of the week and filter by orders from repeat customers
+what is the ratio of return customers overall
+what is the average return customer ratio by day of the week
+what was the total revenue in May 2024 by product_type for 'HIKING BOOTS'
+what was the total revenue in May 2024 by sub_category for 'HIKING BOOTS'
+show the total revenue by day and sub_category in May 2024 for 'HIKING BOOTS'
+revenue breakdown by product category
+query for all the values for main_category
+what is the average sale value for Tuesdays
+query for the category with the strongest sales in January
+query for the best selling category
+query the revenue by main category for the week of 5/12/2024 to 5/18/2024
+query the revenue by day and main category for the week of 5/12/2024 to 5/18/2024
+query the revenue by day for the week of 5/12/2024 to 5/18/2024
+query for all the values for the product_type where sub_category = 'TRAVEL ACCESSORIES'
+"what is the sum of items by Region, product_type where product_type = 'TRAVEL PILLOWS'"
+"what was the total revenue in 2023 by product_type, region"
+total sales revenue by month with year
+all the values for the product_type
+which is the best selling product type in each main category
+give me the revenue breakdown by product category
+get the revenue breakdown by product category
+What are the total sales numbers for February?
+calculate the total revenue for Apparel in February
+calculate the total revenue for Camping & Hiking in February
+calculate the total revenue for Climbing in February
+calculate the total revenue for Footwear in February
+calculate the total revenue for Travel in February
+calculate the total revenue for Water Sports in February
+calculate the total revenue for Winter Sports in February
+query for all the values for product_type where sub_category = ' Travel Pillows'
+query for all the values for product_type where product_type LIKE '%Pillow%'
+what was the total revenue for product_type = 'Travel Pillows' in 2023
+list main categories
+show the total sales revenue by month and year
+SELECT DISTINCT Year FROM order_data
+show the total sales revenue aggregated by month-year
+What are the total sales numbers for February by category?
+what is the ratio of return customers by month
+what are the sub categories in the Apparel area
+what are the sub categories in the Camping area
+list all main areas
+what are the sub categories in the Camping & Outdoors area
+what are the product categories
+"select sub_category distinct where main_category = ""Camping & Hiking"""
+plot the revenue for q1
+plot the revenue for q2
+total sales by category in 2023
+list of main_category for 2023
+what was the best-selling category in q1 2024
+query the total number of orders by month
+query the total number of orders by day in May 2024
+show the number of orders by month over the past 12 months
+get all the values for the order_date
+query the number of orders by month for the last year
+query the total number of orders grouped by region
+query the total number of orders by day for January
+query the total number of orders by day for December
+break down the orders by day and by region
+query the total number of orders by day and by region
+"query the average value of orders by month, main_category"
+what is the average sale value for Apparel
+what is the average sale value for Footwear
+what is the average sale value for Camping & Hiking
+what is the average sale value for Climbing
+what is the average sale value for Travel
+which month has the most orders in 2023
+plot the december revenue by day to show the trend
+what was the total revenue in May 2024 by day
+plot the q4 2023 revenue by month
+"Get data for month 10,11,12 and for the all the main categories"
+what is the total revenue for Q4 2023
+what is the total revenue for Q4 2023 by month
+query the month names
+query for all the values for Month
+query the revenue numbers for May 2024 by day
+how many orders of Travel pillows did we have this month
+average december revenue by day
+plot the december revenue by day
+query the total revenue for each day in December
+average daily revenue for December
+total_revenue_for_each_day_in_December
+number_of_days_in_December
+number_of_days_in_January
+show 2023 sales by category
+what is the total sales for Apparel
+what is the total sales for Footwear
+what is the total sales for Camping & Hiking
+what is the total sales for Climbing
+what is the total sales for Water Sports
+what is the total sales for Winter Sports
+what is the total sales for Travel
+plot the revenue for Q1
+which is the worst performing main category by revenue?
+what are the total revenues for each main category?
+total number of orders by day in May 2024
+query all the values for the region
+query the total revenue for North America
+query the total revenue for Europe
+query the total revenue for Asia-Pacific
+query the total revenue for Africa
+query the total revenue for Middle East
+query the total revenue for South America
+show the total sales by month in 2023
+show the total sales by month in 2024
+what was the total revenue in 2023 by main category
+what were the sales in the first month of 2024 by category
+which day has the strongest revenue this month
+what was the total revenue on the 15th of May 2024
+show the total revenue by day of the month for the current month
+show the total sales revenue by day and category for May 2024
+what was the total revenue in 2023 for APPAREL by Region
+what is the total revenue in 2023 by main_category
+show the total sales revenue for May 2024
+show the total sales revenue by day for May 2024
+show the total sales by category for this month
+what was the total sales revenue for May 2024 by category
+"Break down the orders by day and by region"
+"Query the total number of orders by day and by region"
+"Query the average value of orders by month and main category"
+"What is the average sale value for Apparel?"
+"What is the average sale value for Footwear?"
+"What is the average sale value for Camping & Hiking?"
+"What is the average sale value for Climbing?"
+"What is the average sale value for Travel?"
+"Which month had the most orders in 2023?"
+"Plot the December revenue by day to show the trend"
+"What was the total revenue in May 2024 by day?"
+"Plot the Q4 2023 revenue by month"
+"Get data for months 10, 11, and 12 for all the main categories"
+"What is the total revenue for Q4 2023?"
+"What is the total revenue for Q4 2023 by month?"
+"Query the month names"
+"Query all the values for Month"
+"Query the revenue numbers for May 2024 by day"
+"How many orders of Travel pillows did we have this month?"
+"Average December revenue by day"
+"Plot the December revenue by day"
+"Query the total revenue for each day in December"
+"Average daily revenue for December"
+"Total revenue for each day in December"
+"Number of days in December"
+"Number of days in January"
+"Show 2023 sales by category"
+"What is the total sales for Apparel?"
+"What is the total sales for Footwear?"
+"What is the total sales for Camping & Hiking?"
+"What is the total sales for Climbing?"
+"What is the total sales for Water Sports?"
+"What is the total sales for Winter Sports?"
+"What is the total sales for Travel?"
+"Plot the revenue for Q1"
+"Which is the worst performing main category by revenue?"
+"What are the total revenues for each main category?"
+"Total number of orders by day in May 2024"
+"Query all the values for the region"
+"Query the total revenue for North America"
+"Query the total revenue for Europe"
+"Query the total revenue for Asia-Pacific"
+"Query the total revenue for Africa"
+"Query the total revenue for Middle East"
+"Query the total revenue for South America"
+"Show the total sales by month in 2023"
+"Show the total sales by month in 2024"
+"What was the total revenue in 2023 by main category?"
+"What were the sales in the first month of 2024 by category?"
+"Which day has the strongest revenue this month?"
+"What was the total revenue on the 15th of May 2024?"
+"Show the total revenue by day of the month for the current month"
+"Show the total sales revenue by day and category for May 2024"
+"What was the total revenue in 2023 for APPAREL by Region?"
+"What is the total revenue in 2023 by main category?"
+"Show the total sales revenue for May 2024"
+"Show the total sales revenue by day for May 2024"
+"Show the total sales by category for this month"
+"What was the total sales revenue for May 2024 by category?"
+"How many orders were made each day in 2023?"
+"What was the highest revenue month in 2023?"
+"Show the total number of items sold by day in December"
+"Show the average number of items sold per order in 2023"
+"What's the return rate by region in 2023?"
+"What's the cancellation rate by month in 2023?"
+"How many repeat customer orders were placed each quarter in 2023?"
+"What's the total number of orders by day in January 2024?"
+"What's the average fulfillment time by month in 2023?"
+"How many discounted orders were placed by main category in 2023?"
+"Show the number of items sold by sub category in Q1 2023"
+"What's the average shipping cost per order in 2023?"
+"How many orders were placed by region in Q2 2023?"
+"What's the total number of orders and revenue by sub category in 2023?"
+"Show the average order value by region in 2023"
+"What's the total number of items sold in Q3 2023?"
+"How many orders were returned by month in 2023?"
+"What's the total number of orders canceled by month in 2023?"
+"What's the average discount percentage by region in 2023?"
+"Show the number of orders by product type in Q4 2023"
+"What's the average fulfillment time by region in 2023?"
+"How many orders were placed on each day of the week in 2023?"
+"Show the number of items sold by main category in Q4 2023"
+"What's the total number of orders and revenue by product type in Q1 2023?"
+"What's the total shipping cost by region in 2023?"
+"Show the number of orders by sub category in Q2 2023"
+"What's the average discount percentage by main category in 2023?"
+"How many orders were returned by sub category in 2023?"
+"Show the total sales revenue by main category in Q2 2023"
+"What's the total number of orders and revenue by main category in 2023?"
+"Show the number of orders by product type in Q3 2023"
+"What's the average shipping cost per order by region in 2023?"
+"Show the number of items sold by main category in Q2 2023"
+"What's the average discount percentage by product type in 2023?"
+"How many orders were canceled by product type in 2023?"
+"Show the total sales revenue by sub category in Q3 2023"
+"What's the total number of orders and revenue by product type in 2023?"
+"Show the number of orders by product type in Q1 2023"
+"What's the average fulfillment time by product type in 2023?"
+"Show the number of items sold by product type in Q4 2023"
+"What's the total number of orders and revenue by sub category in Q1 2023?"
+"What's the average shipping cost per order by product type in 2023?"
+"Show the number of orders by sub category in Q4 2023"
+"What's the average discount percentage by sub category in 2023?"
+"How many orders were returned by main category in 2023?"
+"Show the total sales revenue by main category in Q4 2023"
+"What's the total number of orders and revenue by main category in Q1 2023?"
+"Show the number of orders by sub category in Q1 2023"
+"What's the average shipping cost per order by sub category in 2023?"
+"Show the number of items sold by sub category in Q3 2023"
+"What's the average discount percentage by region in Q4 2023?"
+"How many orders were canceled by region in 2023?"
+"Show the total sales revenue by product type in Q1 2023"
+"What's the total number of orders and revenue by product type in Q2 2023?"
+"Show the number of orders by product type in Q2 2023"
+"What's the average fulfillment time by main category in 2023?"
+"Show the number of items sold by main category in Q1 2023"
+"What's the average discount percentage by product type in Q4 2023?"
+"How many orders were canceled by sub category in 2023?"
+"Show the total sales revenue by sub category in Q1 2023"
+"What's the total number of orders and revenue by sub category in Q2 2023?"
+"What time span is covered by the dataset?"
+"What fields are available in the dataset?"
+"Which regions are included in the dataset?"
+"What is the earliest date in the dataset?"
+"What is the latest date in the dataset?"
+"How many unique main categories are there?"
+"What are the unique sub categories in the dataset?"
+"List all the product types available in the dataset"
+"Which years are included in the dataset?"
+"Which months are included in the dataset?"
+"What are the unique values for the 'main_category' field?"
+"What are the unique values for the 'sub_category' field?"
+"What are the unique values for the 'product_type' field?"
+"What are the unique values for the 'Region' field?"
+"How many unique days of the week are there?"
+"How many unique main categories are present?"
+"How many unique sub categories are present?"
+"How many unique product types are present?"
+"How many unique regions are there?"
+"How many records are there in the dataset?"
+"Which main categories have the most records?"
+"Which sub categories have the most records?"
+"Which product types have the most records?"
+"Which regions have the most records?"
+"What is the distribution of records by year?"
+"What is the distribution of records by month?"
+"What is the distribution of records by day of the week?"
+"What is the total number of orders in the dataset?"
+"What is the total revenue in the dataset?"
+"How many orders have a discount applied?"
+"What is the total discount percentage in the dataset?"
+"What is the total shipping cost in the dataset?"
+"How many orders were returned?"
+"How many orders were canceled?"
+"What is the total time to fulfillment in the dataset?"
+"How many orders were placed by repeat customers?"
+"What are the distinct values for the 'Year' field?"
+"What are the distinct values for the 'Month' field?"
+"What are the distinct values for the 'Day' field?"
+"What are the distinct values for the 'Day_of_Week' field?"
+"Which year has the most records?"
+"Which month has the most records?"
+"Which day of the week has the most records?"
+"What is the average number of orders per day?"
+"What is the average revenue per day?"
+"What is the average discount percentage per order?"
+"What is the average shipping cost per order?"
+"What is the average time to fulfillment per order?"
+"What is the average number of items per order?"
+"Which product types have the highest average order value?"
+"Which regions have the highest average order value?"
+"Which main categories have the highest total revenue?"
+"Which sub categories have the highest total revenue?"
+"Which product types have the highest total revenue?"
+"Which regions have the highest total revenue?"
+"What is the average number of items sold per order?"
+"Which main categories have the highest average number of items per order?"
+"Which sub categories have the highest average number of items per order?"
+"Which product types have the highest average number of items per order?"
+"Which regions have the highest average number of items per order?"
+"What is the distribution of records by region?"
+"What is the total revenue by region?"
+"What is the total number of items sold by region?"
+"What is the total number of orders by region?"
+"What is the average number of orders per month?"
+"What is the average number of orders per year?"
+"What is the average number of orders per quarter?"
+"How many unique products are sold in each main category?"
+"How many unique products are sold in each sub category?"
+"How many unique products are sold in each product type?"
+"What is the average discount percentage by region?"
+"What is the average discount percentage by main category?"
+"What is the average discount percentage by sub category?"
+"What is the average discount percentage by product type?"
+"What is the average time to fulfillment by region?"
+"What is the average time to fulfillment by main category?"
+"What is the average time to fulfillment by sub category?"
+"What is the average time to fulfillment by product type?"
+"How many records have missing values?"
+"Which fields have missing values?"
+"What percentage of records have missing values?"
+"What is the total revenue for each product type by month?"
+"What is the total revenue for each sub category by month?"
+"What is the total revenue for each main category by month?"
+"How many orders were placed each day of the week?"
+"How many orders were placed each month?"
+"How many orders were placed each year?"
+"How many orders were placed each quarter?"
+"How many orders were placed for MEN'S CLOTHING JACKETS & VESTS in May 2024?"
+"What is the total revenue for WOMEN'S CLOTHING JACKETS & VESTS in Q1 2023?"
+"Show the average order value for CHILDREN'S CLOTHING JACKETS & VESTS in 2023."
+"How many orders were canceled for MEN'S CLOTHING SHIRTS in January 2024?"
+"What's the average shipping cost for WOMEN'S CLOTHING TOPS in Q2 2023?"
+"How many orders were returned for CHILDREN'S CLOTHING PANTS & SHORTS in 2024?"
+"What's the total revenue for MEN'S CLOTHING UNDERWEAR & BASE LAYERS in 2023?"
+"How many orders with discounts were placed for WOMEN'S CLOTHING UNDERWEAR & BASE LAYERS in May 2024?"
+"Show the average discount percentage for CHILDREN'S CLOTHING OTHER in 2023."
+"What's the average time to fulfillment for MEN'S CLOTHING PANTS & SHORTS in Q3 2023?"
+"How many orders were placed for MEN'S FOOTWEAR HIKING BOOTS in February 2024?"
+"What's the total revenue for WOMEN'S FOOTWEAR TRAIL SHOES in 2023?"
+"Show the average order value for CHILDREN'S FOOTWEAR SANDALS in Q4 2023."
+"How many orders were canceled for MEN'S FOOTWEAR WINTER BOOTS in January 2024?"
+"What's the average shipping cost for WOMEN'S FOOTWEAR OTHER in Q1 2024?"
+"How many orders were returned for CHILDREN'S FOOTWEAR HIKING BOOTS in 2023?"
+"What's the total revenue for MEN'S FOOTWEAR TRAIL SHOES in Q3 2023?"
+"How many orders with discounts were placed for WOMEN'S FOOTWEAR TRAIL SHOES in May 2024?"
+"Show the average discount percentage for CHILDREN'S FOOTWEAR WINTER BOOTS in 2023."
+"What's the average time to fulfillment for MEN'S FOOTWEAR OTHER in Q2 2023?"
+"How many orders were placed for TENTS & SHELTERS BACKPACKING TENTS in March 2024?"
+"What is the total revenue for SLEEPING GEAR SLEEPING BAGS in 2023?"
+"Show the average order value for COOKING GEAR STOVES in Q4 2023."
+"How many orders were canceled for BACKPACKS DAYPACKS in April 2024?"
+"What's the average shipping cost for TENTS & SHELTERS FAMILY CAMPING TENTS in Q1 2023?"
+"How many orders were returned for SLEEPING GEAR SLEEPING PADS in 2023?"
+"What's the total revenue for COOKING GEAR UTENSILS & ACCESSORIES in Q2 2023?"
+"How many orders with discounts were placed for BACKPACKS HYDRATION PACKS in May 2024?"
+"Show the average discount percentage for TENTS & SHELTERS SHELTERS & TARPS in 2023."
+"What's the average time to fulfillment for SLEEPING GEAR HAMMOCKS in Q3 2023?"
+"How many orders were placed for CLIMBING GEAR HARNESSES in May 2024?"
+"What's the total revenue for BOULDERING & TRAINING CLIMBING SHOES in 2023?"
+"Show the average order value for MOUNTAINEERING ICE AXES in Q4 2023."
+"How many orders were canceled for CLIMBING GEAR HELMETS in January 2024?"
+"What's the average shipping cost for BOULDERING & TRAINING CHALK & CHALK BAGS in Q1 2024?"
+"How many orders were returned for MOUNTAINEERING CRAMPONS in 2023?"
+"What's the total revenue for CLIMBING GEAR CARABINERS & QUICKDRAWS in Q3 2023?"
+"How many orders with discounts were placed for BOULDERING & TRAINING TRAINING EQUIPMENT in May 2024?"
+"Show the average discount percentage for MOUNTAINEERING MOUNTAINEERING BOOTS in 2023."
+"What's the average time to fulfillment for CLIMBING GEAR ROPES & SLINGS in Q2 2023?"
+"How many orders were placed for PADDLING KAYAKS in April 2024?"
+"What's the total revenue for SURFING SURFBOARDS in 2023?"
+"Show the average order value for FISHING RODS & REELS in Q4 2023."
+"How many orders were canceled for PADDLING CANOES in February 2024?"
+"What's the average shipping cost for SURFING WETSUITS in Q1 2024?"
+"How many orders were returned for FISHING TACKLE in 2023?"
+"What's the total revenue for PADDLING PADDLES in Q2 2023?"
+"How many orders with discounts were placed for SURFING RASH GUARDS in May 2024?"
+"Show the average discount percentage for FISHING WADERS in 2023."
+"What's the average time to fulfillment for PADDLING SAFETY GEAR in Q3 2023?"
+"How many orders were placed for SKIING SKIS in January 2024?"
+"What's the total revenue for SNOWBOARDING SNOWBOARDS in 2023?"
+"Show the average order value for SNOWSHOEING SNOWSHOES in Q4 2023."
+"How many orders were canceled for SKIING SKI BOOTS in March 2024?"
+"What's the average shipping cost for SNOWBOARDING SNOWBOARD BOOTS in Q1 2024?"
+"How many orders were returned for SNOWSHOEING POLES in 2023?"
+"What's the total revenue for SKIING SKI POLES in Q2 2023?"
+"How many orders with discounts were placed for SNOWBOARDING HELMETS in May 2024?"
+"Show the average discount percentage for SNOWSHOEING ACCESSORIES in 2023."
+"What's the average time to fulfillment for SKIING SKI BINDINGS in Q3 2023?"
+"How many orders were placed for LUGGAGE & BAGS TRAVEL BACKPACKS in May 2024?"
+"What's the total revenue for TRAVEL ACCESSORIES TRAVEL PILLOWS in 2023?"
+"Show the average order value for OTHER OTHER in Q4 2023."
+"How many orders were canceled for LUGGAGE & BAGS DUFFEL BAGS in April 2024?"
+"What's the average shipping cost for TRAVEL ACCESSORIES EYE MASKS in Q1 2024?"
+"How many orders were returned for OTHER OTHER in 2023?"
+"What's the total revenue for LUGGAGE & BAGS CARRY-ONS in Q3 2023?"
+"How many orders with discounts were placed for TRAVEL ACCESSORIES PACKING ORGANIZERS in May 2024?"
+"Show the average discount percentage for OTHER OTHER in 2023."
+"What's the average time to fulfillment for LUGGAGE & BAGS TRAVEL ACCESSORIES in Q2 2023?"
+"How many orders were placed for APPAREL in Q1 2024?"
+"What's the total revenue for FOOTWEAR in 2023?"
+"Show the average order value for CAMPING & HIKING in Q4 2023."
+"How many orders were canceled for CLIMBING in January 2024?"
+"What's the average shipping cost for WATER SPORTS in Q2 2023?"
+"How many orders were returned for WINTER SPORTS in 2023?"
+"What's the total revenue for TRAVEL in Q3 2023?"
+"How many orders with discounts were placed for APPAREL in May 2024?"
+"Show the average discount percentage for FOOTWEAR in 2023."
+"What's the average time to fulfillment for CAMPING & HIKING in Q4 2023?"
+"How many orders were placed in NORTH AMERICA in January 2024?"
+"What's the total revenue for EUROPE in 2023?"
+"Show the average order value for ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled in AFRICA in February 2024?"
+"What's the average shipping cost for MIDDLE EAST in Q2 2023?"
+"How many orders were returned in SOUTH AMERICA in 2023?"
+"What's the total revenue for NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed in EUROPE in May 2024?"
+"Show the average discount percentage for ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for AFRICA in Q4 2023?"
+"How many orders were placed in the MIDDLE EAST in Q1 2024?"
+"What's the total revenue for SOUTH AMERICA in 2023?"
+"How many orders were placed for MEN'S CLOTHING, JACKETS & VESTS in May 2024?"
+"What is the total revenue for WOMEN'S CLOTHING, JACKETS & VESTS in Q1 2023?"
+"Show the average order value for CHILDREN'S CLOTHING, JACKETS & VESTS in 2023."
+"How many orders were canceled for MEN'S CLOTHING, SHIRTS in January 2024?"
+"What's the average shipping cost for WOMEN'S CLOTHING, TOPS in Q2 2023?"
+"How many orders were returned for CHILDREN'S CLOTHING, PANTS & SHORTS in 2024?"
+"What's the total revenue for MEN'S CLOTHING, UNDERWEAR & BASE LAYERS in 2023?"
+"How many orders with discounts were placed for WOMEN'S CLOTHING, UNDERWEAR & BASE LAYERS in May 2024?"
+"Show the average discount percentage for CHILDREN'S CLOTHING, OTHER in 2023."
+"What's the average time to fulfillment for MEN'S CLOTHING, PANTS & SHORTS in Q3 2023?"
+"How many orders were placed for MEN'S FOOTWEAR, HIKING BOOTS in February 2024?"
+"What's the total revenue for WOMEN'S FOOTWEAR, TRAIL SHOES in 2023?"
+"Show the average order value for CHILDREN'S FOOTWEAR, SANDALS in Q4 2023."
+"How many orders were canceled for MEN'S FOOTWEAR, WINTER BOOTS in January 2024?"
+"What's the average shipping cost for WOMEN'S FOOTWEAR, OTHER in Q1 2024?"
+"How many orders were returned for CHILDREN'S FOOTWEAR, HIKING BOOTS in 2023?"
+"What's the total revenue for MEN'S FOOTWEAR, TRAIL SHOES in Q3 2023?"
+"How many orders with discounts were placed for WOMEN'S FOOTWEAR, TRAIL SHOES in May 2024?"
+"Show the average discount percentage for CHILDREN'S FOOTWEAR, WINTER BOOTS in 2023."
+"What's the average time to fulfillment for MEN'S FOOTWEAR, OTHER in Q2 2023?"
+"How many orders were placed for TENTS & SHELTERS, BACKPACKING TENTS in March 2024?"
+"What is the total revenue for SLEEPING GEAR, SLEEPING BAGS in 2023?"
+"Show the average order value for COOKING GEAR, STOVES in Q4 2023."
+"How many orders were canceled for BACKPACKS, DAYPACKS in April 2024?"
+"What's the average shipping cost for TENTS & SHELTERS, FAMILY CAMPING TENTS in Q1 2023?"
+"How many orders were returned for SLEEPING GEAR, SLEEPING PADS in 2023?"
+"What's the total revenue for COOKING GEAR, UTENSILS & ACCESSORIES in Q2 2023?"
+"How many orders with discounts were placed for BACKPACKS, HYDRATION PACKS in May 2024?"
+"Show the average discount percentage for TENTS & SHELTERS, SHELTERS & TARPS in 2023."
+"What's the average time to fulfillment for SLEEPING GEAR, HAMMOCKS in Q3 2023?"
+"How many orders were placed for CLIMBING GEAR, HARNESSES in May 2024?"
+"What's the total revenue for BOULDERING & TRAINING, CLIMBING SHOES in 2023?"
+"Show the average order value for MOUNTAINEERING, ICE AXES in Q4 2023."
+"How many orders were canceled for CLIMBING GEAR, HELMETS in January 2024?"
+"What's the average shipping cost for BOULDERING & TRAINING, CHALK & CHALK BAGS in Q1 2024?"
+"How many orders were returned for MOUNTAINEERING, CRAMPONS in 2023?"
+"What's the total revenue for CLIMBING GEAR, CARABINERS & QUICKDRAWS in Q3 2023?"
+"How many orders with discounts were placed for BOULDERING & TRAINING, TRAINING EQUIPMENT in May 2024?"
+"Show the average discount percentage for MOUNTAINEERING, MOUNTAINEERING BOOTS in 2023."
+"What's the average time to fulfillment for CLIMBING GEAR, ROPES & SLINGS in Q2 2023?"
+"How many orders were placed for PADDLING, KAYAKS in April 2024?"
+"What's the total revenue for SURFING, SURFBOARDS in 2023?"
+"Show the average order value for FISHING, RODS & REELS in Q4 2023."
+"How many orders were canceled for PADDLING, CANOES in February 2024?"
+"What's the average shipping cost for SURFING, WETSUITS in Q1 2024?"
+"How many orders were returned for FISHING, TACKLE in 2023?"
+"What's the total revenue for PADDLING, PADDLES in Q2 2023?"
+"How many orders with discounts were placed for SURFING, RASH GUARDS in May 2024?"
+"Show the average discount percentage for FISHING, WADERS in 2023."
+"What's the average time to fulfillment for PADDLING, SAFETY GEAR in Q3 2023?"
+"How many orders were placed for SKIING, SKIS in January 2024?"
+"What's the total revenue for SNOWBOARDING, SNOWBOARDS in 2023?"
+"Show the average order value for SNOWSHOEING, SNOWSHOES in Q4 2023."
+"How many orders were canceled for SKIING, SKI BOOTS in March 2024?"
+"What's the average shipping cost for SNOWBOARDING, SNOWBOARD BOOTS in Q1 2024?"
+"How many orders were returned for SNOWSHOEING, POLES in 2023?"
+"What's the total revenue for SKIING, SKI POLES in Q2 2023?"
+"How many orders with discounts were placed for SNOWBOARDING, HELMETS in May 2024?"
+"Show the average discount percentage for SNOWSHOEING, ACCESSORIES in 2023."
+"What's the average time to fulfillment for SKIING, SKI BINDINGS in Q3 2023?"
+"How many orders were placed for LUGGAGE & BAGS, TRAVEL BACKPACKS in May 2024?"
+"What's the total revenue for TRAVEL ACCESSORIES, TRAVEL PILLOWS in 2023?"
+"Show the average order value for LUGGAGE & BAGS, DUFFEL BAGS in Q4 2023."
+"How many orders were canceled for LUGGAGE & BAGS, CARRY-ONS in April 2024?"
+"What's the average shipping cost for TRAVEL ACCESSORIES, EYE MASKS in Q1 2024?"
+"How many orders were returned for LUGGAGE & BAGS, TRAVEL ACCESSORIES in 2023?"
+"What's the total revenue for LUGGAGE & BAGS, OTHER in Q3 2023?"
+"How many orders with discounts were placed for TRAVEL ACCESSORIES, PACKING ORGANIZERS in May 2024?"
+"Show the average discount percentage for TRAVEL ACCESSORIES, SECURITY in 2023."
+"What's the average time to fulfillment for TRAVEL ACCESSORIES, OTHER in Q2 2023?"
+"How many orders were placed for APPAREL, MEN'S CLOTHING in Q1 2024?"
+"What's the total revenue for FOOTWEAR, MEN'S FOOTWEAR in 2023?"
+"Show the average order value for CAMPING & HIKING, SLEEPING GEAR in Q4 2023."
+"How many orders were canceled for CLIMBING, CLIMBING GEAR in January 2024?"
+"What's the average shipping cost for WATER SPORTS, PADDLING in Q2 2023?"
+"How many orders were returned for WINTER SPORTS, SKIING in 2023?"
+"What's the total revenue for TRAVEL, LUGGAGE & BAGS in Q3 2023?"
+"How many orders with discounts were placed for APPAREL, WOMEN'S CLOTHING in May 2024?"
+"Show the average discount percentage for FOOTWEAR, WOMEN'S FOOTWEAR in 2023."
+"What's the average time to fulfillment for CAMPING & HIKING, BACKPACKS in Q4 2023?"
+"How many orders were placed for MEN'S CLOTHING, JACKETS & VESTS in NORTH AMERICA in January 2024?"
+"What's the total revenue for WOMEN'S CLOTHING, TOPS in EUROPE in 2023?"
+"Show the average order value for CHILDREN'S CLOTHING, PANTS & SHORTS in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for MEN'S CLOTHING, UNDERWEAR & BASE LAYERS in AFRICA in February 2024?"
+"What's the average shipping cost for WOMEN'S CLOTHING, OTHER in MIDDLE EAST in Q2 2023?"
+"How many orders were returned for CHILDREN'S CLOTHING, JACKETS & VESTS in SOUTH AMERICA in 2023?"
+"What's the total revenue for MEN'S FOOTWEAR, HIKING BOOTS in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for WOMEN'S FOOTWEAR, TRAIL SHOES in EUROPE in May 2024?"
+"Show the average discount percentage for CHILDREN'S FOOTWEAR, SANDALS in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for MEN'S FOOTWEAR, WINTER BOOTS in AFRICA in Q4 2023?"
+"How many orders were placed for TENTS & SHELTERS, BACKPACKING TENTS in NORTH AMERICA in Q1 2024?"
+"What is the total revenue for SLEEPING GEAR, SLEEPING BAGS in EUROPE in 2023?"
+"Show the average order value for COOKING GEAR, STOVES in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for BACKPACKS, DAYPACKS in AFRICA in April 2024?"
+"What's the average shipping cost for TENTS & SHELTERS, FAMILY CAMPING TENTS in MIDDLE EAST in Q1 2024?"
+"How many orders were returned for SLEEPING GEAR, SLEEPING PADS in SOUTH AMERICA in 2023?"
+"What's the total revenue for COOKING GEAR, UTENSILS & ACCESSORIES in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for BACKPACKS, HYDRATION PACKS in EUROPE in May 2024?"
+"Show the average discount percentage for TENTS & SHELTERS, SHELTERS & TARPS in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for SLEEPING GEAR, HAMMOCKS in AFRICA in Q4 2023?"
+"How many orders were placed for CLIMBING GEAR, HARNESSES in NORTH AMERICA in Q2 2024?"
+"What's the total revenue for BOULDERING & TRAINING, CLIMBING SHOES in EUROPE in 2023?"
+"Show the average order value for MOUNTAINEERING, ICE AXES in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for CLIMBING GEAR, HELMETS in AFRICA in January 2024?"
+"What's the average shipping cost for BOULDERING & TRAINING, CHALK & CHALK BAGS in MIDDLE EAST in Q1 2024?"
+"How many orders were returned for MOUNTAINEERING, CRAMPONS in SOUTH AMERICA in 2023?"
+"What's the total revenue for CLIMBING GEAR, CARABINERS & QUICKDRAWS in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for BOULDERING & TRAINING, TRAINING EQUIPMENT in EUROPE in May 2024?"
+"Show the average discount percentage for MOUNTAINEERING, MOUNTAINEERING BOOTS in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for CLIMBING GEAR, ROPES & SLINGS in AFRICA in Q4 2023?"
+"How many orders were placed for PADDLING, KAYAKS in NORTH AMERICA in Q2 2024?"
+"What's the total revenue for SURFING, SURFBOARDS in EUROPE in 2023?"
+"Show the average order value for FISHING, RODS & REELS in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for PADDLING, CANOES in AFRICA in January 2024?"
+"What's the average shipping cost for SURFING, WETSUITS in MIDDLE EAST in Q1 2024?"
+"How many orders were returned for FISHING, TACKLE in SOUTH AMERICA in 2023?"
+"What's the total revenue for PADDLING, PADDLES in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for SURFING, RASH GUARDS in EUROPE in May 2024?"
+"Show the average discount percentage for FISHING, WADERS in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for PADDLING, SAFETY GEAR in AFRICA in Q4 2023?"
+"How many orders were placed for SKIING, SKIS in NORTH AMERICA in Q1 2024?"
+"What's the total revenue for SNOWBOARDING, SNOWBOARDS in EUROPE in 2023?"
+"Show the average order value for SNOWSHOEING, SNOWSHOES in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for SKIING, SKI BOOTS in AFRICA in March 2024?"
+"What's the average shipping cost for SNOWBOARDING, SNOWBOARD BOOTS in MIDDLE EAST in Q1 2024?"
+"How many orders were returned for SNOWSHOEING, POLES in SOUTH AMERICA in 2023?"
+"What's the total revenue for SKIING, SKI POLES in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for SNOWBOARDING, HELMETS in EUROPE in May 2024?"
+"Show the average discount percentage for SNOWSHOEING, ACCESSORIES in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for SKIING, SKI BINDINGS in AFRICA in Q4 2023?"
+"How many orders were placed for LUGGAGE & BAGS, TRAVEL BACKPACKS in NORTH AMERICA in Q1 2024?"
+"What's the total revenue for TRAVEL ACCESSORIES, TRAVEL PILLOWS in EUROPE in 2023?"
+"Show the average order value for LUGGAGE & BAGS, DUFFEL BAGS in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for LUGGAGE & BAGS, CARRY-ONS in AFRICA in April 2024?"
+"What's the average shipping cost for TRAVEL ACCESSORIES, EYE MASKS in MIDDLE EAST in Q1 2024?"
+"How many orders were returned for LUGGAGE & BAGS, TRAVEL ACCESSORIES in SOUTH AMERICA in 2023?"
+"What's the total revenue for LUGGAGE & BAGS, OTHER in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for TRAVEL ACCESSORIES, PACKING ORGANIZERS in EUROPE in May 2024?"
+"Show the average discount percentage for TRAVEL ACCESSORIES, SECURITY in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for TRAVEL ACCESSORIES, OTHER in AFRICA in Q4 2023?"
+"How many orders were placed for APPAREL, MEN'S CLOTHING in NORTH AMERICA in Q1 2024?"
+"What's the total revenue for FOOTWEAR, MEN'S FOOTWEAR in EUROPE in 2023?"
+"Show the average order value for CAMPING & HIKING, SLEEPING GEAR in ASIA-PACIFIC in Q4 2023."
+"How many orders were canceled for CLIMBING, CLIMBING GEAR in AFRICA in January 2024?"
+"What's the average shipping cost for WATER SPORTS, PADDLING in MIDDLE EAST in Q2 2023?"
+"How many orders were returned for WINTER SPORTS, SKIING in SOUTH AMERICA in 2023?"
+"What's the total revenue for TRAVEL, LUGGAGE & BAGS in NORTH AMERICA in Q3 2023?"
+"How many orders with discounts were placed for APPAREL, WOMEN'S CLOTHING in EUROPE in May 2024?"
+"Show the average discount percentage for FOOTWEAR, WOMEN'S FOOTWEAR in ASIA-PACIFIC in 2023."
+"What's the average time to fulfillment for CAMPING & HIKING, BACKPACKS in AFRICA in Q4 2023?"

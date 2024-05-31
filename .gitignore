@@ -400,3 +400,4 @@ FodyWeavers.xsd
 spans.json
 .files/
 **/.promptflow
+src/generate_data/*_batch_*.jsonl

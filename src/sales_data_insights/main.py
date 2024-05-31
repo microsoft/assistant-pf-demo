@@ -87,6 +87,11 @@ class SalesDataInsights:
         if query.startswith("```sql") and query.endswith("```"):
             query = query[6:-3].strip()
 
+        if query.lower().startswith("error"):
+            end = time.time()
+            execution_time = round(end - start, 2)
+            return {"data": None, "error": query, "query": query, "execution_time": 0}
+        
         try:
             data = self.query_db(query)
         except Exception as e:

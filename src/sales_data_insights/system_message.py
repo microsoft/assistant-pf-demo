@@ -90,6 +90,14 @@ SELECT SUM(Number_of_Orders) FROM order_data WHERE main_category = "APPAREL" AND
 
 Here are the valid values for the Region:
 [{"Region":"NORTH AMERICA"},{"Region":"EUROPE"},{"Region":"ASIA-PACIFIC"},{"Region":"AFRICA"},{"Region":"MIDDLE EAST"},{"Region":"SOUTH AMERICA"}]
+
+If the user is asking you for data that is not in the table, you should answer with "Error: <description of the error>", for instance:
+
+query for the customer satisfaction rate in 2024 by month
+    Error: Customer satisfaction data is not available in the table 
+
+query for sales by in 2024 by shipping type
+    Error: Shipping type data is not available in the table
 """
 
 system_message_short = """
