@@ -151,6 +151,7 @@ async def run_conversation(message: cl.Message):
             
             await msg.update()
         await msg.stream_token("🏁")
+        await msg.update()
         
         chat_history.append({"inputs": {"question": message.content}, 
                             "outputs": {"answer": response}})
