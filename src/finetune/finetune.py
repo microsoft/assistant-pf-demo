@@ -1,4 +1,4 @@
-from sales_data_insights.system_message import system_message
+from sales_data_insights.system_message import system_message, system_message_compact
 import pandas as pd
 import os, pathlib, time
 from openai import AzureOpenAI
@@ -26,7 +26,7 @@ def create_datasets(data_set, test_size=100, validation_size=40):
         formatted_df.append(
             {
                 "messages": [
-                    {"role": "system", "content": system_message},
+                    {"role": "system", "content": system_message_compact},
                     {"role": "user", "content": row["question"]},
                     {"role": "assistant", "content": row["ground_truth_query"]}
                 ]
@@ -90,8 +90,9 @@ def submit(client, model, data_set, test_set, train_rows, validation_rows):
     # The fine-tuning job will take some time to start and complete.
 
     print("Job ID:", response.id)
-    print("Status:", response.id)
+    print("Status:", response.status)
     print(response.model_dump_json(indent=2))
+    return response.id
 
 def monitor_job(client, job_id):
     job = client.fine_tuning.jobs.retrieve(job_id)
@@ -111,7 +112,6 @@ def monitor_job(client, job_id):
         for event in events:            
             print(event)
         
-
         if job.status.lower() == "completed":
             print("Job completed")
             break

@@ -190,3 +190,28 @@ SELECT SUM(Number_of_Orders) FROM order_data WHERE main_category = "APPAREL" AND
 Here are the valid values for the Region:
 [{"Region":"NORTH AMERICA"},{"Region":"EUROPE"},{"Region":"ASIA-PACIFIC"},{"Region":"AFRICA"},{"Region":"MIDDLE EAST"},{"Region":"SOUTH AMERICA"}]
 """
+
+system_message_compact = """
+### SQLite table with properties:
+    #
+    #  Number_of_Orders INTEGER "the number of orders processed"
+    #  Sum_of_Order_Value_USD REAL "the total value of the orders processed in USD"
+    #  Sum_of_Number_of_Items REAL "the sum of items in the orders processed"
+    #  Number_of_Orders_with_Discount INTEGER "the number of orders that received a discount"
+    #  Sum_of_Discount_Percentage REAL "the sum of discount percentage -- useful to calculate average discounts given"
+    #  Sum_of_Shipping_Cost_USD REAL "the sum of shipping cost for the processed orders"
+    #  Number_of_Orders_Returned INTEGER "the number of orders returned by the customers"
+    #  Number_of_Orders_Cancelled INTEGER "the number or orders cancelled by the customers before they were sent out"
+    #  Sum_of_Time_to_Fulfillment REAL "the sum of time to fulfillment"
+    #  Number_of_Orders_Repeat_Customers INTEGER "number of orders that were placed by repeat customers"
+    #  Year INTEGER
+    #  Month INTEGER
+    #  Day INTEGER
+    #  Date TIMESTAMP
+    #  Day_of_Week INTEGER in 0 based format, Monday is 0, Tuesday is 1, etc.
+    #  main_category TEXT
+    #  sub_category TEXT
+    #  product_type TEXT
+    #  Region TEXT
+    #
+"""

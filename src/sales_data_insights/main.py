@@ -1,16 +1,17 @@
 import os
 import pathlib
 import sqlite3
-from openai import AzureOpenAI
+from openai import AsyncAzureOpenAI
 import pandas as pd
 from promptflow.tracing import trace
 import json
-from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.aio import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
-from .system_message import system_message, system_message_short
-
+from sales_data_insights.system_message import system_message, system_message_short
+import asyncio
 from typing import TypedDict
+
 class Result(TypedDict):
     data: dict
     error: str
@@ -31,12 +32,8 @@ class SalesDataInsights:
             pathlib.Path(__file__).parent.resolve(), "data", "order_data.db"
         )
         self.model_type = model_type
-
-    @trace
-    def __call__(self, *, question: str, **kwargs) -> Result:
-
         if self.model_type == "azure_openai":
-            client = AzureOpenAI(
+            self.client = AsyncAzureOpenAI(
                                 api_key = os.getenv("OPENAI_API_KEY"),
                                 azure_endpoint = os.getenv("OPENAI_API_BASE"),
                                 api_version = os.getenv("OPENAI_API_VERSION")
@@ -46,10 +43,14 @@ class SalesDataInsights:
             key = os.getenv(f"AZUREAI_{self.model_type.upper()}_KEY")
             print("endpoint", endpoint)
             print("key", key)
-            client = ChatCompletionsClient(
+            self.client = ChatCompletionsClient(
                 endpoint=endpoint,
                 credential=AzureKeyCredential(key),
             )
+
+    @trace
+    async def __call__(self, *, question: str, **kwargs) -> Result:
+
         # Code to get time to execute the function
         import time
         start = time.time()
@@ -62,23 +63,23 @@ class SalesDataInsights:
         
             messages.append({"role": "user", "content": f"{question}\nGive only the query in SQL format"})
 
-            response = client.chat.completions.create(
+            response = await self.client.chat.completions.create(
                 model= os.getenv("OPENAI_ANALYST_CHAT_MODEL"),
                 messages=messages, 
             )
         elif self.model_type.lower() == "phi3_mini":
             combined_message = UserMessage(content=f"{system_message_short}\n\n{question}\nGive only the query in SQL format")
             messages = [combined_message]
-            response = client.create(messages=messages, temperature=0, max_tokens=1000)
+            response = await self.client.create(messages=messages, temperature=0, max_tokens=1000)
         elif self.model_type.lower() == "phi3_medium":
             combined_message = UserMessage(content=f"{system_message}\n\n{question}\nGive only the query in SQL format")
             messages = [combined_message]
-            response = client.create(messages=messages, temperature=0, max_tokens=1000)
+            response = await self.client.create(messages=messages, temperature=0, max_tokens=1000)
         else:
             system_message_obj = SystemMessage(content=system_message)
             user_message_obj = UserMessage(content=f"{question}\nGive only the query in SQL format")
             messages = [system_message_obj, user_message_obj]
-            response = client.create(messages=messages, temperature=0, max_tokens=1000)
+            response = await self.client.create(messages=messages, temperature=0, max_tokens=1000)
 
         message = response.choices[0].message
 
@@ -112,15 +113,29 @@ class SalesDataInsights:
         df = pd.read_sql(query, sql_connection)
 
         return df.to_dict(orient='records')
- 
-if __name__ == "__main__":
 
+    async def close(self):
+        await self.client.close()
+    
+    async def __aenter__(self):
+        print("entering")
+        return self
+    
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        print("exiting")
+        await self.close()
+ 
+async def main():
     models = ["azure_openai", "phi3_mini", "phi3_medium", "cohere_chat", "mistral_small", "mistral_large", "llama3"]
+
     for model in models:
         print("="*50)
         print("model", model)
-        sdi = SalesDataInsights(model_type=model)
-        result = sdi(question="for 2024 Query the average number of orders per day grouped by Month")
-        result["data"] = None
+        async with SalesDataInsights(model_type=model) as sdi:
+            result = await sdi(question="for 2024 Query the average number of orders per day grouped by Month")
+            result["data"] = None
         print("execution_time:", result['execution_time'])
         print("query", result['query'])
+
+if __name__ == "__main__":
+    asyncio.run(main())

@@ -13,10 +13,28 @@ from opentelemetry import trace as otel_trace
 from opentelemetry import context as otel_context
 from promptflow.contracts.multimedia import Image
 from threading import Thread
+import asyncio, inspect
+
+### some stuff to be able to run async code in a sync way
+### will remove when moving this assistant to async
+import threading
+
+_loop = asyncio.new_event_loop()
+
+_thr = threading.Thread(target=_loop.run_forever, name="Async Runner",
+                        daemon=True)
+
+# This will block the calling thread until the coroutine is finished.
+# Any exception that occurs in the coroutine is raised in the caller
+def run_async(coro):  # coro is a couroutine, see example
+    if not _thr.is_alive():
+        _thr.start()
+    future = asyncio.run_coroutine_threadsafe(coro, _loop)
+    return future.result()
+### end stuff 
 
 tracer = otel_trace.get_tracer(__name__)
 fun_emojis = ["🏃‍♂️", "🏃‍♀️", "🚶‍♂️", "🚶‍♀️", "🚶", "🏃", "🚶‍♂️", "🚶‍♀️", "🏃‍♂️", "🏃‍♀️"]
-
 class AssistantsAPIGlue:
     def __init__(
         self,
@@ -173,9 +191,13 @@ class AssistantsAPIGlue:
 
                     if tool_call.type == "function":
                         tool_func = self.tools[tool_call.function.name]
+
                         tool_call_output = tool_func(
                             **json.loads(tool_call.function.arguments)
                         )
+                        
+                        if inspect.iscoroutine(tool_call_output):
+                            tool_call_output = run_async(tool_call_output)
 
                         tool_call_outputs.append(
                             {
