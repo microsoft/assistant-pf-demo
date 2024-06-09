@@ -1,4 +1,4 @@
-name: assistant
+name: assistant2
 channels:
   - anaconda
   - pytorch
@@ -22,5 +22,6 @@ dependencies:
     - ipython
     - pandas 
     - numpy
+    - azure-monitor-query
     - azure-monitor-opentelemetry-exporter --pre
     - git+https://github.com/azure/azure-sdk-for-python.git@84ad0b5b6ed5564e3c3baae9f6de32e00aa1e76b#subdirectory=sdk/ai/azure-ai-inference
