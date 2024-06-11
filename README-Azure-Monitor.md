@@ -209,15 +209,18 @@ The above query will return the input and output of spans 50% of the traces (1 o
 To run with different evaluator, you can pass the path to the promtpy file as an argument to the script. **As you do that, make sure to also change the timestamp file to a new one to start from scratch.** Here is the usage of the script:
 
 ```bash
-usage: eval_azure_monitor.py [-h] [--kql-file KQL_FILE] [--timestamp-file TIMESTAMP_FILE] [--evaluator-path EVALUATOR_PATH]
+usage: eval_azure_monitor.py [-h] [--kql-file KQL_FILE] [--timestamp-file TIMESTAMP_FILE] [--evaluator-path EVALUATOR_PATH] [--dry-run]
 
 Evaluate Azure Monitor data
 
 options:
-  -h, --help                            show this help message and exit
-  --kql-file KQL_FILE                   KQL query file
-  --timestamp-file TIMESTAMP_FILE       Timestamp file
-  --evaluator-path EVALUATOR_PATH       Evaluator path
+  -h, --help            show this help message and exit
+  --kql-file KQL_FILE   KQL query file. Default is sales_data_insights.kql
+  --timestamp-file TIMESTAMP_FILE
+                        Timestamp file. Default is in_domain_evaluator_time_stamp.txt
+  --evaluator-path EVALUATOR_PATH
+                        Evaluator path. Currently only prompty is supported. Default is in_domain_evaluator.prompty
+  --dry-run             When set, the script will not write to App Insights. Default is False.
 ```
 
 To view the evaluation results in a dashboard, you can use the following query:

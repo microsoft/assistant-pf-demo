@@ -9,7 +9,7 @@
 
 import asyncio
 import pathlib
-import os
+import os, json
 import pandas as pd
 from datetime import datetime, timezone, timedelta
 from time import time_ns
@@ -83,7 +83,7 @@ def configure_logging(connection_string):
     provider.add_log_record_processor(SimpleLogRecordProcessor(ConsoleLogExporter()))
     provider.add_log_record_processor(SimpleLogRecordProcessor(AzureMonitorLogExporter(connection_string=connection_string)))
 
-def log_evaluation_event(name: str, scores: dict, meta_data: dict, message: str) -> None:
+def log_evaluation_event(name: str, scores: dict, meta_data: dict, message: str, dry_run=False) -> None:
     trace_id = int(meta_data["trace_id"], 16)
     span_id = int(meta_data["span_id"], 16)
     trace_flags = TraceFlags(TraceFlags.SAMPLED)
@@ -103,7 +103,12 @@ def log_evaluation_event(name: str, scores: dict, meta_data: dict, message: str)
         body=message,
         attributes=attributes
     )
-    _logs.get_logger(__name__).emit(event)
+
+    if dry_run:
+        event_dict = json.loads(event.to_json()) 
+        print(json.dumps(event_dict, indent=2))
+    else:
+        _logs.get_logger(__name__).emit(event)
 
 async def execute_batch(prompty, batch):
     input_fields = prompty._get_input_signature().keys()
@@ -120,17 +125,18 @@ async def execute_batch(prompty, batch):
     logger.info(f"Executed batch of {len(batch)} records")
     return results, meta_data
 
-def log_batch(name, results, meta_data, timestamp_file):
+def log_batch(name, results, meta_data, timestamp_file, dry_run=False):
     for result, meta in zip(results, meta_data):
-        log_evaluation_event(name, result, meta, f"Evaluation results: {name}")
+        log_evaluation_event(name, result, meta, f"Evaluation results: {name}", dry_run=dry_run)
 
         # update the timestamp file
         last_timestamp = meta["time_stamp"]
         last_timestamp += timedelta(milliseconds=1) 
-        with open(timestamp_file, "w") as f:
-            f.write(last_timestamp.isoformat())
+        if not dry_run:
+            with open(timestamp_file, "w") as f:
+                f.write(last_timestamp.isoformat())
 
-async def evaluate_data(df, evaluator_path, timestamp_file):
+async def evaluate_data(df, evaluator_path, timestamp_file, dry_run=False):
     # load the evaluator
     model_config = AzureOpenAIModelConfiguration(
         azure_endpoint=os.getenv("OPENAI_API_BASE"),
@@ -155,9 +161,10 @@ async def evaluate_data(df, evaluator_path, timestamp_file):
         log_batch(name=prompty._name, 
                   results=results,
                   meta_data=meta_data, 
-                  timestamp_file=timestamp_file)
+                  timestamp_file=timestamp_file,
+                  dry_run=dry_run)
 
-async def main(kql_file, timestamp_file, log_analytics_workspace, app_insights_connection_string, evaluator_path):
+async def main(kql_file, timestamp_file, log_analytics_workspace, app_insights_connection_string, evaluator_path, dry_run=False):
     configure_logging(connection_string=app_insights_connection_string)
 
     last_timestamp = datetime(1970, 1, 1, tzinfo=timezone.utc)
@@ -177,7 +184,7 @@ async def main(kql_file, timestamp_file, log_analytics_workspace, app_insights_c
     logger.info(f"Query returned {len(df)} records.")
 
     # Evaluate the data and log the results
-    await evaluate_data(df, evaluator_path, timestamp_file)
+    await evaluate_data(df, evaluator_path, timestamp_file, dry_run=dry_run)
 
     
 if __name__ == "__main__":
@@ -192,9 +199,10 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     parser = argparse.ArgumentParser(description="Evaluate Azure Monitor data")
-    parser.add_argument("--kql-file", type=str, help="KQL query file")
-    parser.add_argument("--timestamp-file", type=str, help="Timestamp file")
-    parser.add_argument("--evaluator-path", type=str, help="Evaluator path")
+    parser.add_argument("--kql-file", type=str, help="KQL query file. Default is sales_data_insights.kql")
+    parser.add_argument("--timestamp-file", type=str, help="Timestamp file. Default is in_domain_evaluator_time_stamp.txt")
+    parser.add_argument("--evaluator-path", type=str, help="Evaluator path. Currently only prompty is supported. Default is in_domain_evaluator.prompty")
+    parser.add_argument("--dry-run", action="store_true", help="When set, the script will not write to App Insights. Default is False.")
     args = parser.parse_args()
 
     this_file = pathlib.Path(__file__).resolve()
@@ -204,7 +212,10 @@ if __name__ == "__main__":
         args.timestamp_file = this_file.parent / "azure_monitor" / "in_domain_evaluator_time_stamp.txt"
     if not args.evaluator_path:
         args.evaluator_path = this_file.parent.parent / "custom_evaluators" / "in_domain_evaluator.prompty"
-        
+    
+    if args.dry_run:
+        print("\033[31m" + "Dry run mode is enabled. No data will be written to App Insights or time_stamp file." + "\033[0m")
+    
     log_analytics_workspace = os.getenv("LOG_ANALYTICS_WORKSPACE_ID")
     app_insights_connection_string = os.getenv("APPLICATIONINSIGHTS_CONNECTION_STRING")
 
@@ -214,4 +225,4 @@ if __name__ == "__main__":
     print(f"Log Analytics Workspace: {log_analytics_workspace}")
     print(f"App Insights Key: {app_insights_connection_string}")
 
-    asyncio.run(main(args.kql_file, args.timestamp_file, log_analytics_workspace, app_insights_connection_string, args.evaluator_path))
+    asyncio.run(main(args.kql_file, args.timestamp_file, log_analytics_workspace, app_insights_connection_string, args.evaluator_path, args.dry_run))
