@@ -98,10 +98,11 @@ Your App Insights instance is backed by an Azure Log Analytics workspace, and yo
 
 1. go to https://dataexplorer.azure.com/ and add a connection:
 
-![](images/ade-1.png)
+<img src="images/ade-1.png"  width="600"/>
 
 Then add the URL for you App Insights instance like so:
-![](images/ade-2.png)
+
+<img src="images/ade-2.png"  width="400"/>
 
 Following this format:
 `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>`
