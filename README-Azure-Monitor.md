@@ -203,7 +203,7 @@ AppDependencies
 | order by time_stamp asc
 ```
 
-The above query will return the input and output of spans for 1 in 2 of the traces for the `SalesDataInsights` sub-flow along with the `trace_id`, `span_id` and `time_stamp` fields. The `trace_id` and `span_id` are used to write the evaluation results back to the App Insights instance as events under the respective span. The `time_stamp` is used to keep track of the last timestamp processed by the script, so subsequent exections won't process the same spans again.
+The above query will return the input and output of spans 50% of the traces (1 out of every 2) for the `SalesDataInsights` sub-flow along with the `trace_id`, `span_id` and `time_stamp` fields. The `trace_id` and `span_id` are used to write the evaluation results back to the App Insights instance as events under the respective span. The `time_stamp` is used to keep track of the last timestamp processed by the script, so subsequent exections won't process the same spans again.
 
 To run with different evaluator, you can pass the path to the promtpy file as an argument to the script. **As you do that, make sure to also change the timestamp file to a new one to start from scratch.** Here is the usage of the script:
 
