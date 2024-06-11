@@ -2,6 +2,7 @@
 
 This demo is set up to view your telemetry in Application Insights / Azure Monitor both to capture the Open Telementry traces as well as evaluation of those traces (both by humans and by automated evaluation).
 
+> Note: The way that LLM executions are captured in Open Telemetry, aka the semantic conventions, are still in development by the Open Telemetry community (see [here for the project that is tracking this](https://github.com/open-telemetry/community/blob/main/projects/llm-semconv.md)). The property names and structure used in this demo are based on the current best practices and are guaranteed to change as the OpenAI Semantic Conventions for LLMs are finalized.
 
 ### View traces in Application Insights
 
@@ -18,7 +19,7 @@ Which will give you a view like this:
 
 ### Building a Dashboard with Promptflow Telemetry
 
-> Note: You can access the telemetry data both through the Application Insights instance and the associated Log Analytics Workspace, albeit using different table and column names (see [here for details](https://learn.microsoft.com/en-us/azure/azure-monitor/app/convert-classic-resource#table-structure)). We are choosing access through the Log Analytics Workspace since it is recommended way for new projects and it allows Python acces to the data which we will be using to create automated evaluations.
+> Note: You can access the telemetry data both through the Application Insights instance and the associated Log Analytics Workspace, albeit using different table and column names (see [here for details](https://learn.microsoft.com/en-us/azure/azure-monitor/app/convert-classic-resource#table-structure)). We are choosing access through the Log Analytics Workspace since it is the recommended way for new projects and it allows Python access to the data which we will be using to create automated evaluations.
 
 To have the Telemetry from Promptflow and your app show up in and Azure Portal Dashboard or a Grafana Dashboard, you can follow these steps:
 
@@ -58,6 +59,8 @@ To manage your Azure Portal Dashboards, got to the Dashboard hub in the Azure Po
 
 Here are a few KQL queries that you can use to get started with building your own dashboards:
 
+> Note: As mentioned above, the property names and structure used in this demo are based on the current best practices and are guaranteed to change as the OpenAI Semantic Conventions for LLMs are finalized.
+
 - Average duration of OpenAI Chat calls by model/deployment name used:
 ```kql
 AppDependencies
@@ -94,7 +97,7 @@ AppDependencies
 ```
 
 ### Query the data in Azure Data Explorer
-Your App Insights instance is backed by an Azure Log Analytics workspace, and you can query the data from Azure Data Explorer (ADE) by follwing these steps:
+In addition to the Azure UX for the Azure Log Analytics workspace, and you can query the data from Azure Data Explorer (ADE) by follwing these steps:
 
 1. go to https://dataexplorer.azure.com/ and add a connection:
 
@@ -107,7 +110,7 @@ Then add the URL for you App Insights instance like so:
 Following this format:
 `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>`
 
-This will allow you to execute the same queries as above but in a more developer-friendly fronted. You can then take them back to Azure Monitor or Grafanat and pin them to a Dashboard.
+This will allow you to execute the same queries as above but in a more developer-friendly fronted. You can then take them back to Azure Monitor or Grafana and pin them to a Dashboard.
 
 In addition, you can pull data from App Insights to build datasets for validation and fine tuning. For instance, in our example the sub-flow that provides the sales data insights is called `SalesDataInsights`. That means that you will find traces with that name from which you can retrieve the input and output parameters with a query like this:
 
@@ -204,7 +207,7 @@ AppDependencies
 | order by time_stamp asc
 ```
 
-The above query will return the input and output of spans 50% of the traces (1 out of every 2) for the `SalesDataInsights` sub-flow along with the `trace_id`, `span_id` and `time_stamp` fields. The `trace_id` and `span_id` are used to write the evaluation results back to the App Insights instance as events under the respective span. The `time_stamp` is used to keep track of the last timestamp processed by the script, so subsequent exections won't process the same spans again.
+The above query will return the input and output of spans of 50% of the traces (1 out of every 2) for the `SalesDataInsights` sub-flow along with the `trace_id`, `span_id` and `time_stamp` fields. The `trace_id` and `span_id` are used to write the evaluation results back to the App Insights instance as events under the respective span. The `time_stamp` is used to keep track of the last timestamp processed by the script, so subsequent exections won't process the same spans again.
 
 To run with different evaluator, you can pass the path to the promtpy file as an argument to the script. **As you do that, make sure to also change the timestamp file to a new one to start from scratch.** Here is the usage of the script:
 
@@ -235,7 +238,7 @@ AppTraces
 | render columnchart 
 ```
 
-!()[images/log-analytics-2.png]
+![](images/log-analytics-2.png)
 (you might need to set the visualization to stacked column chart under "Chart Formatting" to get this view)
 
 Enjoy exploring your Promptflow telemetry!
