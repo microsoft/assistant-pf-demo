@@ -234,7 +234,7 @@ AppTraces
 | extend score = toint(Properties["gen_ai.evaluation.score"]) 
 | project score, OperationId, ParentId
 | join kind=innerunique AppDependencies on $left.OperationId == $right.OperationId and $left.ParentId == $right.Id
-| summarize low_score_count = countif(score <= 3), total_count = count() by bin(TimeGenerated, 1d)
+| summarize low_score_count = countif(score <= 3), high_score_count = countif(score > 3) by bin(TimeGenerated, 1d)
 | render columnchart 
 ```
 
