@@ -1,7 +1,11 @@
 from sales_data_insights.system_message import system_message
 import pandas as pd
-import os, pathlib, time
+import os, pathlib, time, json
 from openai import AzureOpenAI
+from azure.identity import DefaultAzureCredential
+import json
+import os
+import requests
 
 def create_datasets(data_set, test_size=100, validation_size=40):
     # Create a dataset from the training set
@@ -111,25 +115,76 @@ def monitor_job(client, job_id):
         for event in events:            
             print(event)
         
-
-        if job.status.lower() == "completed":
+        if job.status == "succeeded":
             print("Job completed")
-            break
+            print(job)
+            return job.fine_tuned_model
+        
         time.sleep(10)
+
+def deploy(fine_tuned_model):
+
+
+    credential = DefaultAzureCredential()    
+
+    subscription = os.getenv("FT_SUBSCRIPTION")  
+    resource_group = os.getenv("FT_RESOURCE_GROUP")
+    resource_name = os.getenv("FT_RESOURCE_NAME")
+    # resource_id = f"/subscriptions/{subscription}/resourceGroups/{resource_group}/providers/Microsoft.CognitiveServices/accounts/{resource_name}"
+    token = credential.get_token(f"https://management.azure.com/.default").token
+    model_deployment_name = fine_tuned_model # deployment name should be the same as the fine-tuned model name
+
+    # clean up the model name
+    # Resource name can only include alphanumeric characters, underscores and hyphens; Resource name only allows 2 to 64 characters.'
+    fine_tuned_model = fine_tuned_model.replace(".", "-")[0:64]
+
+    deploy_params = {'api-version': "2023-05-01"} 
+    deploy_headers = {'Authorization': 'Bearer {}'.format(token), 'Content-Type': 'application/json'}
+
+    deploy_data_obj = {
+        "sku": {"name": "standard", "capacity": 1}, 
+        "properties": {
+            "model": {
+                "format": "OpenAI",
+                "name": fine_tuned_model, #retrieve this value from the previous call, it will look like gpt-35-turbo-0613.ft-b044a9d3cf9c4228b5d393567f693b83
+                "version": "1"
+            }
+        }
+    }
+
+    deploy_data = json.dumps(deploy_data_obj)
+
+    request_url = f'https://management.azure.com/subscriptions/{subscription}/resourceGroups/{resource_group}/providers/Microsoft.CognitiveServices/accounts/{resource_name}/deployments/{model_deployment_name}'
+
+    print(f'Creating deployment: {model_deployment_name}')
+    print(json.dumps(deploy_data_obj, indent=2))
+
+    r = requests.put(request_url, params=deploy_params, headers=deploy_headers, data=deploy_data)
+
+    print(r)
+    print(r.reason)
+    print(r.json())
+
 
 def main(model, data_set, test_set, train_rows, validation_rows, monitor):
     client = AzureOpenAI(
-        azure_endpoint = os.getenv("OPENAI_API_BASE"), 
-        api_key=os.getenv("OPENAI_API_KEY"),  
+        azure_endpoint = os.getenv("FT_OPENAI_API_BASE"), 
+        api_key=os.getenv("FT_OPENAI_API_KEY"),  
         api_version="2024-05-01-preview"  # This API version or later is required to access seed/events/checkpoint capabilities
     )
- 
+    
     if not monitor:
         job_id = submit(client, model, data_set, test_set, train_rows, validation_rows)
     else:
-        job_id = monitor  
+        job_id = monitor
 
-    monitor_job(client, job_id)    
+    fine_tuned_model = monitor_job(client, job_id)  
+
+    print("Fine-tuned model:", fine_tuned_model)
+
+    # Deploy the fine-tuned model
+    deploy(fine_tuned_model)
+    
 
 
 if __name__ == '__main__':
@@ -144,5 +199,6 @@ if __name__ == '__main__':
     parser.add_argument("--train_rows", help="Number of rows to finetune on", default=100)
     parser.add_argument("--validation_rows", help="Number of rows to finetune on", default=100)
     parser.add_argument("--monitor", help="Don't start, just monitor the job")
+    parser.add_argument("--deploy", help="Don't, just deploy the model and test it")
     args = parser.parse_args()
     main(args.model, args.data_set, args.test_set, args.train_rows, args.validation_rows, args.monitor)
