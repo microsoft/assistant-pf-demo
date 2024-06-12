@@ -1,0 +1,13 @@
+AppDependencies
+| where Name == "call_promptflow"
+| extend inputs = parse_json(todynamic(tostring(Properties["inputs"])))
+| extend question = inputs["question"],
+         hash = hash(OperationId, 2)                            // select 1 in 2 traces
+| where hash==0
+| join kind = innerunique  AppDependencies on $left.OperationId == $right.OperationId 
+| where Name1 == "stream"
+| extend output = parse_json(todynamic(tostring(Properties1["output"])))
+| extend response =  output[array_length(output) - 1]
+| where response != ""
+| project question, response, trace_id = OperationId, span_id = Id, time_stamp = TimeGenerated
+| order by time_stamp asc
