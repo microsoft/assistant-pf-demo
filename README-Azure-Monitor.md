@@ -96,6 +96,17 @@ AppDependencies
 | render columnchart 
 ```
 
+- User votes over time:
+```kql
+AppTraces
+| where Properties["event.name"] == "gen_ai.evaluation.user_vote"
+| extend vote = toint(Properties["gen_ai.evaluation.vote"]) 
+| project vote, OperationId, ParentId
+| join kind=innerunique AppDependencies on $left.OperationId == $right.OperationId and $left.ParentId == $right.Id
+| summarize down = countif(vote == 0), up = countif(vote == 1) by bin(TimeGenerated, 1d)
+| render columnchart 
+```
+
 ### Query the data in Azure Data Explorer
 In addition to the Azure UX for the Azure Log Analytics workspace, and you can query the data from Azure Data Explorer (ADE) by follwing these steps:
 
