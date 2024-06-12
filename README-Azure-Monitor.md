@@ -107,6 +107,10 @@ AppTraces
 | render columnchart 
 ```
 
+Here an example of a Grafana dashboard with the above queries:
+
+![](images/grafana-1.png)
+
 ### Query the data in Azure Data Explorer
 In addition to the Azure UX for the Azure Log Analytics workspace, and you can query the data from Azure Data Explorer (ADE) by follwing these steps:
 
