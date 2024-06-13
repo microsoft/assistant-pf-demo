@@ -61,7 +61,18 @@ Here are a few KQL queries that you can use to get started with building your ow
 
 > Note: As mentioned above, the property names and structure used in this demo are based on the current best practices and are guaranteed to change as the OpenAI Semantic Conventions for LLMs are finalized.
 
-- Average duration of OpenAI Chat calls by model/deployment name used:
+- Average duration of OpenAI Chat calls model and time:
+```kql
+AppDependencies
+| where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat")
+| extend output = parse_json(todynamic(tostring(Properties["output"])))
+| extend duration_sec = DurationMs / 1000, model = tostring(output.model)
+| summarize avg(duration_sec) by bin(TimeGenerated, 1h), model
+| order by TimeGenerated asc 
+| render timechart 
+```
+
+- Average duration of OpenAI Chat calls by model:
 ```kql
 AppDependencies
 | where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat")
@@ -78,7 +89,7 @@ AppDependencies
     total_tokens = toint(Properties["llm.usage.total_tokens"]),
     prompt_tokens = toint(Properties["llm.usage.prompt_tokens"]),
     completion_tokens = toint(Properties["llm.usage.completion_tokens"])
-| summarize sum(total_tokens), sum(prompt_tokens), sum(completion_tokens) by bin(TimeGenerated, 5m) 
+| summarize sum(total_tokens), sum(prompt_tokens), sum(completion_tokens) by bin(TimeGenerated, 1d) 
 | render timechart
 ```
 
@@ -96,6 +107,7 @@ AppDependencies
 | render columnchart 
 ```
 
+
 - User votes over time:
 ```kql
 AppTraces
@@ -103,8 +115,19 @@ AppTraces
 | extend vote = toint(Properties["gen_ai.evaluation.vote"]) 
 | project vote, OperationId, ParentId
 | join kind=innerunique AppDependencies on $left.OperationId == $right.OperationId and $left.ParentId == $right.Id
-| summarize down = countif(vote == 0), up = countif(vote == 1) by bin(TimeGenerated, 1d)
-| render columnchart 
+| summarize down = countif(vote == 0), up = countif(vote == 1), up_percent = 100*avg(vote) by bin(TimeGenerated, 1d)
+| render timechart  
+```
+
+- Question Quality over time:
+```kql
+AppTraces
+| where Properties["event.name"] == "gen_ai.evaluation.InDomainQuestion"
+| extend score = toint(Properties["gen_ai.evaluation.score"]) 
+| project score, OperationId, ParentId
+| join kind=innerunique AppDependencies on $left.OperationId == $right.OperationId and $left.ParentId == $right.Id
+| summarize low_score_count = countif(score <= 3), high_score_count = countif(score > 3) by bin(TimeGenerated, 1d)
+| render timechart 
 ```
 
 Here an example of a Grafana dashboard with the above queries:
