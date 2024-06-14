@@ -65,8 +65,8 @@ Here are a few KQL queries that you can use to get started with building your ow
 ```kql
 AppDependencies
 | where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat")
-| extend output = parse_json(todynamic(tostring(Properties["output"])))
-| extend duration_sec = DurationMs / 1000, model = tostring(output.model)
+| extend model = substring(tostring(Properties["llm.response.model"]), 0, 30),
+         duration_sec = DurationMs / 1000
 | summarize avg(duration_sec) by bin(TimeGenerated, 1h), model
 | order by TimeGenerated asc 
 | render timechart 
@@ -76,33 +76,46 @@ AppDependencies
 ```kql
 AppDependencies
 | where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat")
-| extend output = parse_json(todynamic(tostring(Properties["output"])))
-| project duration_sec = DurationMs / 1000, model = tostring(output.model)
+| extend model = substring(tostring(Properties["llm.response.model"]), 0, 30)
+| project duration_sec = DurationMs / 1000, model 
 | summarize avg(duration_sec) by model
 | render columnchart
 ```
 
-- Tokens used over time:
+- Average duration of Assistant Runs by model:
 ```kql
 AppDependencies
+| where Name in ("AssistantAPI.run")
+| extend model = substring(tostring(Properties["llm.response.model"]), 0, 30)
+| where model != ""
+| project duration_sec = DurationMs / 1000, model 
+| summarize avg(duration_sec) by model
+| render columnchart
+```
+
+- Tokens used by model over time:
+```kql
+AppDependencies
+| where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat", "AssistantAPI.run")
 | extend
     total_tokens = toint(Properties["llm.usage.total_tokens"]),
     prompt_tokens = toint(Properties["llm.usage.prompt_tokens"]),
-    completion_tokens = toint(Properties["llm.usage.completion_tokens"])
-| summarize sum(total_tokens), sum(prompt_tokens), sum(completion_tokens) by bin(TimeGenerated, 1d) 
-| render timechart
+    completion_tokens = toint(Properties["llm.usage.completion_tokens"]),
+    model = substring(tostring(Properties["llm.response.model"]), 0, 22)
+| where model != ""    
+| summarize prompt = sum(prompt_tokens), completion = sum(completion_tokens) by model
+| render columnchart 
 ```
 
 - Total tokens used by model/deployment
 ```kql
 AppDependencies
-| where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat")
-| extend output = parse_json(todynamic(tostring(Properties["output"])))
+| where Name in ("openai_chat_async", "Iterated(openai_chat)", "openai_chat", "AssistantAPI.run")
 | extend
     total_tokens = toint(Properties["llm.usage.total_tokens"]),
     prompt_tokens = toint(Properties["llm.usage.prompt_tokens"]),
     completion_tokens = toint(Properties["llm.usage.completion_tokens"]),
-    model = tostring(output.model)
+    model = substring(tostring(Properties["llm.response.model"]), 0, 30)
 | summarize prompt = sum(prompt_tokens), completion = sum(completion_tokens) by model
 | render columnchart 
 ```
