@@ -1,0 +1,8 @@
+AppDependencies
+| where Name == "SalesDataInsights" 
+| extend inputs = parse_json(tostring(Properties.inputs)),
+         output = parse_json(tostring(Properties.output)),
+         hash = hash(OperationId, 2)                            // select 1 in 2 traces
+| where hash==0
+| project question = inputs.question, query = output.query, error = output.error, trace_id = OperationId, span_id = Id, time_stamp = TimeGenerated
+| order by time_stamp asc

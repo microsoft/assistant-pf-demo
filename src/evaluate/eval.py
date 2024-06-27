@@ -6,8 +6,6 @@ import pandas as pd
 from pprint import pprint
 
 from promptflow.client import load_flow
-from promptflow.evals.evaluate import evaluate
-from promptflow.evals.evaluators import ContentSafetyEvaluator
 from sales_data_insights.main import SalesDataInsights
 
 load_dotenv(override=True)
@@ -51,6 +49,9 @@ def main(model="azure_openai", data="small"):
         print(f"Starting evaluation: {evaluation_name}")
 
         # You can get the same code with this link. https://aka.ms/2024-brk141​
+
+        from promptflow.evals.evaluate import evaluate
+        from promptflow.evals.evaluators import ContentSafetyEvaluator
 
         response = evaluate(
             evaluation_name=evaluation_name,

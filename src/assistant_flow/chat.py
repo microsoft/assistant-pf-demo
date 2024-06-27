@@ -2,7 +2,7 @@ import os
 import logging
 
 # local imports
-from assistant_flow.core import AssistantsAPIGlue
+from assistant_flow.core import AssistantAPI
 from promptflow.tracing import start_trace, trace
 from openai import AzureOpenAI
 from sales_data_insights.main import SalesDataInsights
@@ -64,11 +64,10 @@ def chat_completion(
     )
     sales_data_insights = SalesDataInsights()
     
-    handler = AssistantsAPIGlue(client=client, 
-                                question=question, 
-                                session_state=session_state, 
-                                tools=dict(sales_data_insights=sales_data_insights))
-    return handler.run()
+    handler = AssistantAPI(client=client,                              
+                            session_state=session_state, 
+                            tools=dict(sales_data_insights=sales_data_insights))
+    return handler.start(question=question)
 
 def _test():
     """Test the chat completion function."""

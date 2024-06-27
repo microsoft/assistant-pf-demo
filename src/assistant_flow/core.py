@@ -35,11 +35,12 @@ def run_async(coro):  # coro is a couroutine, see example
 
 tracer = otel_trace.get_tracer(__name__)
 fun_emojis = ["🏃‍♂️", "🏃‍♀️", "🚶‍♂️", "🚶‍♀️", "🚶", "🏃", "🚶‍♂️", "🚶‍♀️", "🏃‍♂️", "🏃‍♀️"]
-class AssistantsAPIGlue:
+
+class AssistantAPI:
+    @trace
     def __init__(
         self,
         client: AzureOpenAI,
-        question: str,
         session_state: dict[str, any] = None,
         tools: dict[str, callable] = None,
     ):
@@ -53,16 +54,11 @@ class AssistantsAPIGlue:
         session_state = session_state or {}
         if "thread_id" in session_state:
             logging.info(f"Using thread_id from session_stat: {session_state['thread_id']}")
-            otel_trace.get_current_span().set_attribute("AssistantsAPIGlue_thread_id",  session_state['thread_id'])
             self.thread_id = self.client.beta.threads.retrieve(session_state['thread_id']).id
         else:
             logging.info(f"Creating a new thread")
             self.thread_id = self.client.beta.threads.create().id
-            otel_trace.get_current_span().set_attribute("AssistantsAPIGlue_thread_id", self.thread_id)
 
-        # Add last message in the thread
-        logging.info("Adding message in the thread")
-        self.add_message(dict(role="user", content=question))
 
         if "OPENAI_ASSISTANT_ID" in os.environ:
             logging.info(
@@ -73,8 +69,6 @@ class AssistantsAPIGlue:
             raise Exception(
                 "You need to provide OPENAI_ASSISTANT_ID in the environment variables"
             )
-        # get current span
-        otel_trace.get_current_span().set_attribute("AssistantsAPIGlue_assistant_id", self.assistant_id)
 
     def add_message(self, message):
         _ = self.client.beta.threads.messages.create(
@@ -83,18 +77,17 @@ class AssistantsAPIGlue:
             content=message["content"],
         )
 
-    @trace
-    def run(self, messages=None):
+    def start(self, question):
         # run handler in a separate thread
         # Capture the current context
         current_context = otel_context.get_current()
         self.queue = QueuedIteratorStream()
-
+        # print(f"current_context {current_context}")
         def run_with_context():
             # Reactivate the captured context in the new thread
             token = otel_context.attach(current_context)
             try:
-                self.run_inner(messages)
+                self.run(question)
             finally:
                 otel_context.detach(token)
 
@@ -107,17 +100,13 @@ class AssistantsAPIGlue:
             session_state={ "thread_id": self.thread_id },
             planner_raw_output=None
         )
-        
 
-
-    def run_inner(self, messages=None):
-        if messages:
-            logging.info("Adding last message in the thread")
-            _ = self.client.beta.threads.messages.create(
-                thread_id=self.thread_id,
-                role=messages[-1]["role"],
-                content=messages[-1]["content"],
-            )
+    @trace    
+    def run(self, question):
+        # Add last message in the thread
+        logging.info("Adding message in the thread")
+        self.add_message(dict(role="user", content=question))
+        self.question = question
 
         # Run the thread
         logging.info("Running the thread")
@@ -126,6 +115,14 @@ class AssistantsAPIGlue:
             assistant_id=self.assistant_id,
         )
         logging.info(f"Run status: {run.status}")
+
+        # get current span
+        span = otel_trace.get_current_span()
+        span.set_attribute("promptflow.assistant.message", self.question)
+        span.set_attribute("promptflow.assistant.run_id", run.id)
+        span.set_attribute("promptflow.assistant.thread_id", self.thread_id)
+        span.set_attribute("promptflow.assistant.assistant_id", self.assistant_id)
+
         self.queue.send(f"\nRunning message on Thread: {self.thread_id}\n")
 
         start_time = time.time()
@@ -141,6 +138,11 @@ class AssistantsAPIGlue:
             )
 
             if run.status == "completed":
+                span.set_attribute("llm.response.model", run.model)
+                span.set_attribute("llm.usage.completion_tokens", run.usage.completion_tokens)
+                span.set_attribute("llm.usage.prompt_tokens", run.usage.prompt_tokens)
+                span.set_attribute("llm.usage.total_tokens", run.usage.total_tokens)
+
                 # check run steps
                 run_steps = self.client.beta.threads.runs.steps.list(
                     thread_id=self.thread_id, run_id=run.id #, after=step_logging_cursor
@@ -160,6 +162,7 @@ class AssistantsAPIGlue:
                 logging.info(f"Run completed with {len(messages)} messages.")
 
                 final_message = messages[0]
+                span.set_attribute("llm.generated_message", final_message.model_dump())
 
                 mixed_response = []
 
@@ -226,6 +229,13 @@ class AssistantsAPIGlue:
             else:
                 raise ValueError(f"Unknown run status: {run.status}")
 
+        run = self.client.beta.threads.runs.cancel(
+            thread_id=self.thread_id, run_id=run.id
+        )
+        self.queue.send("The run has timed out.")
+        self.queue.end()
+        return
+    
 def log_step(step):
     logging.info(
             "The assistant has moved forward to step {}".format(step["id"])
@@ -236,10 +246,19 @@ def log_step(step):
             if tool_call["type"] == "code_interpreter":
                 python_code = tool_call["code_interpreter"]["input"].split("\n")
                 output = tool_call["code_interpreter"]["outputs"]
-                trace_code_interpreter(python_code, output)
+                trace_code_interpreter(python_code, step["usage"], output)
+            else:
+                trace_usage(step["usage"])
+    else: 
+        trace_usage(step["usage"])
+@trace
+def trace_usage(usage):
+    logging.info(
+            "The assistant has used the following tokens: {}".format(usage)
+    )
 
 @trace
-def trace_code_interpreter(python_code, output):
+def trace_code_interpreter(python_code, usage, output):
     logging.info(
             "The assistant executed code interpretation of {}".format(python_code)
     )
