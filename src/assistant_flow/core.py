@@ -30,7 +30,7 @@ class AssistantAPI:
         self.client = client
         self.tools = tools or {}
 
-        self.max_waiting_time = 120
+        self.max_waiting_time = 10
 
         session_state = session_state or {}
         if "thread_id" in session_state:
@@ -161,7 +161,6 @@ class AssistantAPI:
         with self.client.beta.threads.runs.stream(
             thread_id=self.thread_id,
             assistant_id=self.assistant_id,
-            timeout=self.max_waiting_time,
         ) as stream:
             logging.info(f"Stream status: {stream}")
             for event in stream:
@@ -173,123 +172,111 @@ class AssistantAPI:
         # self.queue.send(f"\nRunning message on Thread: {self.thread_id}\n")
 
 
-        # loop until max_waiting_time is reached
-        while (time.time() - start_time) < self.max_waiting_time:
-            # checks the run regularly
-            # run = self.client.beta.threads.runs.retrieve(
-            #     thread_id=self.thread_id, run_id=run.id
-            # )
+        # loop while action is required or until max_waiting_time is reached
+        while ((time.time() - start_time) < self.max_waiting_time) and run.status == "requires_action":
             logging.info(
                 f"Run status: {run.status} (time={int(time.time() - start_time)}s, max_waiting_time={self.max_waiting_time})"
             )
 
-            if run.status == "completed":
-                span.set_attribute("llm.response.model", run.model)
-                span.set_attribute("llm.usage.completion_tokens", run.usage.completion_tokens)
-                span.set_attribute("llm.usage.prompt_tokens", run.usage.prompt_tokens)
-                span.set_attribute("llm.usage.total_tokens", run.usage.total_tokens)
+            tool_call_outputs = []
 
-                # check run steps
-                run_steps = self.client.beta.threads.runs.steps.list(
-                    thread_id=self.thread_id, run_id=run.id #, after=step_logging_cursor
-                )
+            for tool_call in run.required_action.submit_tool_outputs.tool_calls:
+                trace_tool(tool_call.model_dump())
+                self.queue.send(f"\nTool call: {tool_call.function.name} with arguments: {tool_call.function.arguments}\n")
 
-                for step in reversed(list(run_steps)):
-                    log_step(step.model_dump())
-
-                messages = []
-                for message in self.client.beta.threads.messages.list(
-                    thread_id=self.thread_id
-                ):
-                    message = self.client.beta.threads.messages.retrieve(
-                        thread_id=self.thread_id, message_id=message.id
+                if tool_call.type == "function":
+                    tool_func = self.tools[tool_call.function.name]
+                    tool_call_output = tool_func(
+                        **json.loads(tool_call.function.arguments)
                     )
-                    messages.append(message)
-                logging.info(f"Run completed with {len(messages)} messages.")
 
-                final_message = messages[0]
-                span.set_attribute("llm.generated_message", final_message.model_dump())
-
-                mixed_response = []
-
-                for message in final_message.content:
-                    if message.type == "text":
-                        mixed_response.append(message.text.value)
-                    elif message.type == "image_file":
-                        file_id = message.image_file.file_id
-                        mixed_response.append(
-                            Image(self.client.files.content(file_id).read())
-                        )
-                    else:
-                        logging.critical("Unknown content type: {}".format(message.type))
-
-                for response in mixed_response:
-                    self.queue.send(response)
-                
-                self.queue.end()
-
-                return
-            
-            elif run.status == "requires_action":
-                # if the run requires us to run a tool
-                tool_call_outputs = []
-
-                for tool_call in run.required_action.submit_tool_outputs.tool_calls:
-                    trace_tool(tool_call.model_dump())
-                    self.queue.send(f"\nTool call: {tool_call.function.name} with arguments: {tool_call.function.arguments}\n")
-
-                    if tool_call.type == "function":
-                        tool_func = self.tools[tool_call.function.name]
-                        tool_call_output = tool_func(
-                            **json.loads(tool_call.function.arguments)
-                        )
-
-                        tool_call_outputs.append(
-                            {
-                                "tool_call_id": tool_call.id,
-                                "output": json.dumps(tool_call_output),
-                            }
-                        )
-                    else:
-                        raise ValueError(f"Unsupported tool call type: {tool_call.type}")
-
-                if tool_call_outputs:
-                    # _ = self.client.beta.threads.runs.submit_tool_outputs(
-                    #     thread_id=self.thread_id,
-                    #     run_id=run.id,
-                    #     tool_outputs=tool_call_outputs,
-                    # )
-                    logging.info("Resuming streaming the run")
-                    with self.client.beta.threads.runs.submit_tool_outputs_stream(
-                        thread_id=self.thread_id,
-                        run_id=run.id,
-                        tool_outputs=tool_call_outputs,
-                        timeout=self.max_waiting_time - (time.time() - start_time),
-                    ) as stream:
-                        logging.info(f"Stream status: {stream}")
-                        for event in stream:
-                            self.process_event(event)
+                    tool_call_outputs.append(
+                        {
+                            "tool_call_id": tool_call.id,
+                            "output": json.dumps(tool_call_output),
+                        }
+                    )
+                else:
+                    raise ValueError(f"Unsupported tool call type: {tool_call.type}")
+               
+            logging.info("Resuming streaming the run")
+            with self.client.beta.threads.runs.submit_tool_outputs_stream(
+                thread_id=self.thread_id,
+                run_id=run.id,
+                tool_outputs=tool_call_outputs,
+            ) as stream:
+                logging.info(f"Stream status: {stream}")
+                for event in stream:
+                    self.process_event(event)
+                    if ((time.time() - start_time) > self.max_waiting_time):
                         run = stream.current_run
-                        logging.info(f"done streaming")
+                        logging.info(f"streaming timed out")
                         logging.info(f"Run status: {stream.current_run.status}")
+                        break
+                run = stream.current_run
+                logging.info(f"done streaming")
+                logging.info(f"Run status: {stream.current_run.status}")
 
-            elif run.status in ["cancelled", "expired", "failed"]:
-                raise ValueError(f"Run failed with status: {run.status}")
+        if run.status == "completed":
+            span.set_attribute("llm.response.model", run.model)
+            span.set_attribute("llm.usage.completion_tokens", run.usage.completion_tokens)
+            span.set_attribute("llm.usage.prompt_tokens", run.usage.prompt_tokens)
+            span.set_attribute("llm.usage.total_tokens", run.usage.total_tokens)
 
-            elif run.status in ["in_progress", "queued"]:
-                raise ValueError(f"Status should not occur when streaming: {run.status}")
-                # fun running emoji                
-                # self.queue.send(f"{fun_emojis[int(time.time()) % len(fun_emojis)]}")
-                # self.queue.send(".")
-                # time.sleep(2)
+            # check run steps
+            run_steps = self.client.beta.threads.runs.steps.list(
+                thread_id=self.thread_id, run_id=run.id #, after=step_logging_cursor
+            )
 
-            else:
-                raise ValueError(f"Unknown run status: {run.status}")
+            for step in reversed(list(run_steps)):
+                log_step(step.model_dump())
 
-        run = self.client.beta.threads.runs.cancel(
-            thread_id=self.thread_id, run_id=run.id
-        )
-        self.queue.send("The run has timed out.")
+            messages = []
+            for message in self.client.beta.threads.messages.list(
+                thread_id=self.thread_id
+            ):
+                message = self.client.beta.threads.messages.retrieve(
+                    thread_id=self.thread_id, message_id=message.id
+                )
+                messages.append(message)
+            logging.info(f"Run completed with {len(messages)} messages.")
+
+            final_message = messages[0]
+            span.set_attribute("llm.generated_message", final_message.model_dump())
+
+            mixed_response = []
+
+            for message in final_message.content:
+                if message.type == "text":
+                    mixed_response.append(message.text.value)
+                elif message.type == "image_file":
+                    file_id = message.image_file.file_id
+                    mixed_response.append(
+                        Image(self.client.files.content(file_id).read())
+                    )
+                else:
+                    logging.critical("Unknown content type: {}".format(message.type))
+
+            for response in mixed_response:
+                self.queue.send(response)
+            
+        elif run.status in ["cancelled", "expired", "failed"]:
+            self.queue.send(f"Run failed with status: {run.status}")
+
+        elif run.status in ["in_progress", "queued"]:
+            logging.info(f"Run status: {run.status}. The run has timed out.")
+            try: 
+                # the run could have complete by now, so do this in a try/except block
+                run = self.client.beta.threads.runs.cancel(
+                    thread_id=self.thread_id, run_id=run.id
+                )
+            except Exception as e:
+                logging.error(f"Failed to cancel the run: {e}")
+            self.queue.send(f"The run has timed out after {self.max_waiting_time} seconds.")
+
+        else:
+            raise ValueError(f"Unknown run status: {run.status}")
+
         self.queue.end()
         return
     
