@@ -15,7 +15,6 @@ from promptflow.contracts.multimedia import Image
 from threading import Thread
 
 tracer = otel_trace.get_tracer(__name__)
-fun_emojis = ["🏃‍♂️", "🏃‍♀️", "🚶‍♂️", "🚶‍♀️", "🚶", "🏃", "🚶‍♂️", "🚶‍♀️", "🏃‍♂️", "🏃‍♀️"]
 
 class AssistantAPI:
     @trace
@@ -61,11 +60,13 @@ class AssistantAPI:
         # print(f"current_context {current_context}")
         def run_with_context():
             # Reactivate the captured context in the new thread
+            logging.info("Thread started")
             token = otel_context.attach(current_context)
             try:
                 self.run(question)
             finally:
                 otel_context.detach(token)
+            logging.info("Thread ended")
 
         # run handler in a separate thread with context
         thread = Thread(target=run_with_context)
@@ -82,13 +83,6 @@ class AssistantAPI:
     def run(self, question):
         self.question = question
 
-        # Run the thread
-        # logging.info("Running the thread")
-        # run = self.client.beta.threads.runs.create(
-        #     thread_id=self.thread_id,
-        #     assistant_id=self.assistant_id,
-        # )
-        # logging.info(f"Run status: {run.status}")
         run = None
         start_time = time.time()
 
@@ -97,6 +91,7 @@ class AssistantAPI:
         span.set_attribute("promptflow.assistant.message", self.question)
         span.set_attribute("promptflow.assistant.thread_id", self.thread_id)
         span.set_attribute("promptflow.assistant.assistant_id", self.assistant_id)
+        
         logging.info("Submitting the message")
         _ = self.client.beta.threads.messages.create(
             thread_id=self.thread_id,
@@ -113,6 +108,7 @@ class AssistantAPI:
 
             for event in stream:
                 if ((time.time() - start_time) > self.max_waiting_time):
+                    # todo: in case of timeout, the current_run might not be populated yet
                     run = stream.current_run
                     logging.info(f"streaming timed out")
                     logging.info(f"Run status: {stream.current_run.status}")
@@ -124,8 +120,6 @@ class AssistantAPI:
         span.set_attribute("promptflow.assistant.run_id", run.id)
         logging.info(f"thread.run.created: run.id {run.id}")
 
-        # self.queue.send(f"\nRunning message on Thread: {self.thread_id}\n")
-
 
         # loop while action is required or until max_waiting_time is reached
         while ((time.time() - start_time) < self.max_waiting_time) and run.status == "requires_action":
@@ -136,7 +130,7 @@ class AssistantAPI:
             tool_call_outputs = []
 
             for tool_call in run.required_action.submit_tool_outputs.tool_calls:
-                trace_tool(tool_call.model_dump())
+                # trace_tool(tool_call.model_dump())
                 # self.queue.send(f"\nTool call: {tool_call.function.name} with arguments: {tool_call.function.arguments}\n")
 
                 if tool_call.type == "function":
@@ -179,42 +173,6 @@ class AssistantAPI:
             span.set_attribute("llm.usage.prompt_tokens", run.usage.prompt_tokens)
             span.set_attribute("llm.usage.total_tokens", run.usage.total_tokens)
 
-            # # check run steps
-            # run_steps = self.client.beta.threads.runs.steps.list(
-            #     thread_id=self.thread_id, run_id=run.id #, after=step_logging_cursor
-            # )
-
-            # for step in reversed(list(run_steps)):
-            #     log_step(step.model_dump())
-
-            # messages = []
-            # for message in self.client.beta.threads.messages.list(
-            #     thread_id=self.thread_id
-            # ):
-            #     message = self.client.beta.threads.messages.retrieve(
-            #         thread_id=self.thread_id, message_id=message.id
-            #     )
-            #     messages.append(message)
-            # logging.info(f"Run completed with {len(messages)} messages.")
-
-            # final_message = messages[0]
-            # span.set_attribute("llm.generated_message", final_message.model_dump())
-
-            # mixed_response = []
-
-            # for message in final_message.content:
-            #     if message.type == "text":
-            #         mixed_response.append(message.text.value)
-            #     elif message.type == "image_file":
-            #         file_id = message.image_file.file_id
-            #         mixed_response.append(
-            #             Image(self.client.files.content(file_id).read())
-            #         )
-            #     else:
-            #         logging.critical("Unknown content type: {}".format(message.type))
-
-            # for response in mixed_response:
-            #     self.queue.send(response)
             
         elif run.status in ["cancelled", "expired", "failed"]:
             self.queue.send(f"Run failed with status: {run.status}")
@@ -236,47 +194,16 @@ class AssistantAPI:
         self.queue.end()
         return
     
-def log_step(step):
-    logging.info(
-            "The assistant has moved forward to step {}".format(step["id"])
-    )
-    step_details = step["step_details"]
-    if step_details["type"] == "tool_calls":
-        for tool_call in step_details["tool_calls"]:
-            if tool_call["type"] == "code_interpreter":
-                python_code = tool_call["code_interpreter"]["input"].split("\n")
-                output = tool_call["code_interpreter"]["outputs"]
-                trace_code_interpreter(python_code, step["usage"], output)
-            else:
-                trace_usage(step["usage"])
-    else: 
-        trace_usage(step["usage"])
-@trace
-def trace_usage(usage):
-    logging.info(
-            "The assistant has used the following tokens: {}".format(usage)
-    )
-
-@trace
-def trace_code_interpreter(python_code, usage, output):
-    logging.info(
-            "The assistant executed code interpretation of {}".format(python_code)
-    )
-
-@trace
-def trace_tool(tool_call):
-    logging.info(
-            "The assistant has asks for tool execution of {}".format(tool_call["function"]["name"])
-    )
 
 from openai import AssistantEventHandler
 from typing_extensions import override
-from openai.types.beta.threads import ImageFile
+from openai.types.beta.threads import ImageFile, Message
 
 class EventHandler(AssistantEventHandler): 
     def __init__(self, client, queue):
         self.client = client
         self.queue = queue
+        self.tool_calls_done = []
         super().__init__()
 
     @override
@@ -287,6 +214,21 @@ class EventHandler(AssistantEventHandler):
     def on_text_delta(self, delta, snapshot):
         self.queue.send(delta.value)
         
+    def text_message(self, content):
+        with tracer.start_as_current_span("assistant.text_message") as span:
+            span.set_attribute("framework", "promptflow")
+            span.set_attribute("span_type", "Function")
+            span.set_attribute("function", "assistant.text_message")
+            span.set_attribute("inputs", json.dumps(content.text.value.split("\n")))
+
+    def image_message(self, content):
+        image = Image(self.client.files.content(content.image_file.file_id).read())
+        with tracer.start_as_current_span("assistant.image_message") as span:
+            span.set_attribute("framework", "promptflow")
+            span.set_attribute("span_type", "Function")
+            span.set_attribute("function", "assistant.image_message")
+            span.set_attribute("inputs", image.to_base64(with_type=True))
+
     @override
     def on_tool_call_created(self, tool_call):
         self.queue.send(f"\n> tool_call: {tool_call.type}\n")
@@ -296,6 +238,14 @@ class EventHandler(AssistantEventHandler):
         elif tool_call.type == "code_interpreter":
             self.queue.send(f"> id  : {tool_call.id}\n\n")
         
+    @override
+    def on_message_done(self, message: Message) -> None:
+        for content in message.content:
+            if content.type == "text":
+                self.text_message(content)
+            elif content.type == "image_file":
+                self.image_message(content)
+
     @override
     def on_tool_call_delta(self, delta, snapshot):
         if delta.type == 'code_interpreter':
@@ -321,72 +271,50 @@ class EventHandler(AssistantEventHandler):
 
     @override
     def on_tool_call_done(self, tool_call):
-        # submit tool call to telemetry
+        # events seem to be duplicated, so we need to keep track of the tool calls that have been processed
+        if tool_call.id in self.tool_calls_done:
+            return
+        self.tool_calls_done.append(tool_call.id)
+
         self.queue.send("\n")
+
+        # submit tool call to telemetry
         print(f"\ntool_call: {tool_call.type}", flush=True)
         if tool_call.type == "function":
-            print(f"    id  : {tool_call.id}")
-            print(f"    name: {tool_call.function.name}")
+            with tracer.start_as_current_span("assistant.function_call") as span:
+                span.set_attribute("frmaework", "promptflow")
+                span.set_attribute("span_type", "Function")
+                span.set_attribute("function", "function_call")
+                span.set_attribute("inputs", tool_call.function.arguments)
+                span.set_attribute("inputs", json.dumps(dict(name=tool_call.function.name,
+                                                             arguments=json.loads(tool_call.function.arguments),
+                                                             tool_call_id=tool_call.id)))
+
         elif tool_call.type == "code_interpreter":
-            print(f"    id  : {tool_call.id}")
+            with tracer.start_as_current_span("code_interpreter_call") as span:
+                span.set_attribute("framework", "promptflow")
+                span.set_attribute("span_type", "Function")
+                span.set_attribute("function", "code_interpreter_call")
+
+                if tool_call.code_interpreter.input:
+                    span.set_attribute("inputs", json.dumps(dict(code=tool_call.code_interpreter.input.split("\n"),
+                                                                 tool_call_id=tool_call.id)))
+                
+                if tool_call.code_interpreter.outputs:
+                    output_dict = {}
+                    for output in tool_call.code_interpreter.outputs:
+                        if output.type == "logs":
+                            output_dict["logs"] = output.logs.split("\n")
+                        elif output.type == "image":
+                            output_dict["image_file_id"] =  output.image.file_id
+                            file_id = output.image.file_id
+                            image_base64 = Image(self.client.files.content(file_id).read()).to_base64(with_type=True)
+                            output_dict["image_base64"] = image_base64
+                
+                    span.set_attribute("output", json.dumps(output_dict))
         else:
-            print(tool_call)
-
-
-
-def process_event(event):
-    if event.event == "thread.run.created":
-        span = otel_trace.get_current_span()
-        span.set_attribute("promptflow.assistant.run_id", event.data.id)
-        logging.info(f"thread.run.created: run.id {event.data.id}")
-    elif event.event == "thread.message.in_progress":
-        print("\n**** message in progress ****\n")
-    elif event.event == "thread.message.delta":
-        delta = event.data.delta.content[0]
-        if delta.type == "text":
-            print(delta.text.value, end="", flush=True)
-        elif delta.type == "image_file":
-            file_id = delta.image_file.file_id
-            image_base64 = Image(self.client.files.content(file_id).read()).to_base64(with_type=True)
-            print(f"![]({image_base64[:40]})", end="", flush=True)
-        else:
-            print(delta)
-    elif event.event == "thread.run.step.in_progress":
-        print("\n**** step in progress ****\n")
-    elif event.event == "thread.run.step.delta":
-        step_details = event.data.delta.step_details
-        if step_details.type == "tool_calls":
-            for tool_call in step_details.tool_calls:
-                if not tool_call.id is None:
-                    # this is the header
-                    print(f"  tool_call:")
-                    if tool_call.type == "function":
-                        print(f"    type: {tool_call.type}")
-                        print(f"    id  : {tool_call.id}")
-                        print(f"    name: {tool_call.function.name}")
-                    elif tool_call.type == "code_interpreter":
-                        print(f"    type: {tool_call.type}")
-                    else:
-                        print(f"    type: {tool_call.type}")
-                else:
-                    # this is the body
-                    if tool_call.type == "function":
-                        print(tool_call.function.arguments, end="", flush=True)
-                    elif tool_call.type == "code_interpreter":
-                        if tool_call.code_interpreter.input:
-                            print(tool_call.code_interpreter.input, end="", flush=True)
-                        elif tool_call.code_interpreter.outputs:
-                            for output in tool_call.code_interpreter.outputs:
-                                if output.type == "logs":
-                                    print(f"\n{output.logs}", flush=True)
-                        else:
-                            print(tool_call)
-                    else:
-                        print(tool_call)
-        
-    else:
-        logging.info(f"Streaming event: {event.event}")        
-
+            with tracer.start_as_current_span("tool_call") as span:
+                span.set_attribute("promptflow.assistant.tool_call", str(tool_call))
 
 
 import queue
@@ -411,7 +339,7 @@ class QueuedIteratorStream:
     def send(self, event: str) -> None:
         if event is not None and event != "":
             if isinstance(event, Image):
-                self.output.append(event.to_base64(with_type=True))
+                self.output.append(f"\n{event.to_base64(with_type=True)}\n")
                 self.queue.put_nowait(f"\n\n![]({event.to_base64(with_type=True)})\n\n")
             else:
                 self.output.append(event)
@@ -425,7 +353,8 @@ class QueuedIteratorStream:
             span.set_attribute("framework", "promptflow")
             span.set_attribute("span_type", "Function")
             span.set_attribute("function", "stream")
-            span.set_attribute("output", json.dumps(self.output))
+            reformatted_output :str = "".join(self.output)
+            span.set_attribute("output", json.dumps(reformatted_output.split("\n")))
 
         self.queue.put_nowait(self.terminate)
 
