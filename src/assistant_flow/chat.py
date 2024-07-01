@@ -111,7 +111,7 @@ if __name__ == "__main__":
         for token in _test()["chat_output"]:
             # write token to stream and flush
             f.write(str(token))
-            f.write("\n")
+            #f.write("\n")
             f.flush()
             
 

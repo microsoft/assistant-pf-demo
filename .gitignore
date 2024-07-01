@@ -401,3 +401,5 @@ spans.json
 .files/
 **/.promptflow
 src/generate_data/*_batch_*.jsonl
+src/evaluate/azure_monitor/*time_stamp.txt
+test.ipynb
