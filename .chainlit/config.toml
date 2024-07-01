@@ -48,7 +48,7 @@ show_readme_as_default = true
 # description = ""
 
 # Large size content are by default collapsed for a cleaner ui
-default_collapse_content = true
+default_collapse_content = false
 
 # The default value for the expand messages settings.
 default_expand_messages = false
