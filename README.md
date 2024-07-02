@@ -185,7 +185,6 @@ https://ai.azure.com/projecttrace/detail/0x67a45d1c29d32e62f50eda806ff51a3b?wsid
 ```
 ![](images/ai-studio-traces.png)
 
-
 Read more about how to use Application Insights to monitor your application [here](README-Azure-Monitor.md)
 
 ![](images/sad-puppy.png)
