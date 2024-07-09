@@ -175,7 +175,8 @@ class AssistantAPI:
 
             
         elif run.status in ["cancelled", "expired", "failed"]:
-            self.queue.send(f"Run failed with status: {run.status}")
+            self.queue.send(f"Run failed with status: {run.last_error}")
+            logging.info(f"Run status: {run.last_error}")
 
         elif run.status in ["in_progress", "queued"]:
             logging.info(f"Run status: {run.status}. The run has timed out.")
